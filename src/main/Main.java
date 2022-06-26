@@ -2,7 +2,7 @@ package main;
 import javax.swing.JFrame;
 public class Main {
 	public static void main(String[] args) {
-		//commit dc ko vay
+		//commit dc ko vay  1
 		// tạo 1 cửa sổ game
 		JFrame window = new JFrame();
 		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
