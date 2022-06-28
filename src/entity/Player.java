@@ -15,7 +15,8 @@ import main.KeyHandler;
 public class Player extends Entity{
 	GamePanel gp;
 	KeyHandler keyH;
-	
+
+	public int hasKey = 0;
 	public final int screenX;
 	public final int screenY;
 	

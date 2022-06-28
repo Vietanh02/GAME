@@ -33,19 +33,29 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	//FPS
 	int FPS = 60;
-	
+//SYSTEM
 	// bản đồ và cỏ, tường nước ( tile
 	TileManager tileM = new TileManager(this);
 	
 	// keyHandle -- các nút điều khiển
-	KeyHandler keyH = new KeyHandler();
+	KeyHandler keyH = new KeyHandler(this);
+	//UI
+	public UI ui = new UI(this);
+
+
 	Thread gameThread;
 	
 	// xác định va chạm của nhân vật với tường và nước
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public Player player = new Player(this,keyH);
 	
-	
+	//Game State
+	public int gameState;
+	//public final int titleState = 0;
+	public final int playState = 1;
+	public final int pauseState = 2;
+	//public final int charaterState = 4;
+	//public final int optionsState = 5;
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		this.setBackground(Color.black);
@@ -53,7 +63,10 @@ public class GamePanel extends JPanel implements Runnable{
 		this.addKeyListener(keyH);
 		this.setFocusable(true);
 	}
-	
+
+	public void setupGame(){
+		gameState = playState;
+	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
 		gameThread.start();
@@ -118,13 +131,22 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// vẽ nhân vật
 	public void update() {
-		player.update();
+		if (gameState == playState) {
+			player.update();
+		}
+		if(gameState == pauseState) {
+
+		}
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
 		tileM.draw(g2);
 		player.draw(g2);
+
+		//UI
+		ui.draw(g2);
+
 		g2.dispose();
 	}
 	
