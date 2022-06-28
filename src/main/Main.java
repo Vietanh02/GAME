@@ -11,6 +11,7 @@ public class Main {
 		
 		// đưa vào các hình ảnh của game
 		GamePanel gamePanel = new GamePanel();
+		gamePanel.setupGame();
 		window.add(gamePanel);
 		window.pack();
 		window.setLocationRelativeTo(null);
