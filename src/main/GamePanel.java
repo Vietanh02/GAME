@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import javax.swing.JPanel;
 
 import entity.Player;
+import object.SuperObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -47,6 +48,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// xác định va chạm của nhân vật với tường và nước
 	public CollisionChecker cChecker = new CollisionChecker(this);
+	public AssetSetter aSetter = new AssetSetter(this);
 	public Player player = new Player(this,keyH);
 	
 	//Game State
@@ -56,6 +58,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int pauseState = 2;
 	//public final int charaterState = 4;
 	//public final int optionsState = 5;
+
+	public SuperObject[] obj = new SuperObject[10];
+
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		this.setBackground(Color.black);
@@ -66,6 +71,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public void setupGame(){
 		gameState = playState;
+		aSetter.setObject();
 	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -97,7 +103,6 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 			if(timer >= 1000000000) {
-				System.out.println("FPS:"+drawCount);
 				drawCount++;
 				drawCount =0;
 				timer =0;
@@ -132,6 +137,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// vẽ nhân vật
 	public void update() {
 		if (gameState == playState) {
+			obj[3].update();
 			player.update();
 		}
 		if(gameState == pauseState) {
@@ -141,9 +147,16 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
+		//tile
 		tileM.draw(g2);
+		//object
+		for(int i =0 ;i<obj.length;i++){
+			if(obj[i]!=null){
+				obj[i].draw(g2,this);
+			}
+		}
+		//player
 		player.draw(g2);
-
 		//UI
 		ui.draw(g2);
 

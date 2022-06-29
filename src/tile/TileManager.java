@@ -49,10 +49,9 @@ public class TileManager {
 			while(col<gp.maxWorldCol && row<gp.maxWorldRow) {
 				String line = br.readLine();
 				while(col < gp.maxWorldCol) {
-					String numbers[] = line.split(" ");
+					String[] numbers = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
 					mapTileNum[col][row] = num;
-					System.out.println(mapTileNum[col][row]);
 					col++;
 				}
 				if(col == gp.maxWorldCol) {
@@ -65,28 +64,8 @@ public class TileManager {
 			e.printStackTrace();
 		}
 	}
-	
-	/*public void draw(Graphics2D g2) {
-		for(int i =0;i<=15;i++) {
-			g2.drawImage(tile[0].image, 0, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 48, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 96, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 144, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 192, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 240, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 288, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 336, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 384, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 432, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 480, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 528, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 576, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 624, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 672, 48*i,gp.titleSize, gp.titleSize, null);
-			g2.drawImage(tile[0].image, 720, 48*i,gp.titleSize, gp.titleSize, null);
-		}
-	}*/
-	
+
+
 	public void draw(Graphics2D g2) {
 		
 		int worldCol =0;

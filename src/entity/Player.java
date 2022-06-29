@@ -30,6 +30,8 @@ public class Player extends Entity{
 		solidArea = new Rectangle();
 		solidArea.x = 8;
 		solidArea.y = 16;
+		solidAreaDefaultX = solidArea.x;
+		solidAreaDefaultY = solidArea.y;
 		solidArea.height = 16;
 		solidArea.width = 32;
 		
@@ -47,27 +49,19 @@ public class Player extends Entity{
 	
 	public void getPlayerImage() {
 		try {
-			up1 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly1.png"));
-			up2 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly2.png"));
-			down1 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly3.png"));
-			down2 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly4.png"));
-			left1 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly5.png"));
-			left2 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly6.png"));
-			right1 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly7.png"));
-			right2 = ImageIO.read(getClass().getResourceAsStream("/player/Layer 1_birdFly8.png"));
-			
-			// tải các ảnh vảo mảng 
-			String imageLeft = new String("/player/bird_left_fly%d.png");
-			String imageRight = new String("/player/bird_right_fly%d.png");
-			String imageStay = new String("/player/bird_stay_%d.png");
-			for(int i=0;i<4;i++) {
+			// tải các ảnh vảo mảng
+			String imageDown = new String("/player/boy_down_%d.png");
+			String imageUp = new String("/player/boy_up_%d.png");
+			String imageLeft = new String("/player/boy_left_%d.png");
+			String imageRight = new String("/player/boy_right_%d.png");
+			String imageStay = new String("/player/boy_down_%d.png");
+			for(int i=0;i<3;i++) {
 				stay[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageStay,i+1)));
-			}
-			for(int i=0;i<8;i++) {
+				up[i]   = ImageIO.read(getClass().getResourceAsStream(String.format(imageUp,i+1)));
+				down[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageDown,i+1)));
 				left[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageLeft, i+1)));
 				right[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageRight, i+1)));
 			}
-			
 			
 		}catch(IOException e) {
 			e.printStackTrace();
@@ -93,6 +87,9 @@ public class Player extends Entity{
 		//CHECK TILE COLLISION
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
+		//CHECK OBJECT COLLISION
+		int objIndex = gp.cChecker.checkObject(this, true);
+		pickUpObject(objIndex);
 		//IF COLLISION IS FALSE PLAYER CAN MOVE
 		if(collisionOn == false) {
 			switch(direction) {
@@ -114,25 +111,29 @@ public class Player extends Entity{
 				spriteNum = 3;
 			}
 			else if(spriteNum ==3) {
-				spriteNum = 4;
-			}
-			else if(spriteNum ==4) {
-				spriteNum = 5;
-			}
-			else if(spriteNum ==5) {
-				spriteNum = 6;
-			}
-			else if(spriteNum ==6) {
-				spriteNum = 7;
-			}
-			else if(spriteNum ==7) {
-				spriteNum = 8;
-			}
-			else if(spriteNum ==8) {
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
 			
+		}
+	}
+
+	public void pickUpObject(int i){
+		if(i!=999){
+			String objName = gp.obj[i].name;
+			switch (objName){
+				case "Key":
+					hasKey++;
+					gp.obj[i] = null;
+					break;
+				case "Door":
+					if(hasKey>0){
+						gp.obj[i] = null;
+						hasKey--;
+					}
+					break;
+			}
+
 		}
 	}
 	
@@ -145,7 +146,7 @@ public class Player extends Entity{
 			case "down" -> left[spriteNum - 1];
 			case "left" -> left[spriteNum - 1];
 			case "right" -> right[spriteNum - 1];
-			case "stay" -> stay[(spriteNum - 1) / 2];
+			case "stay" -> stay[spriteNum - 1];
 			default -> null;
 		};
 
