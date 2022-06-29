@@ -53,11 +53,11 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	//Game State
 	public int gameState;
-	//public final int titleState = 0;
+	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
-	//public final int charaterState = 4;
-	//public final int optionsState = 5;
+	public final int charaterState = 4;
+	public final int optionsState = 5;
 
 	public SuperObject[] obj = new SuperObject[10];
 
@@ -70,7 +70,7 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 
 	public void setupGame(){
-		gameState = playState;
+		gameState = titleState;
 		aSetter.setObject();
 	}
 	public void startGameThread() {
@@ -147,19 +147,23 @@ public class GamePanel extends JPanel implements Runnable{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D)g;
-		//tile
-		tileM.draw(g2);
-		//object
-		for(int i =0 ;i<obj.length;i++){
-			if(obj[i]!=null){
-				obj[i].draw(g2,this);
+		//title screen
+		if(gameState == titleState){
+			ui.draw(g2);
+		}else{
+			//object
+			for(int i =0 ;i<obj.length;i++){
+				if(obj[i]!=null){
+					obj[i].draw(g2,this);
+				}
 			}
+			//tile
+			tileM.draw(g2);
+			//player
+			player.draw(g2);
+			//UI
+			ui.draw(g2);
 		}
-		//player
-		player.draw(g2);
-		//UI
-		ui.draw(g2);
-
 		g2.dispose();
 	}
 	
