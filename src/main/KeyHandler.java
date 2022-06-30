@@ -87,13 +87,14 @@ public class KeyHandler implements KeyListener {
 					 rightPressed = true;
 				 }
 				 if (code == KeyEvent.VK_P) {
-					 if (gp.gameState == gp.playState) {
 						 gp.gameState = gp.pauseState;
-					 } else if (gp.gameState == gp.pauseState) {
-						 gp.gameState = gp.playState;
-					 }
 				 }
 			 }
+			else if(gp.gameState == gp.pauseState){
+				if(code == KeyEvent.VK_P){
+					gp.gameState = gp.playState;
+				}
+			}
 
 
 		//OPTIONS STATE

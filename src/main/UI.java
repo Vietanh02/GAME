@@ -28,7 +28,7 @@ public class UI {
         }
         //playstate
         if(gp.gameState == gp.playState){
-
+            g2.drawString("Key = "+ gp.player.hasKey, 30, 30);
         }
         if(gp.gameState == gp.pauseState){
             drawPauseScreen();
