@@ -22,6 +22,7 @@ public class SpriteSheet {
 
     private String file;
 
+
     public Sprite getSprite(int x, int y) {
         return SPRITESHEET.getSubimage(x * width, y * height, width, height);
     }
@@ -69,7 +70,6 @@ public class SpriteSheet {
             }
         }
     }
-
     public SpriteSheet(String file){
         this.file = file;
         this.width = TILE_SIZE;
@@ -81,7 +81,31 @@ public class SpriteSheet {
         hSprite = SPRITESHEET.image.getHeight() / height;
         loadSpriteArray();
     }
-    //123
+
+    public SpriteSheet(Sprite sprite, int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        SPRITESHEET = sprite;
+
+        wSprite = SPRITESHEET.image.getWidth() / width;
+        hSprite = SPRITESHEET.image.getHeight() / height;
+        loadSpriteArray();
+    }
+
+    public SpriteSheet(String file, int width, int height) {
+        this.file = file;
+        this.width = width;
+        this.height = height;
+
+        System.out.println("Loading: " + file + ".....");
+        SPRITESHEET = new Sprite(loadSprite(file));
+
+        wSprite = SPRITESHEET.image.getWidth() / width;
+        hSprite = SPRITESHEET.image.getHeight() / height;
+        loadSpriteArray();
+    }
+
     public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2D pos, int width, int height, int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
