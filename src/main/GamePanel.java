@@ -40,6 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	// keyHandle -- các nút điều khiển
 	KeyHandler keyH = new KeyHandler(this);
+	Sound sound = new Sound();
 	//UI
 	public UI ui = new UI(this);
 
@@ -72,6 +73,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public void setupGame(){
 		gameState = titleState;
 		aSetter.setObject();
+		playMusic(0);
 	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -166,6 +168,18 @@ public class GamePanel extends JPanel implements Runnable{
 		}
 		g2.dispose();
 	}
-	
-	
+
+	public void playMusic(int i){
+		sound.setFile(i);
+		sound.play();
+		sound.loop();
+	}
+
+	public void stopMusic(){
+		sound.stop();
+	}
+	public void playSE(int i){
+		sound.setFile(i);
+		sound.play();
+	}
 }
