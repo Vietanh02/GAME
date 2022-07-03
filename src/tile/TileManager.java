@@ -16,7 +16,7 @@ public class TileManager {
 	GamePanel gp;
 	public Tile[] tile;  // lưu các ô của bản đồ
 	public int[][] mapTileNum; // vẽ theo tọa đồ Oxy, ví dụ (0,1) là tường thì chèn ảnh tường vaò vị trí (0,1)
-	
+	private boolean collision = false;
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		tile = new Tile[10000];
@@ -45,20 +45,22 @@ public class TileManager {
 		tile[1].image[1] = world_b.spriteArray[2][1].image;
 		tile[1].image[2] = world_b.spriteArray[3][0].image;
 		tile[1].image[3] = world_b.spriteArray[3][1].image;*/
-		buildTiles("tiles/World_A1.png",2094, 0, 0);
-		buildTiles("tiles/World_A1.png",2286, 0, 16);
-		buildTiles("tiles/World_A1.png",2382, 6, 16);
-		buildTiles("tiles/World_A1.png",2478, 12, 0);
-		buildTiles("tiles/World_A1.png",2574, 18, 0);
-		buildTiles("tiles/World_A1.png",2670, 12, 16);
-		buildTiles("tiles/World_A1.png",2766, 18, 16);
-		buildTiles("tiles/World_A1.png",2094, 0, 0);
-		buildTiles("tiles/World_A1.png",2286, 0, 16);
-		buildTiles("tiles/World_A1.png",2382, 6, 16);
-		buildTiles("tiles/World_A1.png",2478, 12, 0);
-		buildTiles("tiles/World_A1.png",2574, 18, 0);
-		buildTiles("tiles/World_A1.png",2670, 12, 16);
-		buildTiles("tiles/World_A1.png",2766, 18, 16);
+		buildTiles("tiles/World_A1.png",2094, 0, 0, false);
+		buildTiles("tiles/World_A1.png",2286, 0, 16,true);
+		buildTiles("tiles/World_A1.png",2382, 6, 16,true);
+		buildTiles("tiles/World_A1.png",2478, 12, 0,true);
+		buildTiles("tiles/World_A1.png",2574, 18, 0,true);
+		buildTiles("tiles/World_A1.png",2670, 12, 16,true);
+		buildTiles("tiles/World_A1.png",2766, 18, 16,true);
+
+		buildTiles("tiles/World_A2.png",2862, 0, 0,false);
+		buildTiles("tiles/World_A2.png",2958, 0, 8,false);
+		buildTiles("tiles/World_A2.png",3246, 6, 0,false);
+		buildTiles("tiles/World_A2.png",3342, 6, 8,false);
+		buildTiles("tiles/World_A2.png",3630, 12, 0,false);
+		buildTiles("tiles/World_A2.png",3726, 12, 8,false);
+		buildTiles("tiles/World_A2.png",4014, 18, 0,false);
+		buildTiles("tiles/World_A2.png",4110, 18, 8,false);
 	}
 	
 	//tải map 01. quy định 0 là cỏ, 1 là tường 2 là nước, xem res/map01.txt
@@ -118,8 +120,9 @@ public class TileManager {
 		}
 		
 	}
-	public void buildTiles(String file, int index, int x, int y){
+	public void buildTiles(String file, int index, int x, int y, boolean collision){
 		SpriteSheet sp1 = new SpriteSheet(file,24,24);
+		this.collision = collision;
 		setupTile(sp1,index--,x,y,"00011011");//94
 		setupTile(sp1,index--,x,y,"21015111");//93
 		setupTile(sp1,index--,x,y,"30331011");//92
@@ -160,7 +163,7 @@ public class TileManager {
 		setupTile(sp1,index--,x,y,"02321242");//57
 		setupTile(sp1,index--,x,y,"31321242");//56
 		setupTile(sp1,index--,x,y,"02034113");//55
-		setupTile(sp1,index--,x,y,"02321213");//54
+		setupTile(sp1,index--,x,y,"31034113");//54
 		setupTile(sp1,index--,x,y,"02324113");//53
 		setupTile(sp1,index--,x,y,"31324113");//52
 		setupTile(sp1,index--,x,y,"02034142");//51
@@ -178,6 +181,7 @@ public class TileManager {
 		int x4 = Character.getNumericValue(s.charAt(6));
 		int y4 = Character.getNumericValue(s.charAt(7));
 		tile[index] = new Tile();
+		tile[index].collision = this.collision;
 		tile[index].image[0] = sp.spriteArray[x+x1][y+y1].image;
 		tile[index].image[1] = sp.spriteArray[x+x2][y+y2].image;
 		tile[index].image[2] = sp.spriteArray[x+x3][y+y3].image;
