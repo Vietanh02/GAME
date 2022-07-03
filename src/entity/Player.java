@@ -92,15 +92,46 @@ public class Player extends Entity{
 		pickUpObject(objIndex);
 		//IF COLLISION IS FALSE PLAYER CAN MOVE
 		if(collisionOn == false) {
-			switch(direction) {
-			case "stay":              break;
-			case "up": worldY-=speed; break;
-			case "down": worldY+=speed; break;
-			case "left": worldX-=speed; break;
-			case "right": worldX+=speed; break;
+			if(keyH.upPressed == true && keyH.leftPressed == true){
+				worldY -= speed;
+				worldX -= speed;
+				direction = "left";
 			}
+			else if(keyH.upPressed == true && keyH.rightPressed == true){
+				worldY -= speed;
+				worldX += speed;
+				direction = "right";
+			}
+			else if(keyH.downPressed == true && keyH.leftPressed == true){
+				worldY += speed;
+				worldX -= speed;
+				direction = "left";
+			}
+			else if(keyH.downPressed == true && keyH.rightPressed == true){
+				worldY += speed;
+				worldX += speed;
+				direction = "right";
+			}
+			else if(keyH.upPressed == true) {
+				worldY -= speed;
+				direction = "up";
+			}
+			else if(keyH.downPressed == true) {
+				worldY += speed;
+				direction = "down";
+			}
+			else if(keyH.leftPressed== true) {
+				worldX -= speed;
+				direction = "left";
+			}
+			else if(keyH.rightPressed == true) {
+				worldX += speed;
+				direction = "right";
+			}
+			else
+				direction = "stay";
 		}
-		
+
 		// spriteNum để vẽ nhân vật  ở đây vẽ 8 bức 1s sẽ tạo đc chuyển động vỗ cánh
 		spriteCounter++;
 		if(spriteCounter>8) {
