@@ -8,7 +8,7 @@ import Graphics.Font;
 
 public class SpriteSheet {
     public Sprite[][] spriteArray;
-    private final int TILE_SIZE = 32;
+    private final int TILE_SIZE = 24;
     private Sprite SPRITESHEET = null;
 
     public int width;
@@ -106,7 +106,8 @@ public class SpriteSheet {
         loadSpriteArray();
     }
 
-    public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2D pos, int width, int height, int xOffset, int yOffset) {
+    public static void drawArray(Graphics2D g, ArrayList<BufferedImage> img, Vector2D pos, int width, int height,
+                                 int xOffset, int yOffset) {
         float x = pos.x;
         float y = pos.y;
 
@@ -135,7 +136,8 @@ public class SpriteSheet {
     public static void drawArray(Graphics2D g, Font f, String word, Vector2D vector, int size, int xOffset) {
         drawArray(g, f, word, vector, size, size, xOffset, 0);
     }
-    public static void drawArray(Graphics2D g, Font f, String word, Vector2D vector, int width, int height, int xOffset, int yOffset) {
+    public static void drawArray(Graphics2D g, Font f, String word, Vector2D vector,
+                                 int width, int height, int xOffset, int yOffset) {
         float x = vector.x;
         float y = vector.y;
         currentFont = f;
