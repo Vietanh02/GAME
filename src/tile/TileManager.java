@@ -47,62 +47,65 @@ public class TileManager {
 		tile[1].image[1] = world_b.spriteArray[2][1].image;
 		tile[1].image[2] = world_b.spriteArray[3][0].image;
 		tile[1].image[3] = world_b.spriteArray[3][1].image;*/
-		buildTiles("tiles/World_A1.png",2094, 0, 0, false); //nước
-		buildTiles("tiles/World_A1.png",2286, 0, 16,true); //đầm lầy độc
-		buildTiles("tiles/World_A1.png",2382, 6, 16,true); //dung nham
-		buildTiles("tiles/World_A1.png",2478, 12, 0,true); //nước 2
-		buildTiles("tiles/World_A1.png",2574, 18, 0,true); // băng
-		buildTiles("tiles/World_A1.png",2670, 12, 16,true); // hố
-		buildTiles("tiles/World_A1.png",2766, 18, 16,true); //hố băng
-
-		buildTiles("tiles/World_A2.png",2862, 0, 0,false); //cỏ non
-		buildTiles("tiles/World_A2.png",2958, 0, 8,false); // cỏ già
-		buildTiles("tiles/World_A2.png",3246, 6, 0,false); // sa mạc 1
-		buildTiles("tiles/World_A2.png",3342, 6, 8,false); // sa mạc 2
-		buildTiles("tiles/World_A2.png",3630, 12, 0,false); // sa mạc 3
-		buildTiles("tiles/World_A2.png",3726, 12, 8,false); // đá
-		buildTiles("tiles/World_A2.png",4014, 18, 0,false); //tuyết
-		buildTiles("tiles/World_A2.png",4110, 18, 8,false); //băng tuyết
-
-		buildTiles("tiles/World_A1.png",2142, 6, 0,false); //nước sâu
-		buildTiles("tiles/World_A1.png",2190, 0, 12,false); //bãi đá
-		buildTiles("tiles/World_A1.png",2238, 6, 12,false); //bãi băng đá
-		//setup 1 số tile đặc biệt
-		buildTile("tiles/World_A1.png",2289, 0, 28,false); // đầm lầy độc
-		buildTile("tiles/World_A1.png",2384, 6, 28,false); // dung nham
-		buildTile("tiles/World_A1.png",2480, 12, 12,false); //đá trên nước
-		buildTile("tiles/World_A1.png",2576, 18, 12,false); //xoáy nước
-		buildTile("tiles/World_A1.png",2672, 12, 28,false); //thác
-		buildTile("tiles/World_A1.png",2770, 18, 28,false); //mây
-		//
-		buildTiles("tiles/World_A2.png",2910, 0, 4,false);// thảm cỏ non
-		buildTiles("tiles/World_A2.png",3006, 0, 12,false); //thảm cỏ già
-		buildTiles("tiles/World_A2.png",3054, 0, 16,false);// cây
-		buildTiles("tiles/World_A2.png",3102, 0, 20,false);//cây thông
-		buildTiles("tiles/World_A2.png",3150, 0, 24,false);//núi xanh
-		buildTiles("tiles/World_A2.png",3198, 0, 28,false);//núi đá
-
-		buildTiles("tiles/World_A2.png",3294, 6, 4,false);// hạn hán
-		buildTiles("tiles/World_A2.png",3390, 6, 12,false);// cát
-		buildTiles("tiles/World_A2.png",3438, 6, 16,false); // cây gai
-		buildTiles("tiles/World_A2.png",3486, 6, 20,false); // cát 3
-		buildTiles("tiles/World_A2.png",3534, 6, 24,false); // núi đá 2
-		buildTiles("tiles/World_A2.png",3582, 6, 28,false);// núi đá 3
-
-		buildTiles("tiles/World_A2.png",3678, 12, 4,false); // cát 4
-		buildTiles("tiles/World_A2.png",3774, 12, 12,false); // dung nham
-		buildTiles("tiles/World_A2.png",3822, 12, 16,false);//cây dừa
-		buildTiles("tiles/World_A2.png",3870, 12, 20,false);//nền gạch
-		buildTiles("tiles/World_A2.png",3918, 12, 24,false);//núi đá
-		buildTiles("tiles/World_A2.png",3966, 12, 28,false);//núi lửa
-
-		buildTiles("tiles/World_A2.png",4062, 16, 4,false);//núi tuyết
-		buildTiles("tiles/World_A2.png",4158, 16, 12,false);//mây
-		buildTiles("tiles/World_A2.png",4206, 16, 16,false);//cây thông phủ tuyết
-		buildTiles("tiles/World_A2.png",4254, 16, 20,false);//hố
-		buildTiles("tiles/World_A2.png",4302, 16, 24,false);//núi
-		buildTiles("tiles/World_A2.png",4350, 16, 28,false);//núi tuyết
-
+		tile[0] = new Tile();
+		buildTile("tiles/Tile_0.png",0, 0,0,false); //ảnh trống
+//		buildTiles("tiles/World_A1.png",2094, 0, 0, false); //nước
+//		buildTiles("tiles/World_A1.png",2286, 0, 16,true); //đầm lầy độc
+//		buildTiles("tiles/World_A1.png",2382, 6, 16,true); //dung nham
+//		buildTiles("tiles/World_A1.png",2478, 12, 0,true); //nước 2
+//		buildTiles("tiles/World_A1.png",2574, 18, 0,true); // băng
+//		buildTiles("tiles/World_A1.png",2670, 12, 16,true); // hố
+//		buildTiles("tiles/World_A1.png",2766, 18, 16,true); //hố băng
+//
+//		buildTiles("tiles/World_A1.png",2142, 6, 0,false); //nước sâu
+//		buildTiles("tiles/World_A1.png",2190, 0, 12,false); //bãi đá
+//		buildTiles("tiles/World_A1.png",2238, 6, 12,false); //bãi băng đá
+//		//setup 1 số tile đặc biệt
+//		buildTile("tiles/World_A1.png",2289, 0, 28,false); // đầm lầy độc
+//		buildTile("tiles/World_A1.png",2384, 6, 28,false); // dung nham
+//		buildTile("tiles/World_A1.png",2480, 12, 12,false); //đá trên nước
+//		buildTile("tiles/World_A1.png",2576, 18, 12,false); //xoáy nước
+//		buildTile("tiles/World_A1.png",2672, 12, 28,false); //thác
+//		buildTile("tiles/World_A1.png",2770, 18, 28,false); //mây
+//		//
+//		buildTiles("tiles/World_A2.png",2862, 0, 0,false); //cỏ non
+//		buildTiles("tiles/World_A2.png",2958, 0, 8,false); // cỏ già
+//		buildTiles("tiles/World_A2.png",3246, 6, 0,false); // sa mạc 1
+//		buildTiles("tiles/World_A2.png",3342, 6, 8,false); // sa mạc 2
+//		buildTiles("tiles/World_A2.png",3630, 12, 0,false); // sa mạc 3
+//		buildTiles("tiles/World_A2.png",3726, 12, 8,false); // đá
+//		buildTiles("tiles/World_A2.png",4014, 18, 0,false); //tuyết
+//		buildTiles("tiles/World_A2.png",4110, 18, 8,false); //băng tuyết
+//
+//		buildTiles("tiles/World_A2.png",2910, 0, 4,false);// thảm cỏ non
+//		buildTiles("tiles/World_A2.png",3006, 0, 12,false); //thảm cỏ già
+//		buildTiles("tiles/World_A2.png",3054, 0, 16,false);// cây
+//		buildTiles("tiles/World_A2.png",3102, 0, 20,false);//cây thông
+//		buildTiles("tiles/World_A2.png",3150, 0, 24,false);//núi xanh
+//		buildTiles("tiles/World_A2.png",3198, 0, 28,false);//núi đá
+//
+//		buildTiles("tiles/World_A2.png",3294, 6, 4,false);// hạn hán
+//		buildTiles("tiles/World_A2.png",3390, 6, 12,false);// cát
+//		buildTiles("tiles/World_A2.png",3438, 6, 16,false); // cây gai
+//		buildTiles("tiles/World_A2.png",3486, 6, 20,false); // cát 3
+//		buildTiles("tiles/World_A2.png",3534, 6, 24,false); // núi đá 2
+//		buildTiles("tiles/World_A2.png",3582, 6, 28,false);// núi đá 3
+//
+//		buildTiles("tiles/World_A2.png",3678, 12, 4,false); // cát 4
+//		buildTiles("tiles/World_A2.png",3774, 12, 12,false); // dung nham
+//		buildTiles("tiles/World_A2.png",3822, 12, 16,false);//cây dừa
+//		buildTiles("tiles/World_A2.png",3870, 12, 20,false);//nền gạch
+//		buildTiles("tiles/World_A2.png",3918, 12, 24,false);//núi đá
+//		buildTiles("tiles/World_A2.png",3966, 12, 28,false);//núi lửa
+//
+//		buildTiles("tiles/World_A2.png",4062, 16, 4,false);//núi tuyết
+//		buildTiles("tiles/World_A2.png",4158, 16, 12,false);//mây
+//		buildTiles("tiles/World_A2.png",4206, 16, 16,false);//cây thông phủ tuyết
+//		buildTiles("tiles/World_A2.png",4254, 16, 20,false);//hố
+//		buildTiles("tiles/World_A2.png",4302, 16, 24,false);//núi
+//		buildTiles("tiles/World_A2.png",4350, 16, 28,false);//núi tuyết
+		setupTilesA1("tiles/World_A1.png");
+		setupTilesA2("tiles/World_A2.png");
 	}
 	
 	//tải map 01. quy định 0 là cỏ, 1 là tường 2 là nước, xem res/map01.txt
@@ -247,4 +250,63 @@ public class TileManager {
 		tile[index].image[2] = sp.spriteArray[x+x3][y+y3].image;
 		tile[index].image[3] = sp.spriteArray[x+x4][y+y4].image;
 	}
+	public void setupTilesA1(String file){
+		buildTiles(file,2094, 0, 0, false); //nước
+		buildTiles(file,2286, 0, 16,true); //đầm lầy độc
+		buildTiles(file,2382, 6, 16,true); //dung nham
+		buildTiles(file,2478, 12, 0,true); //nước 2
+		buildTiles(file,2574, 18, 0,true); // băng
+		buildTiles(file,2670, 12, 16,true); // hố
+		buildTiles(file,2766, 18, 16,true); //hố băng
+
+		buildTiles(file,2142, 6, 0,false); //nước sâu
+		buildTiles(file,2190, 0, 12,false); //bãi đá
+		buildTiles(file,2238, 6, 12,false); //bãi băng đá
+		//setup 1 số tile đặc biệt
+		buildTile(file,2289, 0, 28,false); // đầm lầy độc
+		buildTile(file,2384, 6, 28,false); // dung nham
+		buildTile(file,2480, 12, 12,false); //đá trên nước
+		buildTile(file,2576, 18, 12,false); //xoáy nước
+		buildTile(file,2672, 12, 28,false); //thác
+		buildTile(file,2770, 18, 28,false); //mây
+	}
+	public void setupTilesA2(String file){
+		buildTiles(file,2862, 0, 0,false); //cỏ non
+		buildTiles(file,2958, 0, 8,false); // cỏ già
+		buildTiles(file,3246, 6, 0,false); // sa mạc 1
+		buildTiles(file,3342, 6, 8,false); // sa mạc 2
+		buildTiles(file,3630, 12, 0,false); // sa mạc 3
+		buildTiles(file,3726, 12, 8,false); // đá
+		buildTiles(file,4014, 18, 0,false); //tuyết
+		buildTiles(file,4110, 18, 8,false); //băng tuyết
+
+		buildTiles(file,2910, 0, 4,false);// thảm cỏ non
+		buildTiles(file,3006, 0, 12,false); //thảm cỏ già
+		buildTiles(file,3054, 0, 16,false);// cây
+		buildTiles(file,3102, 0, 20,false);//cây thông
+		buildTiles(file,3150, 0, 24,false);//núi xanh
+		buildTiles(file,3198, 0, 28,false);//núi đá
+
+		buildTiles(file,3294, 6, 4,false);// hạn hán
+		buildTiles(file,3390, 6, 12,false);// cát
+		buildTiles(file,3438, 6, 16,false); // cây gai
+		buildTiles(file,3486, 6, 20,false); // cát 3
+		buildTiles(file,3534, 6, 24,false); // núi đá 2
+		buildTiles(file,3582, 6, 28,false);// núi đá 3
+
+		buildTiles(file,3678, 12, 4,false); // cát 4
+		buildTiles(file,3774, 12, 12,false); // dung nham
+		buildTiles(file,3822, 12, 16,false);//cây dừa
+		buildTiles(file,3870, 12, 20,false);//nền gạch
+		buildTiles(file,3918, 12, 24,false);//núi đá
+		buildTiles(file,3966, 12, 28,false);//núi lửa
+
+		buildTiles(file,4062, 16, 4,false);//núi tuyết
+		buildTiles(file,4158, 16, 12,false);//mây
+		buildTiles(file,4206, 16, 16,false);//cây thông phủ tuyết
+		buildTiles(file,4254, 16, 20,false);//hố
+		buildTiles(file,4302, 16, 24,false);//núi
+		buildTiles(file,4350, 16, 28,false);//núi tuyết
+	}
+
 }
