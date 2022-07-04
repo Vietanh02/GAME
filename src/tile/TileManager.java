@@ -16,9 +16,7 @@ public class TileManager {
 	GamePanel gp;
 	public Tile[] tile;  // lưu các ô của bản đồ
 	public int[][] mapTileNum; // vẽ theo tọa đồ Oxy, ví dụ (0,1) là tường thì chèn ảnh tường vaò vị trí (0,1)
-
 	public int[][] layer1;// lớp phủ trên bề mặt
-
 	private boolean collision = false;
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
@@ -49,7 +47,6 @@ public class TileManager {
 		tile[1].image[1] = world_b.spriteArray[2][1].image;
 		tile[1].image[2] = world_b.spriteArray[3][0].image;
 		tile[1].image[3] = world_b.spriteArray[3][1].image;*/
-
 		buildTiles("tiles/World_A1.png",2094, 0, 0, false); //nước
 		buildTiles("tiles/World_A1.png",2286, 0, 16,true); //đầm lầy độc
 		buildTiles("tiles/World_A1.png",2382, 6, 16,true); //dung nham
@@ -105,7 +102,6 @@ public class TileManager {
 		buildTiles("tiles/World_A2.png",4254, 16, 20,false);//hố
 		buildTiles("tiles/World_A2.png",4302, 16, 24,false);//núi
 		buildTiles("tiles/World_A2.png",4350, 16, 28,false);//núi tuyết
-
 
 	}
 	
