@@ -1,6 +1,10 @@
 package main;
 
+import object.OBJ_Heart;
+import object.SuperObject;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class UI {
     GamePanel gp;
@@ -8,6 +12,7 @@ public class UI {
     Font arial_40;
     Font arial_80B;
 
+    BufferedImage heart_full, heart_half, heart_blank;
     public int commandNum = 0;
     public int titleScreenState = 0;
 
@@ -16,6 +21,12 @@ public class UI {
 
         arial_40 = new Font("Arial", Font.PLAIN,40);
         arial_80B = new Font("Arial", Font.BOLD,80);
+
+        //CREATE HUB OBJ
+        SuperObject heart = new OBJ_Heart(gp);
+        heart_full = heart.image[0];
+        heart_half = heart.image[1];
+        heart_blank = heart.image[2];
     }
 
     public void draw(Graphics2D g2){
@@ -24,16 +35,45 @@ public class UI {
         g2.setColor(Color.white);
         //titlestate
         if(gp.gameState == gp.titleState){
+            drawPlayerLife();
             drawTitleScreen();
         }
         //playstate
         if(gp.gameState == gp.playState){
-            g2.drawString("Key = "+ gp.player.hasKey, 30, 30);
+            drawPlayerLife();
+            //g2.drawString("Key = "+ gp.player.hasKey, 30, 30);
         }
         if(gp.gameState == gp.pauseState){
+            drawPlayerLife();
             drawPauseScreen();
         }
 
+    }
+    // vẽ Thanh máu
+    public void drawPlayerLife(){
+        int x = gp.tileSize/2;
+        int y = gp.tileSize/2;
+        int i = 0;
+        //draw maxlife
+        while(i < gp.player.maxLife/2){
+            g2.drawImage(heart_blank,x,y,null);
+            i++;
+            x += gp.tileSize;
+        }
+        //reset
+        x = gp.tileSize/2;
+        y = gp.tileSize/2;
+        i = 0;
+        //draw current life
+        while(i< gp.player.life){
+            g2.drawImage(heart_half,x,y,null);
+            i++;
+            if(i<gp.player.life){
+                g2.drawImage(heart_full,x,y,null);
+            }
+            i++;
+            x+= gp.tileSize;
+        }
     }
     public void drawTitleScreen(){
         //titlename

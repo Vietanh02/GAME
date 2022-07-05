@@ -21,4 +21,8 @@ public abstract class Entity {
 	public int spriteNum = 1;
 	public Rectangle solidArea;
 	public boolean collisionOn = false;
+
+	//CHARATER STATUS
+	public int maxLife;
+	public int life;
 }
