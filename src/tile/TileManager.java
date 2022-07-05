@@ -49,6 +49,9 @@ public class TileManager {
 		tile[1].image[3] = world_b.spriteArray[3][1].image;*/
 		tile[0] = new Tile();
 		buildTile("tiles/Tile_0.png",0, 0,0,false); //ảnh trống
+		for(int i = 1; i < 2094; i++){
+			tile[i] = tile[0];
+		}
 //		buildTiles("tiles/World_A1.png",2094, 0, 0, false); //nước
 //		buildTiles("tiles/World_A1.png",2286, 0, 16,true); //đầm lầy độc
 //		buildTiles("tiles/World_A1.png",2382, 6, 16,true); //dung nham
@@ -106,6 +109,7 @@ public class TileManager {
 //		buildTiles("tiles/World_A2.png",4350, 16, 28,false);//núi tuyết
 		setupTilesA1("tiles/World_A1.png");
 		setupTilesA2("tiles/World_A2.png");
+
 	}
 	
 	//tải map 01. quy định 0 là cỏ, 1 là tường 2 là nước, xem res/map01.txt
@@ -174,9 +178,39 @@ public class TileManager {
 		}
 		
 	}
+//	public void buildTileWalls(String file, int index, int x, int y, boolean collision){
+//		SpriteSheet sp1 = new SpriteSheet(file,24,24);
+//		this.collision = collision;
+//		index++;
+//		for(int i = 1; i <= 3; i++){
+//		setupTile(sp1,index--,x,y,"00033033");//67
+//		setupTile(sp1,index--,x,y,"00033033");//66
+//		setupTile(sp1,index--,x,y,"02033233");//65
+//		setupTile(sp1,index--,x,y,"20233033");//64
+//		setupTile(sp1,index--,x,y,"22233233");//64
+//		setupTile(sp1,index--,x,y,"00013031");//63
+//		setupTile(sp1,index--,x,y,"02033233");//62
+//
+//		setupTile(sp1,index--,x,y,"20213031");//61
+//		setupTile(sp1,index--,x,y,"22213231");//60
+//		setupTile(sp1,index--,x,y,"00031013");//69
+//		setupTile(sp1,index--,x,y,"02031213");//58
+//
+//		setupTile(sp1,index--,x,y,"20231013");//57
+//		setupTile(sp1,index--,x,y,"21231213");//56
+//
+//		setupTile(sp1,index--,x,y,"00011011");//55
+//		setupTile(sp1,index--,x,y,"02011211");//54
+//
+//		setupTile(sp1,index--,x,y,"20211011");//53
+//		setupTile(sp1,index--,x,y, "22211211");//52
+//		}
+//
+//	}
 	public void buildTiles(String file, int index, int x, int y, boolean collision){
 		SpriteSheet sp1 = new SpriteSheet(file,24,24);
 		this.collision = collision;
+		setupTile(sp1,index+1,x,y,"00011011");//95
 		setupTile(sp1,index--,x,y,"00011011");//94
 		setupTile(sp1,index--,x,y,"21015111");//93
 		setupTile(sp1,index--,x,y,"30331011");//92
@@ -224,6 +258,7 @@ public class TileManager {
 		setupTile(sp1,index--,x,y,"31034142");//50
 		setupTile(sp1,index--,x,y,"02324142");//49
 		setupTile(sp1,index--,x,y,"31324142");//48
+		tile[index] = tile[0];
 	}
 	//setup tile dặc biệt tại vị trí x, y
 	public void buildTile(String file, int index, int x, int y, boolean collision){
@@ -250,25 +285,49 @@ public class TileManager {
 		tile[index].image[2] = sp.spriteArray[x+x3][y+y3].image;
 		tile[index].image[3] = sp.spriteArray[x+x4][y+y4].image;
 	}
-	public void setupTilesA1(String file){
-		buildTiles(file,2094, 0, 0, false); //nước
-		buildTiles(file,2286, 0, 16,true); //đầm lầy độc
-		buildTiles(file,2382, 6, 16,true); //dung nham
-		buildTiles(file,2478, 12, 0,true); //nước 2
-		buildTiles(file,2574, 18, 0,true); // băng
-		buildTiles(file,2670, 12, 16,true); // hố
-		buildTiles(file,2766, 18, 16,true); //hố băng
 
-		buildTiles(file,2142, 6, 0,false); //nước sâu
-		buildTiles(file,2190, 0, 12,false); //bãi đá
-		buildTiles(file,2238, 6, 12,false); //bãi băng đá
-		//setup 1 số tile đặc biệt
-		buildTile(file,2289, 0, 28,false); // đầm lầy độc
-		buildTile(file,2384, 6, 28,false); // dung nham
-		buildTile(file,2480, 12, 12,false); //đá trên nước
-		buildTile(file,2576, 18, 12,false); //xoáy nước
-		buildTile(file,2672, 12, 28,false); //thác
-		buildTile(file,2770, 18, 28,false); //mây
+	public void setupTilesA1(String file){
+		buildTiles(file,2094, 0, 0, false); //nước bờ cỏ
+		buildTiles(file,2142, 6, 0,false); // nước bờ sỏi đá
+		buildTiles(file,2190, 0, 12,false); //bèo
+		buildTiles(file,2238, 6, 12,false); //cỏ nước
+		buildTiles(file,2286, 0, 16,false); //nước bờ tuyết
+		buildTiles(file,2334, 0, 28,false); //thac
+		setupTile(new SpriteSheet(file,24,24), 2291,0, 28,"00031013");//2 bờ
+		setupTile(new SpriteSheet(file,24,24), 2290,0, 28,"02031213");//bờ phải
+		setupTile(new SpriteSheet(file,24,24), 2289,0, 28,"00011011");//bờ trái
+		setupTile(new SpriteSheet(file,24,24), 2288,0, 28,"01021112");//không bờ
+		buildTiles(file,2382, 6, 16,false); // nước
+		buildTiles(file,2430, 6, 28,false); //thac
+		setupTile(new SpriteSheet(file,24,24), 2387,6, 28,"00031013");//2 bờ
+		setupTile(new SpriteSheet(file,24,24), 2386,6, 28,"02031213");//bờ phải
+		setupTile(new SpriteSheet(file,24,24), 2385,6, 28,"00011011");//bờ trái
+		setupTile(new SpriteSheet(file,24,24), 2384,6, 28,"01021112");//không bờ
+		buildTiles(file,2478, 12, 0,false); //nước bờ cát
+		buildTiles(file,2526, 12, 12,false); //suoi
+		setupTile(new SpriteSheet(file,24,24), 2483,12, 12,"00031013");//2 bờ
+		setupTile(new SpriteSheet(file,24,24), 2482,12, 12,"02031213");//bờ phải
+		setupTile(new SpriteSheet(file,24,24), 2481,12, 12,"00011011");//bờ trái
+		setupTile(new SpriteSheet(file,24,24), 2481,12, 12,"01021112");//không bờ
+		buildTiles(file,2574, 18, 0,false); // nước bờ đất
+		buildTiles(file,2622, 18, 12,false); //suoi da
+		setupTile(new SpriteSheet(file,24,24), 2579,18, 12,"00031013");//2 bờ
+		setupTile(new SpriteSheet(file,24,24), 2578,18, 12,"02031213");//bờ phải
+		setupTile(new SpriteSheet(file,24,24), 2577,18, 12,"00011011");//bờ trái
+		setupTile(new SpriteSheet(file,24,24), 2576,18, 12,"01021112");//không bờ
+		buildTiles(file,2670, 12, 16,false); //bong bong
+		buildTiles(file,2718, 12, 28,true); //thac
+		setupTile(new SpriteSheet(file,24,24), 2675,12, 28,"00031013");//2 bờ
+		setupTile(new SpriteSheet(file,24,24), 2674,12, 28,"02031213");//bờ phải
+		setupTile(new SpriteSheet(file,24,24), 2673,12, 28,"00011011");//bờ trái
+		setupTile(new SpriteSheet(file,24,24), 2672,12, 28,"01021112");//không bờ
+		buildTiles(file,2766, 18, 16,false); //đầm độc
+		buildTiles(file,2814, 18, 28,false); //cay tren dam doc
+		setupTile(new SpriteSheet(file,24,24), 2771,18, 28,"00031013");//2 bờ
+		setupTile(new SpriteSheet(file,24,24), 2770,18, 28,"02031213");//bờ phải
+		setupTile(new SpriteSheet(file,24,24), 2769,18, 28,"00011011");//bờ trái
+		setupTile(new SpriteSheet(file,24,24), 2768,18, 28,"01021112");//không bờ
+
 	}
 	public void setupTilesA2(String file){
 		buildTiles(file,2862, 0, 0,false); //cỏ non
@@ -308,5 +367,6 @@ public class TileManager {
 		buildTiles(file,4302, 16, 24,false);//núi
 		buildTiles(file,4350, 16, 28,false);//núi tuyết
 	}
+
 
 }
