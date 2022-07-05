@@ -48,8 +48,8 @@ public class TileManager {
 		tile[1].image[2] = world_b.spriteArray[3][0].image;
 		tile[1].image[3] = world_b.spriteArray[3][1].image;*/
 		tile[0] = new Tile();
-		buildTile("tiles/Tile_0.png",0, 0,0,false); //ảnh trống
-		for(int i = 1; i < 2094; i++){
+		buildTile(new SpriteSheet("tiles/Tile_0.png",24,24),0, 0,0,false); //ảnh trống
+		for(int i = 512; i < 2094; i++){
 			tile[i] = tile[0];
 		}
 //		buildTiles("tiles/World_A1.png",2094, 0, 0, false); //nước
@@ -109,6 +109,7 @@ public class TileManager {
 //		buildTiles("tiles/World_A2.png",4350, 16, 28,false);//núi tuyết
 		setupTilesA1("tiles/World_A1.png");
 		setupTilesA2("tiles/World_A2.png");
+		setupTilesB_C("tiles/World_B.png","tiles/World_C.png");
 
 	}
 	
@@ -261,13 +262,13 @@ public class TileManager {
 		tile[index] = tile[0];
 	}
 	//setup tile dặc biệt tại vị trí x, y
-	public void buildTile(String file, int index, int x, int y, boolean collision){
+	public void buildTile(SpriteSheet sp, int index, int x, int y, boolean collision){
 		this.collision = collision;
 		tile[index] = new Tile();
-		tile[index].image[0] = new SpriteSheet(file,24,24).spriteArray[x][y].image;
-		tile[index].image[1] = new SpriteSheet(file,24,24).spriteArray[x][y+1].image;
-		tile[index].image[2] = new SpriteSheet(file,24,24).spriteArray[x+1][y].image;
-		tile[index].image[3] = new SpriteSheet(file,24,24).spriteArray[x+1][y+1].image;
+		tile[index].image[0] = sp.spriteArray[x][y].image;
+		tile[index].image[1] = sp.spriteArray[x][y+1].image;
+		tile[index].image[2] = sp.spriteArray[x+1][y].image;
+		tile[index].image[3] = sp.spriteArray[x+1][y+1].image;
 	}
 	public void setupTile(SpriteSheet sp, int index,int x, int y,String s){
 		int x1 = Character.getNumericValue(s.charAt(0));
@@ -368,5 +369,30 @@ public class TileManager {
 		buildTiles(file,4350, 16, 28,false);//núi tuyết
 	}
 
+	public void setupTilesB_C(String file1, String file2) {
+		SpriteSheet sp =new SpriteSheet(file1, 24, 24);
+		int index = 0;
+		for(int i = 0;i < 32; i+=2){
+			for(int j = 0; j < 16; j+=2){
+				buildTile(sp,index++,i,j,false);
+			}
+		}
+		for(int i = 0; i< 32; i+=2){
+			for(int j = 16; j < 32; j+=2){
+				buildTile(sp,index++,i,j,false);
+			}
+		}
+		sp = new SpriteSheet(file2, 24,24);
+		for(int i = 0;i < 32; i+=2){
+			for(int j = 0; j < 16; j+=2){
+				buildTile(sp,index++,i,j,false);
+			}
+		}
+		for(int i = 0; i< 32; i+=2){
+			for(int j = 16; j < 32; j+=2){
+				buildTile(sp,index++,i,j,false);
+			}
+		}
+	}
 
 }
