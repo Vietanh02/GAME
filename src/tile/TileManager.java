@@ -29,87 +29,18 @@ public class TileManager {
 	
 	// nhập các ảnh wall, water, grass vào mảng tile
 	public void getTileImage() {
-	/*	SpriteSheet world_a1 = new SpriteSheet("tiles/World_A1.png",24,24);
-		tile[2] = new Tile();
-		tile[2].image[0] = world_a1.spriteArray[3][1].image;
-		tile[2].image[1] = world_a1.spriteArray[3][2].image;
-		tile[2].image[2] = world_a1.spriteArray[4][1].image;
-		tile[2].image[3] = world_a1.spriteArray[4][2].image;
-		SpriteSheet world_a2 = new SpriteSheet("tiles/World_A2.png",24,24);
-		tile[0] = new Tile();
-		tile[0].image[0] = world_a2.spriteArray[3][1].image;
-		tile[0].image[1] = world_a2.spriteArray[3][2].image;
-		tile[0].image[2] = world_a2.spriteArray[4][1].image;
-		tile[0].image[3] = world_a2.spriteArray[4][2].image;
-		SpriteSheet world_b = new SpriteSheet("tiles/World_B.png",24,24);
-		tile[1] = new Tile();
-		tile[1].image[0] = world_b.spriteArray[2][0].image;
-		tile[1].image[1] = world_b.spriteArray[2][1].image;
-		tile[1].image[2] = world_b.spriteArray[3][0].image;
-		tile[1].image[3] = world_b.spriteArray[3][1].image;*/
+
 		tile[0] = new Tile();
 		buildTile(new SpriteSheet("tiles/Tile_0.png",24,24),0, 0,0,false); //ảnh trống
 		for(int i = 512; i < 2094; i++){
 			tile[i] = tile[0];
 		}
-//		buildTiles("tiles/World_A1.png",2094, 0, 0, false); //nước
-//		buildTiles("tiles/World_A1.png",2286, 0, 16,true); //đầm lầy độc
-//		buildTiles("tiles/World_A1.png",2382, 6, 16,true); //dung nham
-//		buildTiles("tiles/World_A1.png",2478, 12, 0,true); //nước 2
-//		buildTiles("tiles/World_A1.png",2574, 18, 0,true); // băng
-//		buildTiles("tiles/World_A1.png",2670, 12, 16,true); // hố
-//		buildTiles("tiles/World_A1.png",2766, 18, 16,true); //hố băng
 //
-//		buildTiles("tiles/World_A1.png",2142, 6, 0,false); //nước sâu
-//		buildTiles("tiles/World_A1.png",2190, 0, 12,false); //bãi đá
-//		buildTiles("tiles/World_A1.png",2238, 6, 12,false); //bãi băng đá
-//		//setup 1 số tile đặc biệt
-//		buildTile("tiles/World_A1.png",2289, 0, 28,false); // đầm lầy độc
-//		buildTile("tiles/World_A1.png",2384, 6, 28,false); // dung nham
-//		buildTile("tiles/World_A1.png",2480, 12, 12,false); //đá trên nước
-//		buildTile("tiles/World_A1.png",2576, 18, 12,false); //xoáy nước
-//		buildTile("tiles/World_A1.png",2672, 12, 28,false); //thác
-//		buildTile("tiles/World_A1.png",2770, 18, 28,false); //mây
-//		//
-//		buildTiles("tiles/World_A2.png",2862, 0, 0,false); //cỏ non
-//		buildTiles("tiles/World_A2.png",2958, 0, 8,false); // cỏ già
-//		buildTiles("tiles/World_A2.png",3246, 6, 0,false); // sa mạc 1
-//		buildTiles("tiles/World_A2.png",3342, 6, 8,false); // sa mạc 2
-//		buildTiles("tiles/World_A2.png",3630, 12, 0,false); // sa mạc 3
-//		buildTiles("tiles/World_A2.png",3726, 12, 8,false); // đá
-//		buildTiles("tiles/World_A2.png",4014, 18, 0,false); //tuyết
-//		buildTiles("tiles/World_A2.png",4110, 18, 8,false); //băng tuyết
-//
-//		buildTiles("tiles/World_A2.png",2910, 0, 4,false);// thảm cỏ non
-//		buildTiles("tiles/World_A2.png",3006, 0, 12,false); //thảm cỏ già
-//		buildTiles("tiles/World_A2.png",3054, 0, 16,false);// cây
-//		buildTiles("tiles/World_A2.png",3102, 0, 20,false);//cây thông
-//		buildTiles("tiles/World_A2.png",3150, 0, 24,false);//núi xanh
-//		buildTiles("tiles/World_A2.png",3198, 0, 28,false);//núi đá
-//
-//		buildTiles("tiles/World_A2.png",3294, 6, 4,false);// hạn hán
-//		buildTiles("tiles/World_A2.png",3390, 6, 12,false);// cát
-//		buildTiles("tiles/World_A2.png",3438, 6, 16,false); // cây gai
-//		buildTiles("tiles/World_A2.png",3486, 6, 20,false); // cát 3
-//		buildTiles("tiles/World_A2.png",3534, 6, 24,false); // núi đá 2
-//		buildTiles("tiles/World_A2.png",3582, 6, 28,false);// núi đá 3
-//
-//		buildTiles("tiles/World_A2.png",3678, 12, 4,false); // cát 4
-//		buildTiles("tiles/World_A2.png",3774, 12, 12,false); // dung nham
-//		buildTiles("tiles/World_A2.png",3822, 12, 16,false);//cây dừa
-//		buildTiles("tiles/World_A2.png",3870, 12, 20,false);//nền gạch
-//		buildTiles("tiles/World_A2.png",3918, 12, 24,false);//núi đá
-//		buildTiles("tiles/World_A2.png",3966, 12, 28,false);//núi lửa
-//
-//		buildTiles("tiles/World_A2.png",4062, 16, 4,false);//núi tuyết
-//		buildTiles("tiles/World_A2.png",4158, 16, 12,false);//mây
-//		buildTiles("tiles/World_A2.png",4206, 16, 16,false);//cây thông phủ tuyết
-//		buildTiles("tiles/World_A2.png",4254, 16, 20,false);//hố
-//		buildTiles("tiles/World_A2.png",4302, 16, 24,false);//núi
-//		buildTiles("tiles/World_A2.png",4350, 16, 28,false);//núi tuyết
 		setupTilesA1("tiles/World_A1.png");
 		setupTilesA2("tiles/World_A2.png");
+		setupTilesA3("tiles/World_A3.png");
 		setupTilesB_C("tiles/World_B.png","tiles/World_C.png");
+		setupTileA4("tiles/World_A4.png");
 
 	}
 	
@@ -179,35 +110,34 @@ public class TileManager {
 		}
 		
 	}
-//	public void buildTileWalls(String file, int index, int x, int y, boolean collision){
-//		SpriteSheet sp1 = new SpriteSheet(file,24,24);
-//		this.collision = collision;
-//		index++;
-//		for(int i = 1; i <= 3; i++){
-//		setupTile(sp1,index--,x,y,"00033033");//67
-//		setupTile(sp1,index--,x,y,"00033033");//66
-//		setupTile(sp1,index--,x,y,"02033233");//65
-//		setupTile(sp1,index--,x,y,"20233033");//64
-//		setupTile(sp1,index--,x,y,"22233233");//64
-//		setupTile(sp1,index--,x,y,"00013031");//63
-//		setupTile(sp1,index--,x,y,"02033233");//62
-//
-//		setupTile(sp1,index--,x,y,"20213031");//61
-//		setupTile(sp1,index--,x,y,"22213231");//60
-//		setupTile(sp1,index--,x,y,"00031013");//69
-//		setupTile(sp1,index--,x,y,"02031213");//58
-//
-//		setupTile(sp1,index--,x,y,"20231013");//57
-//		setupTile(sp1,index--,x,y,"21231213");//56
-//
-//		setupTile(sp1,index--,x,y,"00011011");//55
-//		setupTile(sp1,index--,x,y,"02011211");//54
-//
-//		setupTile(sp1,index--,x,y,"20211011");//53
-//		setupTile(sp1,index--,x,y, "22211211");//52
-//		}
-//
-//	}
+	public void buildTileWalls(String file, int index, int x, int y, boolean collision){
+		SpriteSheet sp1 = new SpriteSheet(file,24,24);
+		this.collision = collision;
+		for(int i = index +32; i > index;i--){
+			setupTile(sp1,i,x,y,"00033033");//99-68
+		}
+
+		setupTile(sp1,index--,x,y,"00033033");//67
+		setupTile(sp1,index--,x,y,"02033233");//66
+		setupTile(sp1,index--,x,y,"20233033");//65
+		setupTile(sp1,index--,x,y,"22233233");//64
+
+		setupTile(sp1,index--,x,y,"00013031");//63
+		setupTile(sp1,index--,x,y,"02013231");//62
+		setupTile(sp1,index--,x,y,"20213031");//61
+		setupTile(sp1,index--,x,y,"22213231");//60
+
+		setupTile(sp1,index--,x,y,"00031013");//59
+		setupTile(sp1,index--,x,y,"02031213");//58
+		setupTile(sp1,index--,x,y,"20231013");//57
+		setupTile(sp1,index--,x,y,"21231213");//56
+
+		setupTile(sp1,index--,x,y,"00011011");//55
+		setupTile(sp1,index--,x,y,"02011211");//54
+		setupTile(sp1,index--,x,y,"20211011");//53
+		setupTile(sp1,index,x,y, "22211211");//52
+
+	}
 	public void buildTiles(String file, int index, int x, int y, boolean collision){
 		SpriteSheet sp1 = new SpriteSheet(file,24,24);
 		this.collision = collision;
@@ -368,7 +298,6 @@ public class TileManager {
 		buildTiles(file,4302, 16, 24,false);//núi
 		buildTiles(file,4350, 16, 28,false);//núi tuyết
 	}
-
 	public void setupTilesB_C(String file1, String file2) {
 		SpriteSheet sp =new SpriteSheet(file1, 24, 24);
 		int index = 0;
@@ -394,5 +323,101 @@ public class TileManager {
 			}
 		}
 	}
+	public void setupTilesA3(String file){
+		buildTileWalls(file, 4367,0,0, false);
+		buildTileWalls(file, 4415,0,4, false);
+		buildTileWalls(file, 4463,0,8, false);
+		buildTileWalls(file, 4511,0,12, false);
 
+		buildTileWalls(file, 4559,0,16, false);
+		buildTileWalls(file, 4607,0,20, false);
+		buildTileWalls(file, 4655,0,24, false);
+		buildTileWalls(file, 4703,0,28, false);
+
+		buildTileWalls(file, 4751,4,0, false);
+		buildTileWalls(file, 4799,4,4, false);
+		buildTileWalls(file, 4847,4,8, false);
+		buildTileWalls(file, 4895,4,12, false);
+
+		buildTileWalls(file, 4943,4,16, false);
+		buildTileWalls(file, 4991,4,20, false);
+		buildTileWalls(file, 5039,4,24, false);
+		buildTileWalls(file, 5087,4,28, false);
+
+		buildTileWalls(file, 5135,8,0, false);
+		buildTileWalls(file, 5183,8,4, false);
+		buildTileWalls(file, 5231,8,8, false);
+		buildTileWalls(file, 5279,8,12, false);
+
+		buildTileWalls(file, 5327,8,16, false);
+		buildTileWalls(file, 5375,8,20, false);
+		buildTileWalls(file, 5423,8,24, false);
+		buildTileWalls(file, 5471,8,28, false);
+
+		buildTileWalls(file, 5519,12,0, false);
+		buildTileWalls(file, 5567,12,4, false);
+		buildTileWalls(file, 5615,12,8, false);
+		buildTileWalls(file, 5663,12,12, false);
+
+		buildTileWalls(file, 5711,12,16, false);
+		buildTileWalls(file, 5759,12,20, false);
+		buildTileWalls(file, 5807,12,24, false);
+		buildTileWalls(file, 5855,12,28, false);
+	}
+	public void setupTileA4(String file){
+		buildTiles(file, 5934, 0,0,false);
+		buildTiles(file, 5982, 0,4,false);
+		buildTiles(file, 6030, 0,8,false);
+		buildTiles(file, 6078, 0,12,false);
+		buildTiles(file, 6126, 0,16,false);
+		buildTiles(file, 6174, 0,20,false);
+		buildTiles(file, 6222, 0,24,false);
+
+		buildTileWalls(file, 6283, 6, 0, false);
+		buildTiles(file, 6270, 0,28,false);
+
+		buildTileWalls(file, 6331, 6, 4, false);
+		buildTileWalls(file, 6379, 6, 8, false);
+		buildTileWalls(file, 6427, 6, 12, false);
+		buildTileWalls(file, 6475, 6, 16, false);
+		buildTileWalls(file, 6523, 6, 20, false);
+		buildTileWalls(file, 6571, 6, 24, false);
+		buildTileWalls(file, 6619, 6, 28, false);
+
+		buildTiles(file, 6702, 10,0,false);
+		buildTiles(file, 6750, 10,4,false);
+		buildTiles(file, 6798, 10,8,false);
+		buildTiles(file, 6846, 10,12,false);
+		buildTiles(file, 6894, 10,16,false);
+		buildTiles(file, 6942, 10,20,false);
+		buildTiles(file, 6990, 10,24,false);
+		buildTiles(file, 7038, 10,28,false);
+
+		buildTileWalls(file, 7055, 16, 0, false);
+		buildTileWalls(file, 7103, 16, 4, false);
+		buildTileWalls(file, 7151, 16, 8, false);
+		buildTileWalls(file, 7199, 16, 12, false);
+		buildTileWalls(file, 7247, 16, 16, false);
+		buildTileWalls(file, 7295, 16, 20, false);
+		buildTileWalls(file, 7343, 16, 24, false);
+		buildTileWalls(file, 7391, 16, 28, false);
+
+		buildTiles(file, 7470, 20,0,false);
+		buildTiles(file, 7518, 20,4,false);
+		buildTiles(file, 7566, 20,8,false);
+		buildTiles(file, 7614, 20,12,false);
+		buildTiles(file, 7662, 20,16,false);
+		buildTiles(file, 7710, 20,20,false);
+		buildTiles(file, 7758, 20,24,false);
+		buildTiles(file, 7806, 20,28,false);
+
+		buildTileWalls(file, 7823, 26, 0, false);
+		buildTileWalls(file, 7871, 26, 4, false);
+		buildTileWalls(file, 7919, 26, 8, false);
+		buildTileWalls(file, 7967, 26, 12, false);
+		buildTileWalls(file, 8015, 26, 16, false);
+		buildTileWalls(file, 8063, 26, 20, false);
+		buildTileWalls(file, 8111, 26, 24, false);
+		buildTileWalls(file, 8159, 26, 28, false);
+	}
 }
