@@ -23,10 +23,10 @@ public class EventHandler {
     public void checkEvent(){
 
         if (hit(27,16, "right") == true ) {
-            //damagePit(gp.dialogueState);
+            damagePit(gp.dialogueState);
         }
          if (hit(5,8,"any")== true) {
-             //telemap(gp.dialogueState);
+             telemap(gp.dialogueState);
          }
 
 

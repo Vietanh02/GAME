@@ -24,7 +24,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxScreenRow = 12;
 	public final int screenWidth = tileSize*maxScreenCol; //768 pixel
 	public final int screenHeight =  tileSize*maxScreenRow; // 576 // pixel
-	
+
 	//WORLD SETTING 
 	public final int maxWorldCol = 19;
 	public final int maxWorldRow = 16;
@@ -35,10 +35,10 @@ public class GamePanel extends JPanel implements Runnable{
 	//FPS
 	int FPS = 60;
 	long  timer = 0;
-//SYSTEM
+	//SYSTEM
 	// bản đồ và cỏ, tường nước ( tile
 	TileManager tileM = new TileManager(this);
-	
+
 	// keyHandle -- các nút điều khiển
 	KeyHandler keyH = new KeyHandler(this);
 	Sound sound = new Sound();
@@ -47,7 +47,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 
 	Thread gameThread;
-	
+
 	// xác định va chạm của nhân vật với tường và nước
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
@@ -58,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int titleState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
+	public final int dialogueState = 3;
 	public final int charaterState = 4;
 	public final int optionsState = 5;
 
@@ -84,7 +85,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// hàm run trong thư viện giúp lặp lại việc vẽ. Vẽ 60 bức trong 1s để tạo chuyển động
 	@Override
 	public void run() {
-		
+
 		double drawInterval = 1000000000/FPS;
 		double delta = 0;
 		long lastTime = System.nanoTime();
@@ -105,13 +106,13 @@ public class GamePanel extends JPanel implements Runnable{
 				delta--;
 				drawCount++;
 			}
-			
+
 			if(timer >= 1000000000) {
 				drawCount++;
 				drawCount =0;
 				timer =0;
 			}
-			
+
 		}
 	}
 /* public void run() {
@@ -136,8 +137,8 @@ public class GamePanel extends JPanel implements Runnable{
 			}
 			
 		}
-	}*/	
-	
+	}*/
+
 	// vẽ nhân vật
 	public void update() {
 		if (gameState == playState) {
