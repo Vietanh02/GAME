@@ -83,7 +83,6 @@ public class UI {
             g2.setColor(Color.white);
             //titlestate
             if(gp.gameState == gp.titleState){
-                drawPlayerLife();
                 drawTitleScreen();
             }
             //playstate
