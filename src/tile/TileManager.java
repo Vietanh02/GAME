@@ -38,7 +38,7 @@ public class TileManager {
 		loadMap("/maps/map01.txt");
 
 	}
-	
+
 	// nhập các ảnh wall, water, grass vào mảng tile
 	public void getTileImageInside() {
 		setupTilesA1("tiles/Inside_A1.png");
@@ -58,7 +58,7 @@ public class TileManager {
 		setupTileA5("tiles/Outside_A5.png");
 		mapType = "Outside";
 	}
-	
+
 	//tải map 01. quy định 0 là cỏ, 1 là tường 2 là nước, xem res/map01.txt
 	public void loadMap(String filePath) {
 		try {
@@ -69,14 +69,14 @@ public class TileManager {
 			while(col<gp.maxWorldCol && row<4*gp.maxWorldRow) {
 				String line = br.readLine();
 				while(col < gp.maxWorldCol) {
-						String[] numbers = line.split(" ");
-						int num = Integer.parseInt(numbers[col]);
-						if(row < gp.maxWorldRow)  mapTileNum[col][row] = num; // đọc mảng cho lớp nền
-						else if (row < 2*gp.maxWorldRow) layer1[col][row - gp.maxWorldRow] =  num; //đọc cho lớp phủ 1
-						else if (row < 3*gp.maxWorldRow) layer2[col][row - 2*gp.maxWorldRow] =  num; //đọc cho lớp phủ 2
-						else if (row < 4*gp.maxWorldRow) layer3[col][row - 3*gp.maxWorldRow] =  num; //đọc cho lớp phủ 3
+					String[] numbers = line.split(" ");
+					int num = Integer.parseInt(numbers[col]);
+					if(row < gp.maxWorldRow)  mapTileNum[col][row] = num; // đọc mảng cho lớp nền
+					else if (row < 2*gp.maxWorldRow) layer1[col][row - gp.maxWorldRow] =  num; //đọc cho lớp phủ 1
+					else if (row < 3*gp.maxWorldRow) layer2[col][row - 2*gp.maxWorldRow] =  num; //đọc cho lớp phủ 2
+					else if (row < 4*gp.maxWorldRow) layer3[col][row - 3*gp.maxWorldRow] =  num; //đọc cho lớp phủ 3
 					col++;
-					}
+				}
 				if(col == gp.maxWorldCol) {
 					col=0;
 					row++;
@@ -84,14 +84,14 @@ public class TileManager {
 
 
 			}
-			br.close();			
+			br.close();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 	}
 
 	public void draw(Graphics2D g2) {
-		
+
 		int worldCol =0;
 		int worldRow = 0;
 
@@ -105,10 +105,25 @@ public class TileManager {
 
 			// stop moving the camera at the edge
 
+			if (gp.player.screenX > gp.player.worldX){
+				screenX = worldX;
+			}
+			if (gp.player.screenY > gp.player.worldY){
+				screenY = worldY;
+			}
+			int rightOffset = gp.screenWidth -gp.player.screenX;
+			if (rightOffset > gp.WorldWidth - gp.player.worldX){
+				screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+			}
+			int bottomOffset = gp.screenHeight -gp.player.screenY;
+			if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+				screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+			}
+
 			if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
-			   worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
-			   worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
-			   worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
+					worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
+					worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
+					worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
 				//vẽ nền
 				g2.drawImage(tile[tileNum].image[0], screenX, screenY, null);
 				g2.drawImage(tile[tileNum].image[1], screenX + 24, screenY , null);
@@ -122,16 +137,31 @@ public class TileManager {
 
 
 			}
+			else if (gp.player.screenX > gp.player.worldX ||
+					gp.player.screenY > gp.player.worldY ||
+					rightOffset > gp.WorldWidth - gp.player.worldX ||
+					bottomOffset > gp.WorldHeight - gp.player.worldY) {
+				//vẽ nền
+				g2.drawImage(tile[tileNum].image[0], screenX, screenY, null);
+				g2.drawImage(tile[tileNum].image[1], screenX + 24, screenY , null);
+				g2.drawImage(tile[tileNum].image[2], screenX , screenY+24 , null);
+				g2.drawImage(tile[tileNum].image[3], screenX+24 , screenY+24, null);
+				//vẽ lớp thứ 2
+				g2.drawImage(tile[layer1Num].image[0], screenX, screenY,  null);
+				g2.drawImage(tile[layer1Num].image[1], screenX + 24, screenY, null);
+				g2.drawImage(tile[layer1Num].image[2], screenX , screenY+24, null);
+				g2.drawImage(tile[layer1Num].image[3], screenX+24 , screenY+24,  null);
 
+			}
 
 			worldCol++;
-				
+
 			if(worldCol == gp.maxWorldCol) {
 				worldCol = 0;
 				worldRow++;
 			}
 		}
-		
+
 	}
 	//lớp 3 4 ưu tiên trên nhân vật
 	public void draw2(Graphics2D g2) {
@@ -146,6 +176,21 @@ public class TileManager {
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
 			// stop moving the camera at the edge
+
+			if (gp.player.screenX > gp.player.worldX){
+				screenX = worldX;
+			}
+			if (gp.player.screenY > gp.player.worldY){
+				screenY = worldY;
+			}
+			int rightOffset = gp.screenWidth -gp.player.screenX;
+			if (rightOffset > gp.WorldWidth - gp.player.worldX){
+				screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+			}
+			int bottomOffset = gp.screenHeight -gp.player.screenY;
+			if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+				screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+			}
 
 			if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
 					worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
@@ -162,7 +207,21 @@ public class TileManager {
 				g2.drawImage(tile[layer3Num].image[2], screenX , screenY+24,  null);
 				g2.drawImage(tile[layer3Num].image[3], screenX+24 , screenY+24, null);
 			}
+			else if (gp.player.screenX > gp.player.worldX ||
+					gp.player.screenY > gp.player.worldY ||
+					rightOffset > gp.WorldWidth - gp.player.worldX ||
+					bottomOffset > gp.WorldHeight - gp.player.worldY){
+				//vẽ nền
+				g2.drawImage(tile[layer2Num].image[0], screenX, screenY,  null);
+				g2.drawImage(tile[layer2Num].image[1], screenX + 24, screenY,  null);
+				g2.drawImage(tile[layer2Num].image[2], screenX , screenY+24,  null);
+				g2.drawImage(tile[layer2Num].image[3], screenX+24 , screenY+24, null);
 
+				g2.drawImage(tile[layer3Num].image[0], screenX, screenY, null);
+				g2.drawImage(tile[layer3Num].image[1], screenX + 24, screenY,  null);
+				g2.drawImage(tile[layer3Num].image[2], screenX , screenY+24,  null);
+				g2.drawImage(tile[layer3Num].image[3], screenX+24 , screenY+24, null);
+			}
 
 			worldCol++;
 

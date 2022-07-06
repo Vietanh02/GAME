@@ -18,13 +18,13 @@ public class Player extends Entity{
 	public int hasKey = 0;
 	public final int screenX;
 	public final int screenY;
-	
+
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
 		this.keyH = keyH;
 		screenX = gp.screenWidth/2 - (gp.tileSize/2);
 		screenY = gp.screenHeight/2 - (gp.tileSize/2);
-		
+
 		// COLLISION AREA FOR PLAYER 32x32
 		solidArea = new Rectangle();
 		solidArea.x = 8;
@@ -33,11 +33,11 @@ public class Player extends Entity{
 		solidAreaDefaultY = solidArea.y;
 		solidArea.height = 16;
 		solidArea.width = 32;
-		
+
 		setDefaultValues();
 		getPlayerImage();
 	}
-	
+
 	public void setDefaultValues() {
 		worldX = gp.tileSize*7;
 		worldY = gp.tileSize*7;
@@ -47,7 +47,7 @@ public class Player extends Entity{
 		maxLife = 6;
 		life = maxLife;
 	}
-	
+
 	public void getPlayerImage() {
 		try {
 			// tải các ảnh vảo mảng
@@ -63,12 +63,12 @@ public class Player extends Entity{
 				left[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageLeft, i+1)));
 				right[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageRight, i+1)));
 			}
-			
+
 		}catch(IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void update() {
 		if(keyH.upPressed == true) {
 			direction = "up";
@@ -84,7 +84,7 @@ public class Player extends Entity{
 		}else {
 			direction = "stay";
 		}
-		
+
 		//CHECK TILE COLLISION
 		collisionOn = false;
 		gp.cChecker.checkTile(this);
@@ -146,7 +146,7 @@ public class Player extends Entity{
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
-			
+
 		}
 	}
 
@@ -182,7 +182,7 @@ public class Player extends Entity{
 
 		}
 	}
-	
+
 	//hàm draw để vẽ hình của nhân vật khi di chuyển hoặc đứng yên
 	public void draw(Graphics2D g2) {
 		//g2.setColor(Color.white);
@@ -199,6 +199,20 @@ public class Player extends Entity{
 		int x = screenX;
 		int y = screenY;
 
+		if (screenX > worldX) {
+			x = worldX;
+		}
+		if (screenY > worldY) {
+			y = worldY;
+		}
+		int rightOffset = gp.screenWidth -screenX;
+		if (rightOffset > gp.WorldWidth - worldX){
+			x = gp.screenWidth - (gp.WorldWidth -worldX);
+		}
+		int bottomOffset = gp.screenHeight -screenY;
+		if (bottomOffset > gp.WorldHeight - worldY){
+			y = gp.screenHeight - (gp.WorldHeight -worldY);
+		}
 
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
 	}
