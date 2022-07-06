@@ -26,12 +26,12 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenHeight =  tileSize*maxScreenRow; // 576 // pixel
 	
 	//WORLD SETTING 
-	public final int maxWorldCol = 10;
-	public final int maxWorldRow = 10;
+	public final int maxWorldCol = 19;
+	public final int maxWorldRow = 16;
 	public final int WorldWidth = tileSize * maxWorldCol;
 	public final int WorldHeight = tileSize * maxWorldRow;
-	
-	
+
+
 	//FPS
 	int FPS = 60;
 //SYSTEM
@@ -51,7 +51,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public CollisionChecker cChecker = new CollisionChecker(this);
 	public AssetSetter aSetter = new AssetSetter(this);
 	public Player player = new Player(this,keyH);
-	
+	int event = player.hasKey;
 	//Game State
 	public int gameState;
 	public final int titleState = 0;
@@ -96,6 +96,7 @@ public class GamePanel extends JPanel implements Runnable{
 			timer  += (currentTime - lastTime);
 			lastTime = currentTime;
 			if(delta>=1) {
+
 				//1 UPDATE: update information
 				update();
 				//2 DRAW: draw the screen
@@ -141,6 +142,11 @@ public class GamePanel extends JPanel implements Runnable{
 		if (gameState == playState) {
 			obj[3].update();
 			player.update();
+			if(event < player.hasKey) {
+				tileM.update("/maps/map01.txt");
+				event = player.hasKey;
+			}
+
 		}
 		if(gameState == pauseState) {
 

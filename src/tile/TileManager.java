@@ -23,22 +23,31 @@ public class TileManager {
 	public TileManager(GamePanel gp) {
 		this.gp = gp;
 		tile = new Tile[10000];
-		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
-		layer1 = new int[gp.maxWorldCol][gp.maxWorldRow];
-		layer2 = new int[gp.maxWorldCol][gp.maxWorldRow];
-		layer3 = new int[gp.maxWorldCol][gp.maxWorldRow];
-		getTileImage();
-		loadMap("/maps/map01.txt");
-	}
-	
-	// nhập các ảnh wall, water, grass vào mảng tile
-	public void getTileImage() {
-
 		tile[0] = new Tile();
 		buildTile(new SpriteSheet("tiles/Tile_0.png",24,24),0, 0,0,false); //ảnh trống
 		for(int i = 1; i < 10000; i++){
 			tile[i] = tile[0];
 		}
+		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+		layer1 = new int[gp.maxWorldCol][gp.maxWorldRow];
+		layer2 = new int[gp.maxWorldCol][gp.maxWorldRow];
+		layer3 = new int[gp.maxWorldCol][gp.maxWorldRow];
+		getTileImageOutside();
+//		getTileImageInside();
+		loadMap("/maps/map01.txt");
+
+	}
+	
+	// nhập các ảnh wall, water, grass vào mảng tile
+	public void getTileImageInside() {
+		setupTilesA1("tiles/Inside_A1.png");
+		setupTilesA2("tiles/Inside_A2.png");
+		//setupTilesA3("tiles/World_A3.png");
+		setupTilesB_C("tiles/Inside_B.png","tiles/Inside_C.png");
+		setupTileA4("tiles/Inside_A4.png");
+		setupTileA5("tiles/Inside_A5.png");
+	}
+	public void getTileImageOutside() {
 		setupTilesA1("tiles/World_A1.png");
 		setupTilesA2("tiles/World_A2.png");
 		setupTilesA3("tiles/World_A3.png");
@@ -346,23 +355,23 @@ public class TileManager {
 		int index = 0;
 		for(int i = 0;i < 32; i+=2){
 			for(int j = 0; j < 16; j+=2){
-				buildTile(sp,index++,i,j,false);
+				buildTile(sp,index++,i,j,true);
 			}
 		}
 		for(int i = 0; i< 32; i+=2){
 			for(int j = 16; j < 32; j+=2){
-				buildTile(sp,index++,i,j,false);
+				buildTile(sp,index++,i,j,true);
 			}
 		}
 		sp = new SpriteSheet(file2, 24,24);
 		for(int i = 0;i < 32; i+=2){
 			for(int j = 0; j < 16; j+=2){
-				buildTile(sp,index++,i,j,false);
+				buildTile(sp,index++,i,j,true);
 			}
 		}
 		for(int i = 0; i< 32; i+=2){
 			for(int j = 16; j < 32; j+=2){
-				buildTile(sp,index++,i,j,false);
+				buildTile(sp,index++,i,j,true);
 			}
 		}
 	}
@@ -477,5 +486,10 @@ public class TileManager {
 
 			}
 		}
+	}
+
+	public void update(String file){
+		getTileImageInside();
+		loadMap(file);
 	}
 }
