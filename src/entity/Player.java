@@ -199,20 +199,6 @@ public class Player extends Entity{
 		int x = screenX;
 		int y = screenY;
 
-		if (screenX > worldX) {
-			x = worldX;
-		}
-		if (screenY > worldY) {
-			y = worldY;
-		}
-		int rightOffset = gp.screenWidth -screenX;
-		if (rightOffset > gp.WorldWidth - worldX){
-			x = gp.screenWidth - (gp.WorldWidth -worldX);
-		}
-		int bottomOffset = gp.screenHeight -screenY;
-		if (bottomOffset > gp.WorldHeight - worldY){
-			y = gp.screenHeight - (gp.WorldHeight -worldY);
-		}
 
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
 	}

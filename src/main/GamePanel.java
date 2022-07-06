@@ -7,6 +7,7 @@ import java.awt.Graphics2D;
 
 import javax.swing.JPanel;
 
+import entity.Entity;
 import entity.Player;
 import object.SuperObject;
 import tile.TileManager;
@@ -26,8 +27,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenHeight =  tileSize*maxScreenRow; // 576 // pixel
 
 	//WORLD SETTING 
-	public final int maxWorldCol = 19;
-	public final int maxWorldRow = 16;
+	public final int maxWorldCol = 20;
+	public final int maxWorldRow = 10;
 	public final int WorldWidth = tileSize * maxWorldCol;
 	public final int WorldHeight = tileSize * maxWorldRow;
 
@@ -63,7 +64,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 
 	public SuperObject[] obj = new SuperObject[10];
-
+	public Entity[] NPC = new Entity[10];
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		this.setBackground(Color.black);
@@ -74,6 +75,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public void setupGame(){
 		gameState = titleState;
+		aSetter.setNPC();
 		aSetter.setObject();
 		playMusic(0);
 	}
