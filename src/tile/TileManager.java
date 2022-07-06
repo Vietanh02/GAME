@@ -32,16 +32,15 @@ public class TileManager {
 
 		tile[0] = new Tile();
 		buildTile(new SpriteSheet("tiles/Tile_0.png",24,24),0, 0,0,false); //ảnh trống
-		for(int i = 512; i < 2094; i++){
+		for(int i = 1; i < 10000; i++){
 			tile[i] = tile[0];
 		}
-//
 		setupTilesA1("tiles/World_A1.png");
 		setupTilesA2("tiles/World_A2.png");
 		setupTilesA3("tiles/World_A3.png");
 		setupTilesB_C("tiles/World_B.png","tiles/World_C.png");
 		setupTileA4("tiles/World_A4.png");
-
+		setupTileA5("tiles/World_A5.png");
 	}
 	
 	//tải map 01. quy định 0 là cỏ, 1 là tường 2 là nước, xem res/map01.txt
@@ -419,5 +418,14 @@ public class TileManager {
 		buildTileWalls(file, 8063, 26, 20, false);
 		buildTileWalls(file, 8111, 26, 24, false);
 		buildTileWalls(file, 8159, 26, 28, false);
+	}
+	public void setupTileA5(String file){
+		SpriteSheet sp =new SpriteSheet(file, 24, 24);
+		int index = 1536;
+		for(int i = 0;i < 32; i+=2){
+			for(int j = 0; j < 16; j+=2){
+				buildTile(sp,index++,i,j,false);
+			}
+		}
 	}
 }
