@@ -98,7 +98,6 @@ public class Player extends Entity{
 			if(keyH.upPressed == true && keyH.leftPressed == true){
 				worldY -= speed;
 				worldX -= speed;
-				direction = "left";
 			}
 			else if(keyH.upPressed == true && keyH.rightPressed == true){
 				worldY -= speed;
@@ -108,31 +107,23 @@ public class Player extends Entity{
 			else if(keyH.downPressed == true && keyH.leftPressed == true){
 				worldY += speed;
 				worldX -= speed;
-				direction = "left";
 			}
 			else if(keyH.downPressed == true && keyH.rightPressed == true){
 				worldY += speed;
 				worldX += speed;
-				direction = "right";
 			}
 			else if(keyH.upPressed == true) {
 				worldY -= speed;
-				direction = "up";
 			}
 			else if(keyH.downPressed == true) {
 				worldY += speed;
-				direction = "down";
 			}
 			else if(keyH.leftPressed== true) {
 				worldX -= speed;
-				direction = "left";
 			}
 			else if(keyH.rightPressed == true) {
 				worldX += speed;
-				direction = "right";
 			}
-			else
-				direction = "stay";
 		}
 
 		// spriteNum để vẽ nhân vật  ở đây vẽ 8 bức 1s sẽ tạo đc chuyển động nhân vật
