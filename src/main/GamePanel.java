@@ -34,6 +34,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	//FPS
 	int FPS = 60;
+	long  timer = 0;
 //SYSTEM
 	// bản đồ và cỏ, tường nước ( tile
 	TileManager tileM = new TileManager(this);
@@ -88,7 +89,7 @@ public class GamePanel extends JPanel implements Runnable{
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long currentTime;
-		long  timer = 0;
+
 		int drawCount = 0;
 		while(gameThread != null) {
 			currentTime = System.nanoTime();
@@ -142,6 +143,7 @@ public class GamePanel extends JPanel implements Runnable{
 		if (gameState == playState) {
 			obj[3].update();
 			player.update();
+			tileM.update();
 			if(event < player.hasKey) {
 				tileM.update("/maps/map01.txt");
 				event = player.hasKey;
