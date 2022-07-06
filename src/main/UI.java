@@ -78,7 +78,7 @@ public class UI {
     public void drawTitleScreen(){
         //titlename
         if(titleScreenState == 0){
-            g2.setColor(new Color(70,120,80));
+            g2.setColor(new Color(68, 123, 78));
             g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
             g2.setFont(g2.getFont().deriveFont(Font.BOLD,96F));
             String text = "KIWI Adventure";
