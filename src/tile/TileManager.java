@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 
 import Graphics.SpriteSheet;
 import main.GamePanel;
-import main.UntilityTool;
+import main.UtilityTool;
 
 public class TileManager {
 	GamePanel gp;
@@ -133,8 +133,6 @@ public class TileManager {
 				g2.drawImage(tile[layer1Num].image[1], screenX + 24, screenY, null);
 				g2.drawImage(tile[layer1Num].image[2], screenX , screenY+24, null);
 				g2.drawImage(tile[layer1Num].image[3], screenX+24 , screenY+24,  null);
-
-
 			}
 			else if (gp.player.screenX > gp.player.worldX ||
 					gp.player.screenY > gp.player.worldY ||

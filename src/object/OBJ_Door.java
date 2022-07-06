@@ -7,8 +7,10 @@ public class OBJ_Door extends  SuperObject {
     public OBJ_Door(){
         name = "Door";
         try{
-            for(int i=0;i<4;i++)
+            for(int i=0;i<4;i++) {
                 image[i] = ImageIO.read(getClass().getResourceAsStream("/objects/door0.png"));
+                uTool.scaleImage(image[i],48,48);
+            }
         }catch(Exception e){
             e.printStackTrace();
         }

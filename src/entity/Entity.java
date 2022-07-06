@@ -1,7 +1,7 @@
 package entity;
 
 import main.GamePanel;
-import main.UntilityTool;
+import main.UtilityTool;
 
 import javax.imageio.ImageIO;
 import javax.swing.text.Utilities;
@@ -14,7 +14,6 @@ public abstract class Entity {
 	GamePanel gp;
 	public int worldX, worldY;
 	public int speed;
-	public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2, stay;
 	public int solidAreaDefaultX, solidAreaDefaultY;
 
 	public String direction;
@@ -150,7 +149,7 @@ public abstract class Entity {
 	}
 	//GET IMAGE ENTITY (GỌI ẢNH THỰC THỂ)
 	public BufferedImage setup(String imagePath){
-		UntilityTool uTool = new UntilityTool();
+		UtilityTool uTool = new UtilityTool();
 		BufferedImage image = null;
 		try{
 			image = ImageIO.read(getClass().getResourceAsStream(imagePath+".png"));

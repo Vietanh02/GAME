@@ -13,6 +13,11 @@ import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity{
+	private BufferedImage[] stay = new BufferedImage[3];
+	private BufferedImage[] up = new BufferedImage[3];
+	private BufferedImage[] down = new BufferedImage[3];
+	private BufferedImage[] left = new BufferedImage[3];
+	private BufferedImage[] right = new BufferedImage[3];
 	KeyHandler keyH;
 
 	public int hasKey = 0;
@@ -50,15 +55,20 @@ public class Player extends Entity{
 
 	public void getPlayerImage() {
 			// tải các ảnh vảo mảng
-			 down1 = setup("/player/boy_down_1");
-			 up1 = setup("/player/boy_up_1");
-			 left1 = setup("/player/boy_left_1");
-			 right1 = setup("/player/boy_right_1");
-			 down2 = setup("/player/boy_down_2");
-			 up2 = setup("/player/boy_up_2");
-			 left2 = setup("/player/boy_left_2");
-			 right2 = setup("/player/boy_right_2");
-			  stay = setup("/player/boy_down_1");
+
+			String imageDown = new String("/player/boy_down_%d");
+			String imageUp = new String("/player/boy_up_%d");
+			String imageLeft = new String("/player/boy_left_%d");
+			String imageRight = new String("/player/boy_right_%d");
+			String imageStay = new String("/player/boy_down_%d");
+			for(int i=0;i<3;i++) {
+				stay[i] = setup(String.format(imageStay,i+1));
+				up[i]   = setup(String.format(imageUp,i+1));
+				down[i] = setup(String.format(imageDown,i+1));
+				left[i] = setup(String.format(imageLeft,i+1));
+				right[i] = setup(String.format(imageRight,i+1));
+			}
+
 	}
 
 	public void update() {
@@ -132,9 +142,13 @@ public class Player extends Entity{
 				spriteNum =2;
 			}
 			else if(spriteNum ==2) {
+				spriteNum = 3;
+			}
+			else if(spriteNum ==3) {
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
+
 		}
 	}
 
@@ -175,42 +189,13 @@ public class Player extends Entity{
 	public void draw(Graphics2D g2) {
 		//g2.setColor(Color.white);
 		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
-		BufferedImage image = null;
-		switch (direction) {
-			case "up":
-				if(spriteNum == 1){					//dùng spriteNum để tạo chuyển động liên tục
-					image = up1;
-				}
-				if(spriteNum == 2){
-					image = up2;
-				}
-				break;
-			case "down":
-				if(spriteNum == 1){
-					image = down1;
-				}
-				if(spriteNum == 2){
-					image = down2;
-				}
-				break;
-			case "left":
-				if(spriteNum == 1){
-					image = left1;
-				}
-				if(spriteNum == 2){
-					image = left2;
-				}
-				break;
-			case "right":
-				if(spriteNum == 1){
-					image = right1;
-				}
-				if(spriteNum == 2){
-					image = right2;
-				}
-				break;
-			default:
-				image = stay;
+		BufferedImage image = switch (direction) {
+			case "up" -> up[spriteNum - 1];
+			case "down" -> down[spriteNum - 1];
+			case "left" -> left[spriteNum - 1];
+			case "right" -> right[spriteNum - 1];
+			case "stay" -> stay[spriteNum - 1];
+			default -> null;
 		};
 
 		int x = screenX;
@@ -232,5 +217,9 @@ public class Player extends Entity{
 		}
 
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
+	}
+
+	public BufferedImage getDownImage(){
+		return this.down[0];
 	}
 }
