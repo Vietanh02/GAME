@@ -12,7 +12,7 @@ import main.UntilityTool;
 public class TileManager {
 	GamePanel gp;
 	public Tile[] tile;  // lưu các ô của bản đồ
-	public int[][] mapTileNum; // vẽ theo tọa đồ Oxy, ví dụ (0,1) là tường thì chèn ảnh tường vaò vị trí (0,1)
+	public int[][] layer0; // vẽ theo tọa đồ Oxy, ví dụ (0,1) là tường thì chèn ảnh tường vaò vị trí (0,1)
 	public int[][] layer1;// lớp phủ trên bề mặt
 	public int[][] layer2;//
 	public int[][] layer3;//
@@ -29,14 +29,16 @@ public class TileManager {
 		for(int i = 1; i < 10000; i++){
 			tile[i] = tile[0];
 		}
-		mapTileNum = new int[gp.maxWorldCol][gp.maxWorldRow];
+		layer0 = new int[gp.maxWorldCol][gp.maxWorldRow];
 		layer1 = new int[gp.maxWorldCol][gp.maxWorldRow];
 		layer2 = new int[gp.maxWorldCol][gp.maxWorldRow];
 		layer3 = new int[gp.maxWorldCol][gp.maxWorldRow];
 		getTileImageOutside();
 //		getTileImageInside();
-		loadMap("/maps/map01.txt");
-
+		loadMap("/maps/map1.00.txt",layer0);
+		loadMap("/maps/map1.01.txt",layer1);
+		loadMap("/maps/map1.02.txt",layer2);
+		loadMap("/maps/map1.03.txt",layer3);
 	}
 
 	// nhập các ảnh wall, water, grass vào mảng tile
@@ -60,21 +62,18 @@ public class TileManager {
 	}
 
 	//tải map 01. quy định 0 là cỏ, 1 là tường 2 là nước, xem res/map01.txt
-	public void loadMap(String filePath) {
+	public void loadMap(String filePath, int[][] layer) {
 		try {
 			InputStream is = getClass().getResourceAsStream(filePath);
 			BufferedReader br = new BufferedReader(new InputStreamReader(is));
 			int col =0;
 			int row =0;
-			while(col<gp.maxWorldCol && row<4*gp.maxWorldRow) {
+			while(col<gp.maxWorldCol && row<gp.maxWorldRow) {
 				String line = br.readLine();
 				while(col < gp.maxWorldCol) {
 					String[] numbers = line.split(" ");
 					int num = Integer.parseInt(numbers[col]);
-					if(row < gp.maxWorldRow)  mapTileNum[col][row] = num; // đọc mảng cho lớp nền
-					else if (row < 2*gp.maxWorldRow) layer1[col][row - gp.maxWorldRow] =  num; //đọc cho lớp phủ 1
-					else if (row < 3*gp.maxWorldRow) layer2[col][row - 2*gp.maxWorldRow] =  num; //đọc cho lớp phủ 2
-					else if (row < 4*gp.maxWorldRow) layer3[col][row - 3*gp.maxWorldRow] =  num; //đọc cho lớp phủ 3
+					layer[col][row] = num; // đọc mảng cho lớp nền
 					col++;
 				}
 				if(col == gp.maxWorldCol) {
@@ -96,7 +95,7 @@ public class TileManager {
 		int worldRow = 0;
 
 		while(worldCol< gp.maxWorldCol && worldRow < gp.maxWorldRow) {
-			int tileNum = mapTileNum[worldCol][worldRow];
+			int layer0Num = layer0[worldCol][worldRow];
 			int layer1Num = layer1[worldCol][worldRow];
 			int worldX = worldCol*gp.tileSize;
 			int worldY = worldRow*gp.tileSize;
@@ -125,10 +124,10 @@ public class TileManager {
 					worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 					worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
 				//vẽ nền
-				g2.drawImage(tile[tileNum].image[0], screenX, screenY, null);
-				g2.drawImage(tile[tileNum].image[1], screenX + 24, screenY , null);
-				g2.drawImage(tile[tileNum].image[2], screenX , screenY+24 , null);
-				g2.drawImage(tile[tileNum].image[3], screenX+24 , screenY+24, null);
+				g2.drawImage(tile[layer0Num].image[0], screenX, screenY, null);
+				g2.drawImage(tile[layer0Num].image[1], screenX + 24, screenY , null);
+				g2.drawImage(tile[layer0Num].image[2], screenX , screenY+24 , null);
+				g2.drawImage(tile[layer0Num].image[3], screenX+24 , screenY+24, null);
 				//vẽ lớp thứ 2
 				g2.drawImage(tile[layer1Num].image[0], screenX, screenY,  null);
 				g2.drawImage(tile[layer1Num].image[1], screenX + 24, screenY, null);
@@ -142,10 +141,10 @@ public class TileManager {
 					rightOffset > gp.WorldWidth - gp.player.worldX ||
 					bottomOffset > gp.WorldHeight - gp.player.worldY) {
 				//vẽ nền
-				g2.drawImage(tile[tileNum].image[0], screenX, screenY, null);
-				g2.drawImage(tile[tileNum].image[1], screenX + 24, screenY , null);
-				g2.drawImage(tile[tileNum].image[2], screenX , screenY+24 , null);
-				g2.drawImage(tile[tileNum].image[3], screenX+24 , screenY+24, null);
+				g2.drawImage(tile[layer0Num].image[0], screenX, screenY, null);
+				g2.drawImage(tile[layer0Num].image[1], screenX + 24, screenY , null);
+				g2.drawImage(tile[layer0Num].image[2], screenX , screenY+24 , null);
+				g2.drawImage(tile[layer0Num].image[3], screenX+24 , screenY+24, null);
 				//vẽ lớp thứ 2
 				g2.drawImage(tile[layer1Num].image[0], screenX, screenY,  null);
 				g2.drawImage(tile[layer1Num].image[1], screenX + 24, screenY, null);
@@ -592,6 +591,6 @@ public class TileManager {
 	//chuyển map
 	public void update(String file){
 		getTileImageInside();
-		loadMap(file);
+		loadMap(file, layer0);
 	}
 }
