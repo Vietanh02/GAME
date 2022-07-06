@@ -90,11 +90,11 @@ public class TileManager {
 		}
 	}
 
-
 	public void draw(Graphics2D g2) {
 		
 		int worldCol =0;
 		int worldRow = 0;
+
 		while(worldCol< gp.maxWorldCol && worldRow < gp.maxWorldRow) {
 			int tileNum = mapTileNum[worldCol][worldRow];
 			int layer1Num = layer1[worldCol][worldRow];
@@ -102,6 +102,24 @@ public class TileManager {
 			int worldY = worldRow*gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+			// stop moving the camera at the edge
+
+			if (gp.player.screenX > gp.player.worldX){
+				screenX = worldX;
+			}
+			if (gp.player.screenY > gp.player.worldY){
+				screenY = worldY;
+			}
+			int rightOffset = gp.screenWidth -gp.player.screenX;
+			if (rightOffset > gp.WorldWidth - gp.player.worldX){
+				screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+			}
+			int bottomOffset = gp.screenHeight -gp.player.screenY;
+			if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+				screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+			}
+
 			if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
 			   worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
 			   worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
@@ -119,7 +137,23 @@ public class TileManager {
 
 
 			}
-			
+			else if (gp.player.screenX > gp.player.worldX ||
+					   gp.player.screenY > gp.player.worldY ||
+					   rightOffset > gp.WorldWidth - gp.player.worldX ||
+					   bottomOffset > gp.WorldHeight - gp.player.worldY) {
+				//vẽ nền
+				g2.drawImage(tile[tileNum].image[0], screenX, screenY, null);
+				g2.drawImage(tile[tileNum].image[1], screenX + 24, screenY , null);
+				g2.drawImage(tile[tileNum].image[2], screenX , screenY+24 , null);
+				g2.drawImage(tile[tileNum].image[3], screenX+24 , screenY+24, null);
+				//vẽ lớp thứ 2
+				g2.drawImage(tile[layer1Num].image[0], screenX, screenY,  null);
+				g2.drawImage(tile[layer1Num].image[1], screenX + 24, screenY, null);
+				g2.drawImage(tile[layer1Num].image[2], screenX , screenY+24, null);
+				g2.drawImage(tile[layer1Num].image[3], screenX+24 , screenY+24,  null);
+
+			}
+
 			worldCol++;
 				
 			if(worldCol == gp.maxWorldCol) {
@@ -141,10 +175,42 @@ public class TileManager {
 			int worldY = worldRow*gp.tileSize;
 			int screenX = worldX - gp.player.worldX + gp.player.screenX;
 			int screenY = worldY - gp.player.worldY + gp.player.screenY;
+			// stop moving the camera at the edge
+
+			if (gp.player.screenX > gp.player.worldX){
+				screenX = worldX;
+			}
+			if (gp.player.screenY > gp.player.worldY){
+				screenY = worldY;
+			}
+			int rightOffset = gp.screenWidth -gp.player.screenX;
+			if (rightOffset > gp.WorldWidth - gp.player.worldX){
+				screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+			}
+			int bottomOffset = gp.screenHeight -gp.player.screenY;
+			if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+				screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+			}
+
 			if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
 					worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
 					worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 					worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
+				//vẽ nền
+				g2.drawImage(tile[layer2Num].image[0], screenX, screenY,  null);
+				g2.drawImage(tile[layer2Num].image[1], screenX + 24, screenY,  null);
+				g2.drawImage(tile[layer2Num].image[2], screenX , screenY+24,  null);
+				g2.drawImage(tile[layer2Num].image[3], screenX+24 , screenY+24, null);
+
+				g2.drawImage(tile[layer3Num].image[0], screenX, screenY, null);
+				g2.drawImage(tile[layer3Num].image[1], screenX + 24, screenY,  null);
+				g2.drawImage(tile[layer3Num].image[2], screenX , screenY+24,  null);
+				g2.drawImage(tile[layer3Num].image[3], screenX+24 , screenY+24, null);
+			}
+			else if (gp.player.screenX > gp.player.worldX ||
+					gp.player.screenY > gp.player.worldY ||
+					rightOffset > gp.WorldWidth - gp.player.worldX ||
+					bottomOffset > gp.WorldHeight - gp.player.worldY){
 				//vẽ nền
 				g2.drawImage(tile[layer2Num].image[0], screenX, screenY,  null);
 				g2.drawImage(tile[layer2Num].image[1], screenX + 24, screenY,  null);
