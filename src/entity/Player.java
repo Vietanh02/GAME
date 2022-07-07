@@ -92,6 +92,9 @@ public class Player extends Entity{
 		pickUpObject(objIndex);
 		int npcIndex = gp.cChecker.checkEntity(this, gp.NPC);
 		interactNPC(npcIndex);
+
+		gp.eHandler.checkEvent();
+		gp.keyH.enterPressed = false;
 		//IF COLLISION IS FALSE PLAYER CAN MOVE
 		if(collisionOn == false) {
 			if(keyH.upPressed == true && keyH.leftPressed == true){
@@ -218,7 +221,6 @@ public class Player extends Entity{
 					gp.gameState = gp.dialogueState;
 					gp.NPC[i].speak();
 				}
-				gp.keyH.enterPressed = false;
 			}
 	}
 }

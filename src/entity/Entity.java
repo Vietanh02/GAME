@@ -219,10 +219,6 @@ public abstract class Entity {
 		}
 	}
 	public void update(){
-		setAction();
-		collisionOn = false;
-//		gp.cChecker.checkTile(this);
-
 	}
 	public void setAction(){
 	}
