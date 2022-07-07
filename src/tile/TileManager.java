@@ -563,19 +563,19 @@ public class TileManager {
 	//hoạt ảnh nước
 	public void update(){
 
-		spriteCounter++;
-		if(spriteCounter>10	) {
-			if(spriteNum == 0) {
-				spriteNum =1;
-			}
-			else if(spriteNum ==1) {
-				spriteNum = 2;
-			}
-			else if(spriteNum ==2) {
-				spriteNum = 0;
-			}
-			spriteCounter = 0;
-		}
+//		spriteCounter++;
+//		if(spriteCounter>10	) {
+//			if(spriteNum == 0) {
+//				spriteNum =1;
+//			}
+//			else if(spriteNum ==1) {
+//				spriteNum = 2;
+//			}
+//			else if(spriteNum ==2) {
+//				spriteNum = 0;
+//			}
+//			spriteCounter = 0;
+//		}
 //			buildTiles("tiles/"+mapType+"_A1.png",2094, 0, 4*spriteNum, true); //nước bờ cỏ
 //			buildTiles("tiles/"+mapType+"_A1.png",2142, 6, 4*spriteNum,true); // nước bờ sỏi đá
 //			buildTiles("tiles/"+mapType+"_A1.png",2286, 0, 16+4*spriteNum,true); //nước bờ tuyết

@@ -75,7 +75,7 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public void setupGame(){
 		gameState = titleState;
-		//aSetter.setNPC();
+		aSetter.setNPC();
 		aSetter.setObject();
 		playMusic(0);
 	}
@@ -147,8 +147,9 @@ public class GamePanel extends JPanel implements Runnable{
 			obj[3].update();
 			player.update();
 			tileM.update();
+			NPC[0].update();
 			if(event < player.hasKey) {
-				tileM.update("/maps/map01.txt");
+				//tileM.update("/maps/map01.txt");
 				event = player.hasKey;
 			}
 
@@ -167,6 +168,7 @@ public class GamePanel extends JPanel implements Runnable{
 			//tile
 			tileM.draw(g2);
 			tileM.draw2(g2);
+			NPC[0].draw(g2,this);
 			//object
 			for(int i =0 ;i<obj.length;i++) {
 				if (obj[i] != null) {
