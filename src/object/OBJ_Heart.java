@@ -12,6 +12,6 @@ public class OBJ_Heart extends Entity {
                 stay[0] = setup("/objects/heart_full");
                 stay[1] = setup("/objects/heart_half");
                 stay[2] = setup("/objects/heart_blank");
-        collision = true;
+        collision = false;
     }
 }

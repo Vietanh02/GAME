@@ -10,6 +10,7 @@ public class NPC_OldMan extends Entity{
     public NPC_OldMan(GamePanel gp){
         super(gp);
         direction = "down";
+        speed = 1;
         getImage();
     }
     public void getImage(){
@@ -41,6 +42,35 @@ public class NPC_OldMan extends Entity{
                 direction = "left";
             } else direction = "right";
             actionLockCounter = 0;
+        }
+    }
+    public void update() {
+        setAction();
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+        gp.cChecker.checkObject(this, false);
+        //gp.cChecker.checkPlayer(this);
+        if (collisionOn == false) {
+            switch (direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+            }
+        }
+        spriteCounter++;
+        if (spriteCounter == 12) {
+            if (spriteNum == 2) spriteNum = 0;
+            spriteNum++;
+            spriteCounter = 0;
         }
     }
 }

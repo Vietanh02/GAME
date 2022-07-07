@@ -24,6 +24,8 @@ public class UI {
 
     double playTime;
 
+    double startTime = System.nanoTime()/1000000000;
+
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     BufferedImage heart_full, heart_half, heart_blank;
@@ -38,9 +40,9 @@ public class UI {
 
         //CREATE HUB OBJ
         Entity heart = new OBJ_Heart(gp);
-        heart_full = heart.image[0];
-        heart_half = heart.image[1];
-        heart_blank = heart.image[2];
+        heart_full = heart.stay[0];
+        heart_half = heart.stay[1];
+        heart_blank = heart.stay[2];
     }
     public void showMessage(String text){
         message = text;
@@ -90,7 +92,7 @@ public class UI {
                 drawPlayerLife();
                 //g2.drawString("Key = "+ gp.player.hasKey, 30, 30);
                 //TIME
-                playTime += (double)1/60;
+                playTime = (double)System.nanoTime()/1000000000-startTime;
                 g2.drawString("Time:" + dFormat.format(playTime), gp.tileSize*11, 65);
 
                //Message
