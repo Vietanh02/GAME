@@ -24,7 +24,7 @@ public abstract class Entity {
 	public BufferedImage[] right = new BufferedImage[3];
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	public Rectangle solidArea;
+	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public boolean collisionOn = false;
 	public int actionLockCounter = 0;
 	//CHARATER STATUS
@@ -214,8 +214,25 @@ public abstract class Entity {
 	public void update(){
 		setAction();
 		collisionOn = false;
-//		gp.cChecker.checkTile(this);
+		gp.cChecker.checkTile(this);
+		gp.cChecker.checkObject(this,false);
+		gp.cChecker.checkPlayer(this);
+		if(collisionOn == false ){
+			switch (direction){
+				case "up": worldY-=speed;break;
+				case "down": worldY+=speed;break;
+				case  "right": worldX+=speed;break;
+				case "left": worldX-=speed;break;
+			}
+		}
+		spriteCounter++;
+		if(spriteCounter==12){
+			if(spriteNum == 2) spriteNum = 0;
+			spriteNum++;
+			spriteCounter =  0;
+		}
 
 	}
-	public void setAction(){}
+	public void setAction(){
+	}
 }
