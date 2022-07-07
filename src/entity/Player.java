@@ -5,9 +5,6 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
@@ -93,6 +90,8 @@ public class Player extends Entity{
 		//CHECK OBJECT COLLISION
 		int objIndex = gp.cChecker.checkObject(this, true);
 		pickUpObject(objIndex);
+		int npcIndex = gp.cChecker.checkEntity(this, gp.NPC);
+		interactNPC(npcIndex);
 		//IF COLLISION IS FALSE PLAYER CAN MOVE
 		if(collisionOn == false) {
 			if(keyH.upPressed == true && keyH.leftPressed == true){
@@ -185,8 +184,8 @@ public class Player extends Entity{
 			case "down" -> down[spriteNum - 1];
 			case "left" -> left[spriteNum - 1];
 			case "right" -> right[spriteNum - 1];
-			case "stay" -> stay[spriteNum - 1];
-			default -> null;
+		//	case "stay" -> stay[spriteNum - 1];
+			default -> stay[1];
 		};
 
 		int x = screenX;
@@ -212,5 +211,14 @@ public class Player extends Entity{
 
 	public BufferedImage getDownImage(){
 		return this.down[0];
+	}
+	public void interactNPC(int i){
+			if(i!=999){
+				if(gp.keyH.enterPressed == true) {
+					gp.gameState = gp.dialogueState;
+					gp.NPC[i].speak();
+				}
+				gp.keyH.enterPressed = false;
+			}
 	}
 }

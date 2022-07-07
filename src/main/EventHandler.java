@@ -6,7 +6,8 @@ import java.awt.*;
 public class EventHandler {
     GamePanel gp;
     EventRect eventRect[][];
-
+//
+ 
     public EventHandler(GamePanel gp) {
         this.gp = gp;
 
@@ -31,13 +32,8 @@ public class EventHandler {
         }
     }
     public void checkEvent(){
-
         if (hit(2,6, "any") == true ) {damagePit(2,6,gp.dialogueState);}
-
         if (hit(5,8,"any")== true) {telemap(5,8,gp.dialogueState);}
-
-
-
     }
 
     public boolean hit(int col, int row, String reqDirection){
