@@ -5,6 +5,9 @@ package entity;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
 
 import main.GamePanel;
 import main.KeyHandler;
@@ -187,8 +190,8 @@ public class Player extends Entity{
 			case "down" -> down[spriteNum - 1];
 			case "left" -> left[spriteNum - 1];
 			case "right" -> right[spriteNum - 1];
-		//	case "stay" -> stay[spriteNum - 1];
-			default -> stay[1];
+			case "stay" -> stay[spriteNum - 1];
+			default -> null;
 		};
 
 		int x = screenX;
