@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 
 import entity.Entity;
 import entity.Player;
-import object.SuperObject;
 import tile.TileManager;
 
 public class GamePanel extends JPanel implements Runnable{
@@ -63,7 +62,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int charaterState = 4;
 	public final int optionsState = 5;
 
-	public SuperObject[] obj = new SuperObject[10];
+	public Entity[] obj = new Entity[10];
 	public Entity[] NPC = new Entity[10];
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
