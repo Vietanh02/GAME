@@ -171,7 +171,7 @@ public abstract class Entity {
 		}
 		return image;
 	}
-	public void draw(Graphics2D g2, GamePanel gp){
+	public void draw(Graphics2D g2){
 		//g2.setColor(Color.white);
 		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
 		BufferedImage image = switch (direction) {
