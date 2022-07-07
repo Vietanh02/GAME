@@ -49,24 +49,16 @@ public class Player extends Entity{
 	}
 
 	public void getPlayerImage() {
-		try {
 			// tải các ảnh vảo mảng
-			String imageDown = new String("/player/boy_down_%d.png");
-			String imageUp = new String("/player/boy_up_%d.png");
-			String imageLeft = new String("/player/boy_left_%d.png");
-			String imageRight = new String("/player/boy_right_%d.png");
-			String imageStay = new String("/player/boy_down_%d.png");
-			for(int i=0;i<3;i++) {
-				stay[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageStay,i+1)));
-				up[i]   = ImageIO.read(getClass().getResourceAsStream(String.format(imageUp,i+1)));
-				down[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageDown,i+1)));
-				left[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageLeft, i+1)));
-				right[i] = ImageIO.read(getClass().getResourceAsStream(String.format(imageRight, i+1)));
-			}
-
-		}catch(IOException e) {
-			e.printStackTrace();
-		}
+			 down1 = setup("/player/boy_down_1");
+			 up1 = setup("/player/boy_up_1");
+			 left1 = setup("/player/boy_left_1");
+			 right1 = setup("/player/boy_right_1");
+			 down2 = setup("/player/boy_down_2");
+			 up2 = setup("/player/boy_up_2");
+			 left2 = setup("/player/boy_left_2");
+			 right2 = setup("/player/boy_right_2");
+			  stay = setup("/player/boy_down_1");
 	}
 
 	public void update() {
@@ -133,20 +125,16 @@ public class Player extends Entity{
 				direction = "stay";
 		}
 
-		// spriteNum để vẽ nhân vật  ở đây vẽ 8 bức 1s sẽ tạo đc chuyển động vỗ cánh
+		// spriteNum để vẽ nhân vật  ở đây vẽ 8 bức 1s sẽ tạo đc chuyển động nhân vật
 		spriteCounter++;
 		if(spriteCounter>8) {
 			if(spriteNum == 1) {
 				spriteNum =2;
 			}
 			else if(spriteNum ==2) {
-				spriteNum = 3;
-			}
-			else if(spriteNum ==3) {
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
-
 		}
 	}
 
@@ -187,13 +175,42 @@ public class Player extends Entity{
 	public void draw(Graphics2D g2) {
 		//g2.setColor(Color.white);
 		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
-		BufferedImage image = switch (direction) {
-			case "up" -> left[spriteNum - 1];
-			case "down" -> left[spriteNum - 1];
-			case "left" -> left[spriteNum - 1];
-			case "right" -> right[spriteNum - 1];
-			case "stay" -> stay[spriteNum - 1];
-			default -> null;
+		BufferedImage image = null;
+		switch (direction) {
+			case "up":
+				if(spriteNum == 1){					//dùng spriteNum để tạo chuyển động liên tục
+					image = up1;
+				}
+				if(spriteNum == 2){
+					image = up2;
+				}
+				break;
+			case "down":
+				if(spriteNum == 1){
+					image = down1;
+				}
+				if(spriteNum == 2){
+					image = down2;
+				}
+				break;
+			case "left":
+				if(spriteNum == 1){
+					image = left1;
+				}
+				if(spriteNum == 2){
+					image = left2;
+				}
+				break;
+			case "right":
+				if(spriteNum == 1){
+					image = right1;
+				}
+				if(spriteNum == 2){
+					image = right2;
+				}
+				break;
+			default:
+				image = stay;
 		};
 
 		int x = screenX;

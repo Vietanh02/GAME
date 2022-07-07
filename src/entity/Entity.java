@@ -1,23 +1,20 @@
 package entity;
 
 import main.GamePanel;
+import main.UntilityTool;
 
+import javax.imageio.ImageIO;
+import javax.swing.text.Utilities;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public abstract class Entity {
 
 	GamePanel gp;
 	public int worldX, worldY;
 	public int speed;
-	public BufferedImage up1, up2, down1, down2, left1, left2, right1, right2;
-	// khi đi sang trái thì có 8 ảnh thay nhau đc vẽ trong 1 s
-	// tương tự với phải
-	// đứng yên có 4 ảnh
-	public BufferedImage[] up = new BufferedImage[3], down = new BufferedImage[3];
-	public BufferedImage[] left = new BufferedImage[3], right = new BufferedImage[3];
-	public BufferedImage[] stay = new BufferedImage[3];
-
+	public BufferedImage up1,up2,down1,down2,left1,left2,right1,right2, stay;
 	public int solidAreaDefaultX, solidAreaDefaultY;
 
 	public String direction;
@@ -100,6 +97,7 @@ public abstract class Entity {
 		return maxMana;
 	}
 
+
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
 	}
@@ -150,6 +148,19 @@ public abstract class Entity {
 		}
 		return false;
 
+
+=======
+	//GET IMAGE ENTITY (GỌI ẢNH THỰC THỂ)
+	public BufferedImage setup(String imagePath){
+		UntilityTool uTool = new UntilityTool();
+		BufferedImage image = null;
+		try{
+			image = ImageIO.read(getClass().getResourceAsStream(imagePath+".png"));
+			image = uTool.scaleImage(image,gp.tileSize,gp.tileSize);
+		}catch (IOException e){
+			e.printStackTrace();
+		}
+		return image;
 
 	}
 }
