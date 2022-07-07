@@ -34,5 +34,6 @@ public class AssetSetter {
         gp.NPC[0] = new NPC_OldMan(this.gp);
         gp.NPC[0].worldX = 10*gp.tileSize;
         gp.NPC[0].worldY = 10*gp.tileSize;
+
     }
 }

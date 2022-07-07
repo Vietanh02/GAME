@@ -27,9 +27,9 @@ public abstract class Entity {
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public boolean collisionOn = false;
 	public int actionLockCounter = 0;
-
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
+
 	//CHARATER STATUS
 
 	public Entity(GamePanel gp) {

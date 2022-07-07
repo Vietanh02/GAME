@@ -243,5 +243,6 @@ public class CollisionChecker {
 		target.solidArea.y = target.solidAreaDefaultY;
 
 		return index;
+
 	}
 }

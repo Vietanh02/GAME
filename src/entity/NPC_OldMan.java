@@ -21,6 +21,7 @@ public class NPC_OldMan extends Entity{
         dialogues[3] = "Co 1 cai ruong o gan day";
         dialogues[4] = "Toi dang ban, hay de luc khac noi chuyen";
         dialogues[5] = "Nay chang trai tre a, cau co biet ve nguoi anh \nhung Ba Binh, nguoi ma da danh bai quai vat \nSima de giai cuu the gioi khong?";
+
     }
     public void getImage(){
         // tải các ảnh vảo mảng
@@ -55,5 +56,6 @@ public class NPC_OldMan extends Entity{
     }
     public void speak(){
         super.speak();
+
     }
 }
