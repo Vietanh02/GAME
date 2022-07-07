@@ -10,6 +10,7 @@ import java.text.DecimalFormat;
 import static java.lang.Math.round;
 
 public class UI {
+    public String currentDialogue = "";
     GamePanel gp;
     Graphics2D g2;
     Font arial_40;
