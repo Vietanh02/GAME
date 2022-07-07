@@ -13,5 +13,12 @@ public class OBJ_Door extends Entity {
             for(int i=0;i<1;i++) {
                 stay[i] = setup("/objects/door0");
             }
+            collision = true;
+            solidArea.x = 0;
+            solidArea.y = 16;
+            solidArea.width = 48;
+            solidArea.height = 32;
+            solidAreaDefaultX = solidArea.x;
+            solidAreaDefaultY = solidArea.y;
     }
 }
