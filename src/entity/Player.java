@@ -13,7 +13,7 @@ import main.GamePanel;
 import main.KeyHandler;
 
 public class Player extends Entity{
-	private BufferedImage[] stay = new BufferedImage[3];
+	public BufferedImage[] stay = new BufferedImage[3];
 	private BufferedImage[] up = new BufferedImage[3];
 	private BufferedImage[] down = new BufferedImage[3];
 	private BufferedImage[] left = new BufferedImage[3];

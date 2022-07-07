@@ -1,6 +1,7 @@
 package main;
 
 //import entity.NPC_LittleRed;
+import entity.NPC_OldMan;
 import object.OBJ_Chest;
 import object.OBJ_Door;
 import object.OBJ_Key;
@@ -30,8 +31,8 @@ public class AssetSetter {
 
     }
     public void setNPC(){
-        //gp.NPC[0] = new NPC_LittleRed(this.gp);
-        //gp.NPC[0].worldX = 7*gp.tileSize;
-        //gp.NPC[0].worldX = 7*gp.tileSize;
+        gp.NPC[0] = new NPC_OldMan(this.gp);
+        gp.NPC[0].worldX = 7*gp.tileSize;
+        gp.NPC[0].worldY = 7*gp.tileSize;
     }
 }
