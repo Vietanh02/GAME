@@ -12,6 +12,15 @@ public class NPC_OldMan extends Entity{
         direction = "down";
         speed = 2;
         getImage();
+        setDialogue();
+    }
+    public void setDialogue(){
+        dialogues[0] = "Hello,Kiwi.";
+        dialogues[1] = "Kiwi oi! Kiwi di dau day?";
+        dialogues[2] = "Toi la Ure";
+        dialogues[3] = "Co 1 cai ruong o gan day";
+        dialogues[4] = "Toi dang ban, hay de luc khac noi chuyen";
+        dialogues[5] = "Nay chang trai tre a, cau co biet ve nguoi anh \nhung Ba Binh, nguoi ma da danh bai quai vat \nSima de giai cuu the gioi khong?";
     }
     public void getImage(){
         // tải các ảnh vảo mảng
@@ -43,5 +52,8 @@ public class NPC_OldMan extends Entity{
             } else direction = "right";
             actionLockCounter = 0;
         }
+    }
+    public void speak(){
+        super.speak();
     }
 }
