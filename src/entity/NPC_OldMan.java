@@ -59,7 +59,7 @@ public class NPC_OldMan extends Entity{
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        //gp.cChecker.checkPlayer(this);
+        gp.cChecker.checkPlayer(this);
         if (collisionOn == false) {
             switch (direction) {
                 case "up":
@@ -82,5 +82,8 @@ public class NPC_OldMan extends Entity{
             spriteNum++;
             spriteCounter = 0;
         }
+    }
+    public void speak(){
+        super.speak();
     }
 }

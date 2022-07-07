@@ -30,7 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int maxWorldRow = 79;
 	public final int WorldWidth = tileSize * maxWorldCol;
 	public final int WorldHeight = tileSize * maxWorldRow;
-
+	//public EventHandler eHandler = new EventHandler(this);
 
 	//FPS
 	int FPS = 60;
@@ -40,7 +40,7 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager tileM = new TileManager(this);
 
 	// keyHandle -- các nút điều khiển
-	KeyHandler keyH = new KeyHandler(this);
+	public KeyHandler keyH = new KeyHandler(this);
 	Sound sound = new Sound();
 	//UI
 	public UI ui = new UI(this);
@@ -169,6 +169,8 @@ public class GamePanel extends JPanel implements Runnable{
 			tileM.draw2(g2);
 			NPC[0].draw(g2,this);
 			//object
+
+			
 			for(int i =0 ;i<obj.length;i++) {
 				if (obj[i] != null) {
 					obj[i].draw(g2, this);

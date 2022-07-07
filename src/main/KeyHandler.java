@@ -4,8 +4,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 public class KeyHandler implements KeyListener {
-	GamePanel gp;
-	public boolean upPressed,downPressed,leftPressed,rightPressed;
+
+    GamePanel gp;
+	public boolean upPressed,downPressed,leftPressed,rightPressed, enterPressed;
 
 	public  KeyHandler(GamePanel gp) {
 		this.gp = gp;
@@ -89,12 +90,22 @@ public class KeyHandler implements KeyListener {
 				 if (code == KeyEvent.VK_P) {
 						 gp.gameState = gp.pauseState;
 				 }
+				 if(code == KeyEvent.VK_ENTER){
+					 enterPressed = true;
+				 }
 			 }
-			else if(gp.gameState == gp.pauseState){
-				if(code == KeyEvent.VK_P){
-					gp.gameState = gp.playState;
-				}
-			}
+			 //pause state
+			 else if(gp.gameState == gp.pauseState){
+				 if(code == KeyEvent.VK_P){
+					 gp.gameState = gp.playState;
+				 }
+			 }
+			 //dialogue state
+			 else if(gp.gameState == gp.dialogueState){
+				 if(code == KeyEvent.VK_ENTER){
+					 gp.gameState = gp.playState;
+				 }
+			 }
 
 
 		//OPTIONS STATE
