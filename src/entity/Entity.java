@@ -147,9 +147,7 @@ public abstract class Entity {
 			return true;
 		}
 		return false;
-
-
-=======
+	}
 	//GET IMAGE ENTITY (GỌI ẢNH THỰC THỂ)
 	public BufferedImage setup(String imagePath){
 		UntilityTool uTool = new UntilityTool();
@@ -161,6 +159,5 @@ public abstract class Entity {
 			e.printStackTrace();
 		}
 		return image;
-
 	}
 }
