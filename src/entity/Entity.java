@@ -12,11 +12,15 @@ import java.io.IOException;
 public abstract class Entity {
 
 	GamePanel gp;
+
+	public BufferedImage[] image = new BufferedImage[4];
+	public String name;
+	public boolean collision = false;
 	public int worldX, worldY;
 	public int speed;
 	public int solidAreaDefaultX, solidAreaDefaultY;
 
-	public String direction;
+	public String direction = "stay";
 	public BufferedImage[] stay = new BufferedImage[3];
 	public BufferedImage[] up = new BufferedImage[3];
 	public BufferedImage[] down = new BufferedImage[3];
@@ -24,7 +28,7 @@ public abstract class Entity {
 	public BufferedImage[] right = new BufferedImage[3];
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
-	public Rectangle solidArea;
+	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public boolean collisionOn = false;
 	public int actionLockCounter = 0;
 	//CHARATER STATUS

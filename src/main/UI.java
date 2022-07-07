@@ -1,7 +1,7 @@
 package main;
 
+import entity.Entity;
 import object.OBJ_Heart;
-import object.SuperObject;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -37,7 +37,7 @@ public class UI {
         arial_80B = new Font("Arial", Font.BOLD,80);
 
         //CREATE HUB OBJ
-        SuperObject heart = new OBJ_Heart(gp);
+        Entity heart = new OBJ_Heart(gp);
         heart_full = heart.image[0];
         heart_half = heart.image[1];
         heart_blank = heart.image[2];
