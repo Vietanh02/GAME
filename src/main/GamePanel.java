@@ -41,7 +41,7 @@ public class GamePanel extends JPanel implements Runnable{
 	TileManager tileM = new TileManager(this);
 
 	// keyHandle -- các nút điều khiển
-	public KeyHandler keyH = new KeyHandler(this);
+	KeyHandler keyH = new KeyHandler(this);
 	Sound sound = new Sound();
 	//UI
 	public UI ui = new UI(this);
