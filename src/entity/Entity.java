@@ -10,9 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public abstract class Entity {
-
 	GamePanel gp;
-
 	public BufferedImage[] image = new BufferedImage[4];
 	public String name;
 	public boolean collision = false;
@@ -42,7 +40,6 @@ public abstract class Entity {
 
 	// Now, Time's up, Ure is coming
 	// set again after meeting, all the number is not last one
-
 	protected boolean die = false;
 
 	protected int attackSpeed = 1000;

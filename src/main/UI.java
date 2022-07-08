@@ -1,7 +1,7 @@
 package main;
 
 import entity.Entity;
-import object.OBJ_Heart;
+import entity.object.OBJ_Heart;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
