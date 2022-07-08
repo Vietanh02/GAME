@@ -2,10 +2,9 @@ package main;
 
 //import entity.NPC_LittleRed;
 import entity.NPC_OldMan;
-import object.OBJ_Chest;
-import object.OBJ_Door;
-import object.OBJ_Heart;
-import object.OBJ_Key;
+import entity.object.OBJ_Chest;
+import entity.object.OBJ_Door;
+import entity.object.OBJ_Key;
 
 public class AssetSetter {
     GamePanel gp;
