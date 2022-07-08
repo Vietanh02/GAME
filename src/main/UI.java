@@ -49,6 +49,11 @@ public class UI {
         message = text;
         messageOn = true;
     }
+    public int getXforCenteredText(String text) {
+        int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
+        int x = gp.screenWidth/2 - length/2;
+        return x;
+    }
     public void draw(Graphics2D g2){
         if(gameFinished == true){
             g2.setFont(arial_40);
@@ -84,10 +89,12 @@ public class UI {
             this.g2 = g2;
             g2.setFont(arial_40);
             g2.setColor(Color.white);
+
             //titlestate
             if(gp.gameState == gp.titleState){
                 drawTitleScreen();
             }
+
             //playstate
             if(gp.gameState == gp.playState){
                 drawPlayerLife();
@@ -107,13 +114,21 @@ public class UI {
                     }
                 }
             }
+            // pausestate
             if(gp.gameState == gp.pauseState){
                 drawPlayerLife();
                 drawPauseScreen();
             }
+            // dialoguestate
             if(gp.gameState == gp.dialogueState){
                 drawPlayerLife();
                 drawDialogueScreen();
+
+            }
+            if(gp.gameState == gp.charaterState){
+                drawPlayerLife();
+                drawCharacterScreen();
+                //drawInventory();
             }
         }
     }
@@ -124,24 +139,16 @@ public class UI {
         int width = gp.screenWidth - (gp.tileSize*4);
         int height = gp.tileSize*5;
         drawSubWindow(x,y,width,height);
-        x+=gp.tileSize;
-        y+=gp.tileSize;
-        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
-//        g2.drawString(currentDialogue,x,y);
-        for(String line : currentDialogue.split("\n")){
-            g2.drawString(line,x,y);
-            y+=40;
-        }
+//        x+=gp.tileSize;
+//        y+=gp.tileSize;
+//        g2.setFont(g2.getFont().deriveFont(Font.PLAIN,32F));
+////        g2.drawString(currentDialogue,x,y);
+//        for(String line : currentDialogue.split("\n")){
+//            g2.drawString(line,x,y);
+//            y+=40;
+//        }
     }
-    public void drawSubWindow(int x,int y,int width,int height){
-        Color c = new Color(0,0,0,200);
-        g2.setColor(c);
-        g2.fillRoundRect(x,y,width,height,35,35);
-        c = new Color(255,255,255);
-        g2.setColor(c);
-        g2.setStroke(new BasicStroke(5));
-        g2.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
-    }
+
 
     // vẽ Thanh máu
     public void drawPlayerLife(){
@@ -262,9 +269,49 @@ public class UI {
             int y = gp.screenHeight/2;
             g2.drawString(text,x,y);
     }
-    public int getXforCenteredText(String text) {
-        int length = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
-        int x = gp.screenWidth/2 - length/2;
-        return x;
+
+    public void drawCharacterScreen(){
+
+        //Create a frame
+        final int frameX = gp.tileSize;
+        final int frameY = gp.tileSize;
+        final int frameWidth = gp.tileSize * 6;
+        final int frameHeight = gp.tileSize * 10;
+        drawSubWindow(frameX, frameY, frameWidth, frameHeight);
+
+        //Text
+        g2.setColor(Color.WHITE);
+        g2.setFont(g2.getFont().deriveFont(32F));
+
+        int textX = frameX + 20;
+        int textY = frameY + gp.tileSize;
+        final int lineHeight = 35;
+
+        //Name
+        g2.drawString("LEVEL", textX, textY);
+        textY += lineHeight;
+        g2.drawString("LIFE", textX, textY);
+        textY += lineHeight;
+        g2.drawString("STRENGTH", textX, textY);
+        textY += lineHeight;
+        g2.drawString("DEXTERITY", textX, textY);
+        textY += lineHeight;
+        g2.drawString("ATK", textX, textY);
+        textY += lineHeight;
+        g2.drawString("DEF", textX, textY);
+        textY += lineHeight;
+
+
+
+    }
+
+    public void drawSubWindow(int x,int y,int width,int height){
+        Color c = new Color(0,0,0,200);
+        g2.setColor(c);
+        g2.fillRoundRect(x,y,width,height,35,35);
+        c = new Color(255,255,255);
+        g2.setColor(c);
+        g2.setStroke(new BasicStroke(5));
+        g2.drawRoundRect(x+5,y+5,width-10,height-10,25,25);
     }
 }

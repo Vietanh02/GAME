@@ -2,7 +2,7 @@ package main;
 
 //import entity.NPC_LittleRed;
 import entity.NPC_OldMan;
-import entity.monster.MON_GreenSlime;
+import monster.MON_GreenSlime;
 import entity.object.OBJ_Door;
 import entity.object.OBJ_Key;
 import entity.object.OBJ_Teleport;
