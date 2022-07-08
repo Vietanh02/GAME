@@ -5,6 +5,7 @@ import entity.NPC_OldMan;
 import entity.monster.MON_GreenSlime;
 import entity.object.OBJ_Door;
 import entity.object.OBJ_Key;
+import entity.object.OBJ_Teleport;
 
 public class AssetSetter {
     GamePanel gp;
@@ -24,6 +25,10 @@ public class AssetSetter {
         gp.obj[1] = new OBJ_Door(gp);
         gp.obj[1].worldX = 7*gp.tileSize;
         gp.obj[1].worldY = 7*gp.tileSize;
+
+        gp.obj[3] = new OBJ_Teleport(gp);
+        gp.obj[3].worldX = 40*gp.tileSize;
+        gp.obj[3].worldY = 36*gp.tileSize;
 
     }
     public void setNPC(){

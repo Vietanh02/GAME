@@ -42,9 +42,9 @@ public class EventHandler {
         if(distance > gp.tileSize){
             canTouchEvent = true;
         }
-        if(canTouchEvent == true){
-            if (hit(3,3, "any") == true ) {damagePit(3,3,gp.dialogueState);}
-//            if (hit(5,8,"any")== true) {telemap(5,8,gp.dialogueState);}
+        if(canTouchEvent){
+//            if (hit(3, 3, "any")) {damagePit(3,3,gp.dialogueState);}
+            if (hit(40, 36,1,1, "any")) {telemap(70,50,gp.dialogueState);}
 //            if(hit(10,10,"up") == true){healingPool(gp.dialogueState);}
         }
     }
@@ -58,7 +58,7 @@ public class EventHandler {
         eventRect[col][row].x = col*gp.tileSize + eventRect[col][row].x;
         eventRect[col][row].y = row*gp.tileSize + eventRect[col][row].y;
 
-        if(gp.player.solidArea.intersects(eventRect[row][col])&&eventRect[col][row].eventDone == false){
+        if(gp.player.solidArea.intersects(eventRect[row][col])&& !eventRect[col][row].eventDone){
             if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")){
                 hit = true;
                 previousEventX = gp.player.worldX;
@@ -73,6 +73,26 @@ public class EventHandler {
 
         return hit;
     }
+    public boolean hit(int x, int y,int width, int height, String reqDirection){
+
+        boolean hit = false;
+        Rectangle eventRectan = new Rectangle(x*gp.tileSize,y*gp.tileSize,width*gp.tileSize,height*gp.tileSize);
+        gp.player.solidArea.x = gp.player.worldX + gp.player.solidArea.x;
+        gp.player.solidArea.y = gp.player.worldY + gp.player.solidArea.y;
+
+
+        if(gp.player.solidArea.intersects(eventRectan)){
+            if(gp.player.direction.contentEquals(reqDirection) || reqDirection.contentEquals("any")){
+                hit = true;
+                previousEventX = gp.player.worldX;
+                previousEventY = gp.player.worldY;
+            }
+        }
+
+        gp.player.solidArea.x = gp.player.solidAreaDefaultX;
+        gp.player.solidArea.y = gp.player.solidAreaDefaultY;
+        return hit;
+    }
 
     public void damagePit(int col, int row, int gameState){
         gp.gameState = gameState;
@@ -85,11 +105,12 @@ public class EventHandler {
 
     public void telemap (int col, int row, int gameState){
         gp.gameState = gameState ;
-        gp.player.worldX = gp.tileSize * 12;
-        gp.player.worldY = gp.tileSize * 13;
+        gp.ui.currentDialogue = "Dich chuyen";
+        gp.player.worldX = gp.tileSize * 70;
+        gp.player.worldY = gp.tileSize * 30;
     }
     public void healingPool(int gameState){
-        if(gp.keyH.enterPressed == true){
+        if(gp.keyH.enterPressed){
             gp.gameState = gameState;
             gp.ui.currentDialogue = "Ban choi da va hoi mau";
             gp.player.life += 1;

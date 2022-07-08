@@ -51,11 +51,11 @@ public class Player extends Entity{
 	public void getPlayerImage() {
 			// tải các ảnh vảo mảng
 
-			String imageDown = new String("/player/boy_down_%d");
-			String imageUp = new String("/player/boy_up_%d");
-			String imageLeft = new String("/player/boy_left_%d");
-			String imageRight = new String("/player/boy_right_%d");
-			String imageStay = new String("/player/boy_down_%d");
+			String imageDown = "/player/boy_down_%d";
+			String imageUp = "/player/boy_up_%d";
+			String imageLeft = "/player/boy_left_%d";
+			String imageRight = "/player/boy_right_%d";
+			String imageStay = "/player/boy_down_%d";
 			for(int i=0;i<3;i++) {
 				stay[i] = setup(String.format(imageStay,i+1));
 				up[i]   = setup(String.format(imageUp,i+1));
@@ -67,79 +67,79 @@ public class Player extends Entity{
 	}
 
 	public void update() {
-		if(keyH.upPressed == true) {
-			direction = "up";
-		}
-		else if(keyH.downPressed == true) {
-			direction = "down";
-		}
-		else if(keyH.leftPressed == true) {
-			direction = "left";
-		}
-		else if(keyH.rightPressed == true) {
-			direction = "right";
-		}else {
-			direction = "stay";
-		}
-
-		//CHECK TILE COLLISION
-		collisionOn = false;
-		gp.cChecker.checkTile(this);
-		//CHECK OBJECT COLLISION
-		int objIndex = gp.cChecker.checkObject(this, true);
-		pickUpObject(objIndex);
-		int npcIndex = gp.cChecker.checkEntity(this, gp.NPC);
-		interactNPC(npcIndex);
-
-		gp.eHandler.checkEvent();
-		gp.keyH.enterPressed = false;
-		//IF COLLISION IS FALSE PLAYER CAN MOVE
-		if(collisionOn == false) {
-			if(keyH.upPressed == true && keyH.leftPressed == true){
-				worldY -= speed;
-				worldX -= speed;
+		if(keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.enterPressed){
+			if(keyH.upPressed) {
+				direction = "up";
 			}
-			else if(keyH.upPressed == true && keyH.rightPressed == true){
-				worldY -= speed;
-				worldX += speed;
+			else if(keyH.downPressed) {
+				direction = "down";
+			}
+			else if(keyH.leftPressed) {
+				direction = "left";
+			}
+			else if(keyH.rightPressed) {
 				direction = "right";
+//			}else {
+//				direction = "stay";
 			}
-			else if(keyH.downPressed == true && keyH.leftPressed == true){
-				worldY += speed;
-				worldX -= speed;
-			}
-			else if(keyH.downPressed == true && keyH.rightPressed == true){
-				worldY += speed;
-				worldX += speed;
-			}
-			else if(keyH.upPressed == true) {
-				worldY -= speed;
-			}
-			else if(keyH.downPressed == true) {
-				worldY += speed;
-			}
-			else if(keyH.leftPressed== true) {
-				worldX -= speed;
-			}
-			else if(keyH.rightPressed == true) {
-				worldX += speed;
-			}
-		}
+			//CHECK TILE COLLISION
+			collisionOn = false;
+			gp.cChecker.checkTile(this);
+			//CHECK OBJECT COLLISION
+			int objIndex = gp.cChecker.checkObject(this, true);
+			pickUpObject(objIndex);
+			int npcIndex = gp.cChecker.checkEntity(this, gp.NPC);
+			interactNPC(npcIndex);
+			gp.eHandler.checkEvent();
+			gp.cChecker.checkEntity(this, gp.monster);
 
-		// spriteNum để vẽ nhân vật  ở đây vẽ 8 bức 1s sẽ tạo đc chuyển động nhân vật
-		spriteCounter++;
-		if(spriteCounter>8) {
-			if(spriteNum == 1) {
-				spriteNum =2;
+			//IF COLLISION IS FALSE PLAYER CAN MOVE
+			if(!collisionOn && !keyH.enterPressed) {
+				if(keyH.upPressed && keyH.leftPressed){
+					worldY -= speed;
+					worldX -= speed;
+				}
+				else if(keyH.upPressed && keyH.rightPressed){
+					worldY -= speed;
+					worldX += speed;
+				}
+				else if(keyH.downPressed && keyH.leftPressed){
+					worldY += speed;
+					worldX -= speed;
+				}
+				else if(keyH.downPressed && keyH.rightPressed){
+					worldY += speed;
+					worldX += speed;
+				}
+				else if(keyH.upPressed) {
+					worldY -= speed;
+				}
+				else if(keyH.downPressed) {
+					worldY += speed;
+				}
+				else if(keyH.leftPressed) {
+					worldX -= speed;
+				}
+				else if(keyH.rightPressed) {
+					worldX += speed;
+				}
 			}
-			else if(spriteNum ==2) {
-				spriteNum = 3;
-			}
-			else if(spriteNum ==3) {
-				spriteNum = 1;
-			}
-			spriteCounter = 0;
+			gp.keyH.enterPressed = false;
+			// spriteNum để vẽ nhân vật  ở đây vẽ 8 bức 1s sẽ tạo đc chuyển động nhân vật
+			spriteCounter++;
+			if(spriteCounter>8) {
+				if(spriteNum == 1) {
+					spriteNum =2;
+				}
+				else if(spriteNum ==2) {
+					spriteNum = 3;
+				}
+				else if(spriteNum ==3) {
+					spriteNum = 1;
+				}
+				spriteCounter = 0;
 
+			}
 		}
 	}
 
@@ -215,7 +215,7 @@ public class Player extends Entity{
 	}
 	public void interactNPC(int i){
 			if(i!=999){
-				if(gp.keyH.enterPressed == true) {
+				if(gp.keyH.enterPressed) {
 					gp.gameState = gp.dialogueState;
 					gp.NPC[i].speak();
 				}

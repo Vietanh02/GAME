@@ -24,11 +24,11 @@ public class NPC_OldMan extends Entity{
     public void getImage(){
         // tải các ảnh vảo mảng
 
-        String imageDown = new String("/npc/oldman_down_%d");
-        String imageUp = new String("/npc/oldman_up_%d");
-        String imageLeft = new String("/npc/oldman_left_%d");
-        String imageRight = new String("/npc/oldman_right_%d");
-        String imageStay = new String("/npc/oldman_down_%d");
+        String imageDown = "/npc/oldman_down_%d";
+        String imageUp = "/npc/oldman_up_%d";
+        String imageLeft = "/npc/oldman_left_%d";
+        String imageRight = "/npc/oldman_right_%d";
+        String imageStay = "/npc/oldman_down_%d";
         for(int i=0;i<2;i++) {
             stay[i] = setup(String.format(imageStay,i+1));
             up[i]   = setup(String.format(imageUp,i+1));
@@ -48,8 +48,9 @@ public class NPC_OldMan extends Entity{
                 direction = "down";
             } else if (i <= 75) {
                 direction = "left";
-            } else direction = "right";
-            actionLockCounter = 0;
+            } else {
+                direction = "right";
+            }
         }
     }
     public void update() {
@@ -58,20 +59,12 @@ public class NPC_OldMan extends Entity{
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkPlayer(this);
-        if (collisionOn == false) {
+        if (!collisionOn) {
             switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "right" -> worldX += speed;
+                case "left" -> worldX -= speed;
             }
         }
         spriteCounter++;

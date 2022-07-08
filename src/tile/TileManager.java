@@ -328,7 +328,7 @@ public class TileManager {
 	}
 	public void setupTileA4(String file){
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 5057;
+		int index = 4097;
 		for(int i = 0; i < 30; i++){
 			for(int j = 0; j < 32; j++){
 				tile[index] = new Tile();
@@ -339,7 +339,7 @@ public class TileManager {
 	}
 	public void setupTileA5(String file){
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 4097;
+		int index = 5057;
 		for(int i = 0; i < 32; i++){
 			for(int j = 0; j < 16; j++){
 				tile[index] = new Tile();
