@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 public abstract class Entity {
-	GamePanel gp;
+	protected GamePanel gp;
 	public BufferedImage[] image = new BufferedImage[4];
 	public String name;
 	public boolean collision = false;

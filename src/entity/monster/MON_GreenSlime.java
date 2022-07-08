@@ -1,4 +1,4 @@
-package monster;
+package entity.monster;
 
 import entity.Entity;
 import main.GamePanel;
@@ -50,6 +50,35 @@ public class MON_GreenSlime extends Entity {
                 direction = "left";
             } else direction = "right";
             actionLockCounter = 0;
+        }
+    }
+    public void update() {
+        setAction();
+        collisionOn = false;
+        gp.cChecker.checkTile(this);
+        gp.cChecker.checkObject(this, false);
+        gp.cChecker.checkPlayer(this);
+        if (collisionOn == false) {
+            switch (direction) {
+                case "up":
+                    worldY -= speed;
+                    break;
+                case "down":
+                    worldY += speed;
+                    break;
+                case "right":
+                    worldX += speed;
+                    break;
+                case "left":
+                    worldX -= speed;
+                    break;
+            }
+        }
+        spriteCounter++;
+        if (spriteCounter == 12) {
+            if (spriteNum == 2) spriteNum = 0;
+            spriteNum++;
+            spriteCounter = 0;
         }
     }
 }

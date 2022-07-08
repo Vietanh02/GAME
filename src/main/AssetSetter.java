@@ -2,7 +2,7 @@ package main;
 
 //import entity.NPC_LittleRed;
 import entity.NPC_OldMan;
-import monster.MON_GreenSlime;
+import entity.monster.MON_GreenSlime;
 
 public class AssetSetter {
     GamePanel gp;
