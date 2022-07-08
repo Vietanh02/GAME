@@ -24,6 +24,8 @@ public abstract class Entity {
 	public BufferedImage[] down = new BufferedImage[3];
 	public BufferedImage[] left = new BufferedImage[3];
 	public BufferedImage[] right = new BufferedImage[3];
+	protected boolean invicible = false;
+	protected int invicibleCounter;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
@@ -41,7 +43,7 @@ public abstract class Entity {
 	// Now, Time's up, Ure is coming
 	// set again after meeting, all the number is not last one
 	protected boolean die = false;
-
+	boolean attacking = false;
 	protected int attackSpeed = 1000;
 	protected int attackDelay = 500;
 	protected boolean attackAbility = true;
@@ -204,15 +206,18 @@ public abstract class Entity {
 				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
 				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
-
-			g2.drawImage(image, screenX, screenY, null);
+			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			g2.drawImage(image, screenX, screenY,null);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 
 		}
 		else if (gp.player.screenX > gp.player.worldX ||
 				gp.player.screenY > gp.player.worldY ||
 				rightOffset > gp.WorldWidth - gp.player.worldX ||
 				bottomOffset > gp.WorldHeight - gp.player.worldY){
-			g2.drawImage(image, screenX, screenY,gp.tileSize, gp.tileSize, null);
+			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			g2.drawImage(image, screenX, screenY,null);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 		}
 	}
 	public void update() {

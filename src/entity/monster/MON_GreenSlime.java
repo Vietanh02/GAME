@@ -80,5 +80,13 @@ public class MON_GreenSlime extends Entity {
             spriteNum++;
             spriteCounter = 0;
         }
+        //neu quai bi danh, bat tu 1 thoi gian
+        if(invicible){
+            invicibleCounter++;
+            if(invicibleCounter > 60){
+                invicible = false;
+                invicibleCounter = 0;
+            }
+        }
     }
 }

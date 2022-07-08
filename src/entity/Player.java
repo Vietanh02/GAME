@@ -9,10 +9,17 @@ import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
 	public BufferedImage[] stay = new BufferedImage[3];
-	private BufferedImage[] up = new BufferedImage[3];
-	private BufferedImage[] down = new BufferedImage[3];
-	private BufferedImage[] left = new BufferedImage[3];
-	private BufferedImage[] right = new BufferedImage[3];
+	private final BufferedImage[] up = new BufferedImage[3];
+	private final BufferedImage[] down = new BufferedImage[3];
+	private final BufferedImage[] left = new BufferedImage[3];
+	private final BufferedImage[] right = new BufferedImage[3];
+
+	private final BufferedImage[] attackUp = new BufferedImage[3];
+	private final BufferedImage[] attackDown = new BufferedImage[3];
+	private final BufferedImage[] attackLeft = new BufferedImage[3];
+	private final BufferedImage[] attackRight = new BufferedImage[3];
+
+	Rectangle attackArea = new Rectangle(0,0,0,0);
 	KeyHandler keyH;
 
 	public int hasKey = 0;
@@ -31,11 +38,14 @@ public class Player extends Entity{
 		solidArea.y = 16;
 		solidAreaDefaultX = solidArea.x;
 		solidAreaDefaultY = solidArea.y;
-		solidArea.height = 16;
+		solidArea.height = 32;
 		solidArea.width = 32;
 
+		attackArea.width = 36;
+		attackArea.height = 48;
 		setDefaultValues();
 		getPlayerImage();
+		getPlayerAttackImage();
 	}
 
 	public void setDefaultValues() {
@@ -63,11 +73,25 @@ public class Player extends Entity{
 				left[i] = setup(String.format(imageLeft,i+1));
 				right[i] = setup(String.format(imageRight,i+1));
 			}
-
+	}
+	public void getPlayerAttackImage(){
+		String imageDown = "/player/boy_down_%d";
+		String imageUp = "/player/boy_up_%d";
+		String imageLeft = "/player/boy_left_%d";
+		String imageRight = "/player/boy_right_%d";
+		for(int i=0;i<3;i++) {
+			attackUp[i]   = setup(String.format(imageUp,i+1));
+			attackDown[i] = setup(String.format(imageDown,i+1));
+			attackLeft[i] = setup(String.format(imageLeft,i+1));
+			attackRight[i] = setup(String.format(imageRight,i+1));
+		}
 	}
 
 	public void update() {
-		if(keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.enterPressed){
+		if(attacking){
+			attacking();
+		}
+		else if(keyH.upPressed || keyH.downPressed || keyH.rightPressed || keyH.leftPressed || keyH.enterPressed){
 			if(keyH.upPressed) {
 				direction = "up";
 			}
@@ -146,6 +170,57 @@ public class Player extends Entity{
 		}
 	}
 
+	private void attacking() {
+		spriteCounter++;
+		if(spriteCounter <= 5){
+			spriteNum = 1;
+		}
+		if(spriteCounter > 5 && spriteCounter < 25){
+			spriteNum = 2;
+			//luu worldX,Y, solidArea
+			int currentWorldX = worldX;
+			int currentWorldY = worldY;
+			int solidAreaWidth = solidArea.width;
+			int solidAreaHeight = solidArea.height;
+
+			switch (direction){
+				case "up": worldY -= attackArea.height;
+				case "down": worldY += attackArea.height;
+				case "left": worldX -= attackArea.width;
+				case "right": worldX += attackArea.width;
+			}
+
+			solidArea.width = attackArea.width;
+			solidArea.height = attackArea.height;
+
+			int monIndex = gp.cChecker.checkEntity(this, gp.monster);
+			damageMonster(monIndex);
+			worldX = currentWorldX;
+			worldY = currentWorldY;
+			solidArea.width = solidAreaWidth;
+			solidArea.height = solidAreaHeight;
+		}
+		if(spriteCounter >= 25){
+			spriteNum = 1;
+			spriteCounter = 0;
+			attacking = false;
+		}
+	}
+
+	public void damageMonster(int i){
+		if(i!= 999){
+			if(!gp.monster[i].invicible) {
+				gp.monster[i].life -= 1;
+				gp.monster[i].invicible = true;
+				if(gp.monster[i].life == 0){
+					gp.monster[i] = null;
+				}
+			}
+		} else {
+			System.out.println("Miss!");
+		}
+	}
+
 	public void pickUpObject(int i){
 		if(i!=999){
 			String objName = gp.obj[i].name;
@@ -183,14 +258,35 @@ public class Player extends Entity{
 	public void draw(Graphics2D g2) {
 		//g2.setColor(Color.white);
 		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
-		BufferedImage image = switch (direction) {
-			case "up" -> up[spriteNum - 1];
-			case "down" -> down[spriteNum - 1];
-			case "left" -> left[spriteNum - 1];
-			case "right" -> right[spriteNum - 1];
-			case "stay" -> stay[spriteNum - 1];
-			default -> null;
-		};
+		BufferedImage image = null;
+		int tempScreenX = screenX;
+		int tempScreenY = screenY;
+
+		switch (direction) {
+			case "up" -> {
+				if (!attacking) image = up[spriteNum - 1];
+				if (attacking){
+					tempScreenY -= gp.tileSize;
+					image = attackUp[spriteNum - 1];
+				}
+			}
+			case "down" -> {
+				if (!attacking) image = down[spriteNum - 1];
+				if (attacking) image = attackDown[spriteNum - 1];
+			}
+			case "left" -> {
+				if (!attacking) image = left[spriteNum - 1];
+				if (attacking){
+					tempScreenX -= gp.tileSize;
+					image = attackLeft[spriteNum - 1];
+				}
+			}
+			case "right" -> {
+				if (!attacking) image = right[spriteNum - 1];
+				if (attacking) image = attackRight[spriteNum - 1];
+			}
+			case "stay" -> image = stay[spriteNum - 1];
+		}
 
 		int x = screenX;
 		int y = screenY;
@@ -217,11 +313,14 @@ public class Player extends Entity{
 		return this.down[0];
 	}
 	public void interactNPC(int i){
+		if(gp.keyH.enterPressed){
 			if(i!=999){
-				if(gp.keyH.enterPressed) {
 					gp.gameState = gp.dialogueState;
 					gp.NPC[i].speak();
 				}
+			if(i == 999){
+					attacking = true;
 			}
+		}
 	}
 }

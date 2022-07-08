@@ -10,6 +10,8 @@ public class OBJ_Key extends Entity {
         super(gp);
         name = "Key";
         stay[0] = setup("/objects/Key0");
+        stay[1] = setup("/objects/Key0");
+        stay[2] = setup("/objects/Key0");
         collision = true;
     }
 }
