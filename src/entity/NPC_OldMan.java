@@ -2,8 +2,6 @@ package entity;
 
 import main.GamePanel;
 
-import javax.imageio.ImageIO;
-import java.io.IOException;
 import java.util.Random;
 
 public class NPC_OldMan extends Entity{
@@ -41,7 +39,7 @@ public class NPC_OldMan extends Entity{
     }
     public void setAction() {
         actionLockCounter++;
-        if (actionLockCounter == 120) {
+        if (actionLockCounter == 200) {
             Random random = new Random();
             int i = random.nextInt(100) + 1;//ngau nhien tu 1 toi 100
             if (i <= 25) {

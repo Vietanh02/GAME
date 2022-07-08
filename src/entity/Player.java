@@ -1,16 +1,11 @@
 package entity;
 
 
-
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
-import javax.imageio.ImageIO;
-
 import main.GamePanel;
 import main.KeyHandler;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 public class Player extends Entity{
 	public BufferedImage[] stay = new BufferedImage[3];
@@ -44,8 +39,8 @@ public class Player extends Entity{
 	}
 
 	public void setDefaultValues() {
-		worldX = gp.tileSize*7;
-		worldY = gp.tileSize*7;
+		worldX = gp.tileSize*30;
+		worldY = gp.tileSize*20;
 		speed = 4;
 		direction = "up";
 		//player status
