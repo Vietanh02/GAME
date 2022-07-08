@@ -99,21 +99,21 @@ public class Player extends Entity{
 		gp.eHandler.checkEvent();
 		gp.keyH.enterPressed = false;
 		//IF COLLISION IS FALSE PLAYER CAN MOVE
-		if(collisionOn == false) {
-			if(keyH.upPressed == true && keyH.leftPressed == true){
+		if(!collisionOn) {
+			if(keyH.upPressed && keyH.leftPressed){
 				worldY -= speed;
 				worldX -= speed;
 			}
-			else if(keyH.upPressed == true && keyH.rightPressed == true){
+			else if(keyH.upPressed && keyH.rightPressed){
 				worldY -= speed;
 				worldX += speed;
 				direction = "right";
 			}
-			else if(keyH.downPressed == true && keyH.leftPressed == true){
+			else if(keyH.downPressed && keyH.leftPressed){
 				worldY += speed;
 				worldX -= speed;
 			}
-			else if(keyH.downPressed == true && keyH.rightPressed == true){
+			else if(keyH.downPressed && keyH.rightPressed){
 				worldY += speed;
 				worldX += speed;
 			}
