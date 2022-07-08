@@ -82,16 +82,19 @@ public class Player extends Entity{
 //			}else {
 //				direction = "stay";
 			}
-			//CHECK TILE COLLISION
+			//	CHECK TILE COLLISION
 			collisionOn = false;
 			gp.cChecker.checkTile(this);
-			//CHECK OBJECT COLLISION
+			//	CHECK OBJECT COLLISION
 			int objIndex = gp.cChecker.checkObject(this, true);
 			pickUpObject(objIndex);
+			//	CHECK NPC COLLISION
 			int npcIndex = gp.cChecker.checkEntity(this, gp.NPC);
 			interactNPC(npcIndex);
 			gp.eHandler.checkEvent();
 			gp.cChecker.checkEntity(this, gp.monster);
+			//	CHECK MONSTER COLLISION
+			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 
 			//IF COLLISION IS FALSE PLAYER CAN MOVE
 			if(!collisionOn && !keyH.enterPressed) {
