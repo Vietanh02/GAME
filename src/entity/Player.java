@@ -83,8 +83,8 @@ public class Player extends Entity{
 		}
 		else if(keyH.rightPressed == true) {
 			direction = "right";
-//		}else {
-//			direction = "stay";
+		}else {
+			direction = "stay";
 		}
 
 		//CHECK TILE COLLISION
@@ -99,21 +99,21 @@ public class Player extends Entity{
 		gp.eHandler.checkEvent();
 		gp.keyH.enterPressed = false;
 		//IF COLLISION IS FALSE PLAYER CAN MOVE
-		if(!collisionOn) {
-			if(keyH.upPressed && keyH.leftPressed){
+		if(collisionOn == false) {
+			if(keyH.upPressed == true && keyH.leftPressed == true){
 				worldY -= speed;
 				worldX -= speed;
 			}
-			else if(keyH.upPressed && keyH.rightPressed){
+			else if(keyH.upPressed == true && keyH.rightPressed == true){
 				worldY -= speed;
 				worldX += speed;
 				direction = "right";
 			}
-			else if(keyH.downPressed && keyH.leftPressed){
+			else if(keyH.downPressed == true && keyH.leftPressed == true){
 				worldY += speed;
 				worldX -= speed;
 			}
-			else if(keyH.downPressed && keyH.rightPressed){
+			else if(keyH.downPressed == true && keyH.rightPressed == true){
 				worldY += speed;
 				worldX += speed;
 			}
