@@ -312,9 +312,9 @@ public class Player extends Entity{
 		}
 		//nếu đang tấn công, tỷ lệ ảnh 2 ô 48x48
 		if(attacking){
-			g2.drawImage(image, x, y,gp.tileSize*2,gp.tileSize,null);
+			g2.drawImage(image, x, y,null);
 		}
-		else g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
+		else g2.drawImage(image, x, y,null);
 	}
 
 	public BufferedImage getDownImage(){

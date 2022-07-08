@@ -170,7 +170,8 @@ public abstract class Entity {
 		BufferedImage image = null;
 		try{
 			image = ImageIO.read(getClass().getResourceAsStream(imagePath+".png"));
-			image = uTool.scaleImage(image,gp.tileSize,gp.tileSize);
+			image = uTool.scaleImage(image,image.getWidth()*3,image.getHeight()*3);
+
 		}catch (IOException e){
 			e.printStackTrace();
 		}
