@@ -209,6 +209,8 @@ public abstract class Entity {
 				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
 
 			g2.drawImage(image, screenX, screenY, null);
+			g2.setColor(Color.red);
+			g2.drawRect(screenX+solidArea.x,screenY+solidArea.y,solidArea.width,solidArea.height);
 
 		}
 		else if (gp.player.screenX > gp.player.worldX ||
@@ -216,6 +218,8 @@ public abstract class Entity {
 				rightOffset > gp.WorldWidth - gp.player.worldX ||
 				bottomOffset > gp.WorldHeight - gp.player.worldY){
 			g2.drawImage(image, screenX, screenY,gp.tileSize, gp.tileSize, null);
+			g2.setColor(Color.red);
+			g2.drawRect(screenX+solidArea.x,screenY+solidArea.y,solidArea.width,solidArea.height);
 		}
 	}
 	public void update(){

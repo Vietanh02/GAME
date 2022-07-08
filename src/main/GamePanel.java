@@ -148,7 +148,7 @@ public class GamePanel extends JPanel implements Runnable{
 	// vẽ nhân vật
 	public void update() {
 		if (gameState == playState) {
-			obj[3].update();
+			obj[2].update();
 			player.update();
 			tileM.update();
 			NPC[0].update();
@@ -156,7 +156,6 @@ public class GamePanel extends JPanel implements Runnable{
 				//tileM.update("/maps/map01.txt");
 				event = player.hasKey;
 			}
-
 		}
 		if(gameState == pauseState) {
 
@@ -171,11 +170,12 @@ public class GamePanel extends JPanel implements Runnable{
 		}else{
 			//tile
 			tileM.draw(g2);
+//			eHandler.draw(g2);
 			//ADD entities to the List
 			entityList.add(player);
 			for(int i=0; i< NPC.length; i++){
 				if(NPC[i]!= null){
-					entityList.add(NPC[i]);
+//					entityList.add(NPC[i]);
 				}
 			}
 			for(int i=0; i<obj.length; i++){

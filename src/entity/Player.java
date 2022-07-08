@@ -83,8 +83,8 @@ public class Player extends Entity{
 		}
 		else if(keyH.rightPressed == true) {
 			direction = "right";
-		}else {
-			direction = "stay";
+//		}else {
+//			direction = "stay";
 		}
 
 		//CHECK TILE COLLISION
