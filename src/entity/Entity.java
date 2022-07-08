@@ -215,7 +215,44 @@ public abstract class Entity {
 			g2.drawImage(image, screenX, screenY,gp.tileSize, gp.tileSize, null);
 		}
 	}
-	public void update(){
+	public void update() {
+		setAction();
+		collision = false;
+		gp.cChecker.checkTile(this);
+		gp.cChecker.checkObject(this, false);
+		gp.cChecker.checkEntity(this, gp.monster);
+		gp.cChecker.checkEntity(this, gp.NPC);
+		gp.cChecker.checkPlayer(this);
+
+		//	IF COLLISION IS FALSE, PLAYER CAN MOVE
+		if (collision = false) {
+			switch (direction) {
+				case "up":
+					worldY -= speed;
+					break;
+				case "down":
+					worldY += speed;
+					break;
+				case "left":
+					worldX -= speed;
+					break;
+				case "right":
+					worldX += speed;
+					break;
+			}
+		}
+		spriteCounter++;
+		if (spriteCounter > 12) {
+			if (spriteNum == 1) {
+				spriteNum = 2;
+			} else if (spriteNum == 2) {
+				spriteNum = 3;
+			} else if (spriteNum == 3) {
+				spriteNum = 1;
+			}
+			spriteCounter = 0;
+
+		}
 	}
 	public void setAction(){
 	}
