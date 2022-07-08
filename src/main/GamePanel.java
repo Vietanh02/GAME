@@ -29,8 +29,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int screenHeight =  tileSize*maxScreenRow; // 576 // pixel
 
 	//WORLD SETTING 
-	public final int maxWorldCol = 39;
-	public final int maxWorldRow = 79;
+	public final int maxWorldCol = 120;
+	public final int maxWorldRow = 120;
 	public final int WorldWidth = tileSize * maxWorldCol;
 	public final int WorldHeight = tileSize * maxWorldRow;
 	public EventHandler eHandler = new EventHandler(this);
@@ -68,7 +68,6 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public Entity[] obj = new Entity[10];
 	public Entity[] NPC = new Entity[10];
-	public Entity[] monster = new Entity[20];
 	ArrayList<Entity> entityList = new ArrayList<>();
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -82,7 +81,6 @@ public class GamePanel extends JPanel implements Runnable{
 		gameState = titleState;
 		aSetter.setNPC();
 		aSetter.setObject();
-		aSetter.setMonster();
 		playMusic(0);
 	}
 	public void startGameThread() {
@@ -94,7 +92,7 @@ public class GamePanel extends JPanel implements Runnable{
 	@Override
 	public void run() {
 
-		double drawInterval = 1000000000f/FPS;
+		double drawInterval = 1000000000/FPS;
 		double delta = 0;
 		long lastTime = System.nanoTime();
 		long currentTime;
@@ -123,35 +121,41 @@ public class GamePanel extends JPanel implements Runnable{
 
 		}
 	}
+/* public void run() {
+		
+		double drawInterval = 1000000000/FPS;
+		double nextDrawTime = System.nanoTime() + drawInterval;
+		
+		while(gameThread != null) {
+			update();
+			repaint();
+			try {
+				double remainingTime = nextDrawTime - System.nanoTime();
+				remainingTime = remainingTime/1000000;
+				if(remainingTime <0) {
+					remainingTime =0;
+				}
+				
+				Thread.sleep((long)remainingTime);
+				nextDrawTime += drawInterval;
+			}catch(InterruptedException e) {
+				e.printStackTrace();
+			}
+			
+		}
+	}*/
 
+	// vẽ nhân vật
 	public void update() {
 		if (gameState == playState) {
-			// update player
+			obj[2].update();
 			player.update();
-			// update obj
-			for(int i= 0; i< obj.length ; i++){
-				if(obj[i]!=null){
-					obj[i].update();
-				}
-			}
-			// update NPC
-			for(int i= 0; i< NPC.length ; i++){
-				if(NPC[i]!=null){
-					NPC[i].update();
-				}
-			}
-			// update Monster
-			for(int i= 0; i< monster.length ; i++){
-				if(monster[i]!=null){
-					monster[i].update();
-				}
-			}
 			tileM.update();
+			NPC[0].update();
 			if(event < player.hasKey) {
 				//tileM.update("/maps/map01.txt");
 				event = player.hasKey;
 			}
-
 		}
 		if(gameState == pauseState) {
 
@@ -166,10 +170,12 @@ public class GamePanel extends JPanel implements Runnable{
 		}else{
 			//tile
 			tileM.draw(g2);
+//			eHandler.draw(g2);
 			//ADD entities to the List
+			entityList.add(player);
 			for(int i=0; i< NPC.length; i++){
 				if(NPC[i]!= null){
-					entityList.add(NPC[i]);
+//					entityList.add(NPC[i]);
 				}
 			}
 			for(int i=0; i<obj.length; i++){
@@ -177,12 +183,6 @@ public class GamePanel extends JPanel implements Runnable{
 					entityList.add(obj[i]);
 				}
 			}
-			for(int i=0; i<monster.length; i++){
-				if(monster[i] != null){
-					entityList.add(monster[i]);
-				}
-			}
-			entityList.add(player);
 
 			//Sort
 			Collections.sort(entityList, new Comparator<Entity>() {
