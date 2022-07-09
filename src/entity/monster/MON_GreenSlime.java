@@ -17,7 +17,7 @@ public class MON_GreenSlime extends Entity {
         def = 0;
         EXP = 2;
         direction = "down";
-        type = 2;
+        type = type_monster;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;

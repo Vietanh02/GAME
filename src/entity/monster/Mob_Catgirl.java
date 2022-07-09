@@ -14,7 +14,7 @@ public class Mob_Catgirl extends Entity {
         maxLife = 20;
         life = maxLife;
         direction = "down";
-        type = 2;
+        type = type_monster;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;

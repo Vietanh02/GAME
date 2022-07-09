@@ -9,8 +9,8 @@ import main.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.rmi.UnexpectedException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Player extends Entity{
 	public BufferedImage[] stay = new BufferedImage[3];
@@ -24,7 +24,6 @@ public class Player extends Entity{
 	private final BufferedImage[] attackLeft = new BufferedImage[4];
 	private final BufferedImage[] attackRight = new BufferedImage[4];
 
-	Rectangle attackArea = new Rectangle(0,0,0,0);
 	KeyHandler keyH;
 
 	public int hasKey = 0;
@@ -32,6 +31,7 @@ public class Player extends Entity{
 	public final int screenY;
 	public ArrayList<Entity> inventory = new ArrayList<>();
 	public final int maxinventorySize = 48;
+
 
 
 
@@ -50,8 +50,8 @@ public class Player extends Entity{
 		solidArea.height = 32;
 		solidArea.width = 32;
 
-		attackArea.width = 36;
-		attackArea.height = 48;
+//		attackArea.width = 36;
+//		attackArea.height = 48;
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
@@ -70,8 +70,8 @@ public class Player extends Entity{
 		nextLevelExp = 5;
 		currentShield = new OBJ_Shield_Wood(gp);
 		currentWeapon = new OBJ_Sword_Normal(gp);
-		attack = getAttack();
-		defense = getDefense();
+		attack = getDamage();
+		defense = getDef();
 
 	}
 	public void setItems(){
@@ -88,7 +88,10 @@ public class Player extends Entity{
 
 	}
 
-	public int getAttack(){ return attack = damage + currentWeapon.attackValue;}
+	public int getAttack(){
+		attackArea = currentWeapon.attackArea;
+		return attack = damage + currentWeapon.attackValue;
+	}
 	public int getDefense(){ return defense = def + currentShield.defenseValue;}
 
 	public void getPlayerImage() {
@@ -282,43 +285,53 @@ public class Player extends Entity{
 			life = maxLife;
 			str++;
 			dex++;
-//			atk = getatk();
-//			def = getdef();
+			atk = getDamage();
+			def = getDef();
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "Level up! You are level "+level+" now!\n You become stronger";
 		}
 	}
 
+	public void sellectItem(){
+
+		int itemIndex = gp.ui.getItemIndexOnSlot();
+
+		if(itemIndex< inventory.size()){
+
+			Entity selectedItem = inventory.get(itemIndex);
+			if(selectedItem.type == type_sword || selectedItem.type == type_axe){
+				currentWeapon = selectedItem;
+				attack = getAttack();
+			}
+			if (selectedItem.type == type_shield){
+				currentShield = selectedItem;
+				defense = getDefense();
+			}
+			if (selectedItem.type == type_consumnable){
+					selectedItem.use(this);
+					inventory.remove(itemIndex);
+			}
+		}
+
+	}
+
 	public void pickUpObject(int i){
-		if(i!=999){
-			String objName = gp.obj[i].name;
-			switch (objName){
-				case "Key":
-					hasKey++;
-					gp.obj[i] = null;
-//					gp.ui.showMessage("You got a key");
-					break;
-				case "Door":
-					if(hasKey>0){
-						gp.obj[i] = null;
-						hasKey--;
-//						gp.ui.showMessage("You opened the door !");
-					}else{
-//						gp.ui.showMessage("You needed a key!");
-					}
-					break;
-				case "Boots":
-					gp.obj[i] = null;
-					speed+=1;
-//					gp.ui.showMessage("Speed up");
-					break;
-				case "Chest":
-					gp.ui.gameFinished = true;
-					gp.stopMusic();
-					//gp.playSE(4);
-					break;
+		if(i!=999) {
+
+			String text = "";
+			if (inventory.size() != maxinventorySize ){
+				if(gp.obj[i].value == 1) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(2);
+					text = "Got a " + gp.obj[i].name + "!";
+				}
+			}
+		 	else {
+			text = "Inventory is full"+"\n"+"You can't carry any more!!!";
 			}
 
+			gp.ui.addMessage(text);
+			gp.obj[i] = null;
 		}
 	}
 

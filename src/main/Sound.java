@@ -10,6 +10,9 @@ public class Sound {
     public Sound(){
         soundURL[0] = getClass().getResource("/sound/themeSound.wav");
         soundURL[1] = getClass().getResource("/sound/cursor.wav");
+        soundURL[2] = getClass().getResource("/sound/coin.wav");
+        soundURL[3] = getClass().getResource("/sound/powerup.wav");
+
         //them sound danh nhau
     }
     public void setFile(int i){

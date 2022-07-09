@@ -4,9 +4,7 @@ package main;
 import entity.NPC_Fairy;
 import entity.NPC_OldMan;
 import entity.monster.MON_GreenSlime;
-import entity.object.OBJ_Door;
-import entity.object.OBJ_Key;
-import entity.object.OBJ_Teleport;
+import entity.object.*;
 import entity.monster.Mob_Pig;
 import entity.monster.Mob_Catgirl;
 
@@ -17,21 +15,42 @@ public class AssetSetter {
     }
 
     public void setObject(){
-        gp.obj[0] = new OBJ_Key(gp);
-        gp.obj[0].worldX = 20*gp.tileSize;
-        gp.obj[0].worldY = 32*gp.tileSize;
+        int i=0;
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = 20*gp.tileSize;
+        gp.obj[i].worldY = 32*gp.tileSize;
+        i++;
 
-        gp.obj[2] = new OBJ_Key(gp);
-        gp.obj[2].worldX = 28*gp.tileSize;
-        gp.obj[2].worldY = 32*gp.tileSize;
+        gp.obj[i] = new OBJ_Door(gp);
+        gp.obj[i].worldX = 7*gp.tileSize;
+        gp.obj[i].worldY = 7*gp.tileSize;
+        i++;
 
-        gp.obj[1] = new OBJ_Door(gp);
-        gp.obj[1].worldX = 7*gp.tileSize;
-        gp.obj[1].worldY = 7*gp.tileSize;
+        gp.obj[i] = new OBJ_Key(gp);
+        gp.obj[i].worldX = 28*gp.tileSize;
+        gp.obj[i].worldY = 32*gp.tileSize;
+        i++;
 
-        gp.obj[3] = new OBJ_Teleport(gp);
-        gp.obj[3].worldX = 40*gp.tileSize;
-        gp.obj[3].worldY = 36*gp.tileSize;
+        gp.obj[i] = new OBJ_Teleport(gp);
+        gp.obj[i].worldX = 40*gp.tileSize;
+        gp.obj[i].worldY = 36*gp.tileSize;
+        i++;
+
+
+        gp.obj[i] = new OBJ_AXE(gp);
+        gp.obj[i].worldX = 28*gp.tileSize;
+        gp.obj[i].worldY = 28*gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_Blue_Shield(gp);
+        gp.obj[i].worldX = 32*gp.tileSize;
+        gp.obj[i].worldY = 28*gp.tileSize;
+        i++;
+
+        gp.obj[i] = new OBJ_Potion_Red(gp);
+        gp.obj[i].worldX = 32*gp.tileSize;
+        gp.obj[i].worldY = 34*gp.tileSize;
+        i++;
 
     }
     public void setNPC(){

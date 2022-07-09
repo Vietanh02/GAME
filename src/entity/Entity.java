@@ -38,7 +38,7 @@ public abstract class Entity {
 	public int actionLockCounter = 0;
 	public boolean invincible = false;
 	public int invincibleCounter = 0;
-	public int type; //	0 = player, 1 = NPC, 2 = monster
+
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 
@@ -50,6 +50,8 @@ public abstract class Entity {
 
 	// Now, Time's up, Ure is coming
 	// set again after meeting, all the number is not last one
+
+
 	public int level = 1;
 	public int nextLevelExp = 2;
 	protected boolean die = false;
@@ -86,16 +88,27 @@ public abstract class Entity {
 	protected int inte;
 	protected int maxMana = 100;
 	protected int mana = 100;
-
 	protected int EXP;
 	protected int coin = 0;
-
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
-
 	// item attributes
 	public int attackValue;
 	public int defenseValue;
+	//type
+	public int type; //	0 = player, 1 = NPC, 2 = monster
+	public final int type_player = 0;
+	public final int type_NPC = 1;
+	public final int type_monster = 2;
+	public final int type_sword = 3;
+	public final int type_axe = 4;
+	public final int type_shield = 5;
+	public final int type_consumnable = 6;
+
+	public int value = 0;
+	public int itemValue = 1;
+
+	public Rectangle attackArea = new Rectangle();
 	public String description = "";
 	// chưa viết được hàm skill
 
@@ -358,7 +371,7 @@ public abstract class Entity {
 		gp.cChecker.checkEntity(this, gp.NPC);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-		if(this.type == 2 && contactPlayer == true){
+		if(this.type == type_monster && contactPlayer == true){
 			if(gp.player.invincible == false){
 				//	player can give damage
 
@@ -413,5 +426,8 @@ public abstract class Entity {
 			case "right" -> direction = "left";
 			case "stay" -> direction = "stay";
 		}
+	}
+	public void use(Entity entity){
+
 	}
 }
