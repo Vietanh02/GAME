@@ -10,10 +10,10 @@ public class MON_GreenSlime extends Entity {
         super(gp);
         name = "Green Slime";
         speed = 1;
-        maxLife = 4;
+        maxLife = 10;
         life = maxLife;
         direction = "down";
-        
+        type = 2;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;
@@ -24,10 +24,10 @@ public class MON_GreenSlime extends Entity {
     }
     public void getImage(){
 
-        String imageDown1 = new String("/monster/greenslime_down_%d");
-        String imageUp1 = new String("/monster/greenslime_down_%d");
-        String imageLeft1 = new String("/monster/greenslime_down_%d");
-        String imageRight1 = new String("/monster/greenslime_down_%d");
+        String imageDown1 = "/monster/greenslime_down_%d";
+        String imageUp1 = "/monster/greenslime_down_%d";
+        String imageLeft1 = "/monster/greenslime_down_%d";
+        String imageRight1 = "/monster/greenslime_down_%d";
 
         for(int i=0;i<2;i++) {
             up[i]   = setup(String.format(imageUp1,i+1));
@@ -40,6 +40,7 @@ public class MON_GreenSlime extends Entity {
 
         actionLockCounter++;
         if (actionLockCounter == 120) {
+            speed = 1;
             Random random = new Random();
             int i = random.nextInt(100) + 1;//ngau nhien tu 1 toi 100
             if (i <= 25) {
@@ -58,20 +59,12 @@ public class MON_GreenSlime extends Entity {
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
         gp.cChecker.checkPlayer(this);
-        if (collisionOn == false) {
+        if (!collisionOn) {
             switch (direction) {
-                case "up":
-                    worldY -= speed;
-                    break;
-                case "down":
-                    worldY += speed;
-                    break;
-                case "right":
-                    worldX += speed;
-                    break;
-                case "left":
-                    worldX -= speed;
-                    break;
+                case "up" -> worldY -= speed;
+                case "down" -> worldY += speed;
+                case "right" -> worldX += speed;
+                case "left" -> worldX -= speed;
             }
         }
         spriteCounter++;
@@ -88,5 +81,15 @@ public class MON_GreenSlime extends Entity {
                 invicibleCounter = 0;
             }
         }
+    }
+    public void damageReaction(){
+        speed = 4;
+        actionLockCounter = 80;
+        switch (gp.player.direction){
+            case "up" -> direction =  "down";
+            case "down" -> direction =  "up";
+            case "left" -> direction =  "right";
+            case "right" -> direction =  "left";
+        };
     }
 }

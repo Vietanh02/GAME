@@ -212,10 +212,12 @@ public class Player extends Entity{
 	public void damageMonster(int i){
 		if(i!= 999){
 			if(!gp.monster[i].invicible) {
+				//gp.playSE(index);
 				gp.monster[i].life -= 1;
 				gp.monster[i].invicible = true;
+				gp.monster[i].damageReaction();
 				if(gp.monster[i].life == 0){
-					gp.monster[i] = null;
+					gp.monster[i].dying = true;
 				}
 			}
 		} else {
@@ -325,7 +327,8 @@ public class Player extends Entity{
 					gp.NPC[i].speak();
 				}
 			if(i == 999){
-					attacking = true;
+				//gp.playSE(index);
+				attacking = true;
 			}
 		}
 	}

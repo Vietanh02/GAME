@@ -17,7 +17,7 @@ public abstract class Entity {
 	public int worldX, worldY;
 	public int speed;
 	public int solidAreaDefaultX, solidAreaDefaultY;
-
+	public int type;
 	public String direction = "stay";
 	public BufferedImage[] stay = new BufferedImage[3];
 	public BufferedImage[] up = new BufferedImage[3];
@@ -26,12 +26,18 @@ public abstract class Entity {
 	public BufferedImage[] right = new BufferedImage[3];
 	protected boolean invicible = false;
 	protected int invicibleCounter;
+	public boolean alive = true;
+	public boolean dying = false;
+	protected int dyingCounter = 0;
+
+	public boolean hpOn = false;
+	public int hpOnCounter = 0;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public boolean collisionOn = false;
 	public int actionLockCounter = 0;
-	String dialogues[] = new String[20];
+	String[] dialogues = new String[20];
 	int dialogueIndex = 0;
 
 	//CHARATER STATUS
@@ -206,20 +212,72 @@ public abstract class Entity {
 				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
 				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
-			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			if((type == 2 && hpOn)) {
+				double oneScale = (double)gp.tileSize/maxLife;
+				g2.setColor(Color.BLACK);
+				g2.fillRect(screenX-1,screenY-16,gp.tileSize+2,7);
+				g2.setColor(Color.red);
+				g2.fillRect(screenX,screenY-15, (int) (oneScale*life),5);
+				hpOnCounter++;
+				if(hpOnCounter > 600) {
+					hpOn = false;
+					hpOnCounter = 0;
+				}
+			}
+			if(invicible) {
+				hpOn = true;
+				hpOnCounter = 0;
+				changeAlpha(g2,0.4f);
+			}
+			if(dying) dyingAnimation(g2);
 			g2.drawImage(image, screenX, screenY,null);
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
+			changeAlpha(g2,1f);
 
 		}
 		else if (gp.player.screenX > gp.player.worldX ||
 				gp.player.screenY > gp.player.worldY ||
 				rightOffset > gp.WorldWidth - gp.player.worldX ||
 				bottomOffset > gp.WorldHeight - gp.player.worldY){
-			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			if((type == 2 && hpOn)) {
+				double oneScale = (double)gp.tileSize/maxLife;
+				g2.setColor(Color.BLACK);
+				g2.fillRect(screenX-1,screenY-16,gp.tileSize+2,7);
+				g2.setColor(Color.red);
+				g2.fillRect(screenX,screenY-15, (int) (oneScale*life),5);
+				hpOnCounter++;
+
+				if(hpOnCounter > 600) {
+					hpOn = false;
+					hpOnCounter = 0;
+				}
+			}
+			if(invicible) {
+				hpOn = true;
+				hpOnCounter = 0;
+				changeAlpha(g2,0.4f);
+			}
+			if(dying) dyingAnimation(g2);
 			g2.drawImage(image, screenX, screenY,null);
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
+			changeAlpha(g2,1f);
 		}
 	}
+
+	private void dyingAnimation(Graphics2D g2) {
+		dyingCounter++;
+		if(dyingCounter <= 5){changeAlpha(g2,0f);
+		} else if(dyingCounter <= 10) {changeAlpha(g2,1f);
+		} else if(dyingCounter <= 15) {changeAlpha(g2,0f);
+		} else if(dyingCounter <= 20) {changeAlpha(g2,1f);
+		} else if(dyingCounter <= 25) {changeAlpha(g2,0f);
+		} else if(dyingCounter <= 30) {changeAlpha(g2,1f);
+		} else if(dyingCounter <= 35) {changeAlpha(g2,0f);
+		} else if(dyingCounter <= 40) {changeAlpha(g2,1f);
+		} else {dying = false;alive = false;}
+	}
+	public void changeAlpha(Graphics2D g2,float alpha){
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha));
+	}
+
 	public void draw(Graphics2D g2,int width,int height){
 		//g2.setColor(Color.white);
 		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
@@ -280,20 +338,12 @@ public abstract class Entity {
 		gp.cChecker.checkPlayer(this);
 
 		//	IF COLLISION IS FALSE, PLAYER CAN MOVE
-		if (collision = false) {
+		if (!collision) {
 			switch (direction) {
-				case "up":
-					worldY -= speed;
-					break;
-				case "down":
-					worldY += speed;
-					break;
-				case "left":
-					worldX -= speed;
-					break;
-				case "right":
-					worldX += speed;
-					break;
+				case "up" -> worldY -= speed;
+				case "down" -> worldY += speed;
+				case "left" -> worldX -= speed;
+				case "right" -> worldX += speed;
 			}
 		}
 		spriteCounter++;
@@ -310,6 +360,9 @@ public abstract class Entity {
 		}
 	}
 	public void setAction(){
+	}
+	public void damageReaction(){
+
 	}
 	public void speak(){
 		if(dialogues[dialogueIndex] == null) dialogueIndex = 0;

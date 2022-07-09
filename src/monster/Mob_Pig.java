@@ -11,10 +11,10 @@ public class Mob_Pig extends Entity {
         super(gp);
         name = "Pig";
         speed = 1;
-        maxLife = 4;
+        maxLife = 5;
         life = maxLife;
         direction = "down";
-
+        type = 2;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;
@@ -38,6 +38,7 @@ public class Mob_Pig extends Entity {
 
         actionLockCounter++;
         if (actionLockCounter == 120) {
+            speed = 1;
             Random random = new Random();
             int i = random.nextInt(100) + 1;//ngau nhien tu 1 toi 100
             if (i <= 25) {
@@ -78,5 +79,15 @@ public class Mob_Pig extends Entity {
                 invicibleCounter = 0;
             }
         }
+    }
+    public void damageReaction(){
+        actionLockCounter = 0;
+        speed = 5;
+        switch (gp.player.direction){
+            case "up" -> direction =  "up";
+            case "down" -> direction =  "down";
+            case "left" -> direction =  "left";
+            case "right" -> direction =  "right";
+        };
     }
 }

@@ -9,12 +9,12 @@ import java.util.Random;
 public class Mob_Catgirl extends Entity {
     public Mob_Catgirl(GamePanel gp){
         super(gp);
-        name = "Werewolf";
+        name = "Catgirl";
         speed = 1;
-        maxLife = 4;
+        maxLife = 20;
         life = maxLife;
         direction = "down";
-
+        type = 2;
         solidArea.x = 3;
         solidArea.y = 18;
         solidArea.width = 42;
@@ -78,5 +78,14 @@ public class Mob_Catgirl extends Entity {
                 invicibleCounter = 0;
             }
         }
+    }
+    public void damageReaction(){
+        actionLockCounter = 0;
+        switch (gp.player.direction){
+            case "up" -> direction =  "down";
+            case "down" -> direction =  "up";
+            case "left" -> direction =  "right";
+            case "right" -> direction =  "left";
+        };
     }
 }
