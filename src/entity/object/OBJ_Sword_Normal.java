@@ -2,7 +2,6 @@ package entity.object;
 
 import entity.Entity;
 import main.GamePanel;
-import entity.Player;
 
 public class OBJ_Sword_Normal extends Entity {
 
@@ -12,7 +11,10 @@ public class OBJ_Sword_Normal extends Entity {
         value = itemValue;
         type = type_sword;
         name = "Normal Sword";
-        down[0] = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
+        stay[0] = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
+        stay[1] = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
+        stay[2] = setup("/objects/sword_normal", gp.tileSize, gp.tileSize);
+
         attackValue = 10;
         attackArea.width = 32;
         attackArea.height = 32;

@@ -325,17 +325,13 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Life", textX, textY);
         textY += lineHeight;
-        g2.drawString("Strength", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Dexterity", textX, textY);
-        textY += lineHeight;
         g2.drawString("ATK", textX, textY);
         textY += lineHeight;
         g2.drawString("DEF", textX, textY);
         textY += lineHeight;
         g2.drawString("Exp", textX, textY);
         textY += lineHeight;
-        g2.drawString("Next Level", textX, textY);
+        g2.drawString("Next Level Exp", textX, textY);
         textY += lineHeight;
         g2.drawString("Coin", textX, textY);
         textY += lineHeight + 20;
@@ -350,7 +346,7 @@ public class UI {
         textY = frameY + gp.tileSize;
         String value;
 
-        value = String.valueOf(gp.player.level);
+        value = String.valueOf(gp.player.getLevel() );
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
@@ -360,22 +356,12 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = String.valueOf(gp.player.strength);
+        value = String.valueOf(gp.player.getAtk());
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = String.valueOf(gp.player.dexterity);
-        textX = getXforAlignToRightText(value, tailX);
-        g2.drawString(value, textX, textY);
-        textY += lineHeight;
-
-        value = String.valueOf(gp.player.getAttack());
-        textX = getXforAlignToRightText(value, tailX);
-        g2.drawString(value, textX, textY);
-        textY += lineHeight;
-
-        value = String.valueOf(gp.player.getDefense());
+        value = String.valueOf(gp.player.getDef());
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
@@ -395,10 +381,13 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        g2.drawImage(gp.player.currentWeapon.down[0], tailX - gp.tileSize, textY-15, null );
-        textY += lineHeight+20;
-        g2.drawImage(gp.player.currentShield.down[0], tailX - gp.tileSize, textY-15, null );
-
+        if(gp.player.currentWeapon != null){
+            g2.drawImage(gp.player.currentWeapon.stay[0], tailX - gp.tileSize, textY - 15, null);
+        }
+            textY += lineHeight + 20;
+        if(gp.player.currentShield != null){
+            g2.drawImage(gp.player.currentShield.stay[0], tailX - gp.tileSize, textY - 15, null);
+        }
 }
 
     public void drawInventory(){

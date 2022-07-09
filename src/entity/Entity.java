@@ -52,7 +52,7 @@ public abstract class Entity {
 	// set again after meeting, all the number is not last one
 
 
-	public int level = 1;
+	protected int level = 1;
 	public int nextLevelExp = 2;
 	protected boolean die = false;
 	boolean attacking = false;
@@ -73,19 +73,13 @@ public abstract class Entity {
 	protected int health = 100;
 	public int maxLife;
 	public float life;
-	public int strength;
-	public int dexterity;
-	public int attack;
-	public int defense;
 	public Entity currentWeapon;
 	public Entity currentShield;
-
-	protected int def = 10;
-	protected int atk = 10;
-	protected int damage = 50;
-	protected int str;
-	protected int dex;
-	protected int inte;
+	public int damage;
+	protected int normalDef = 10;
+	protected int normalAtk = 10;
+	protected int def;
+	protected int atk;
 	protected int maxMana = 100;
 	protected int mana = 100;
 	protected int EXP;
@@ -121,6 +115,10 @@ public abstract class Entity {
 		this.die = death;
 	}
 
+	public int getLevel() {
+		return level;
+	}
+
 	public int getHealth() {
 		return health;
 	}
@@ -129,9 +127,6 @@ public abstract class Entity {
 		this.health = health;
 	}
 
-	public int getDef() {
-		return def;
-	}
 
 	public int getEXP() {
 		return EXP;
@@ -146,7 +141,6 @@ public abstract class Entity {
 		return maxMana;
 	}
 
-
 	public void setMaxMana(int maxMana) {
 		this.maxMana = maxMana;
 	}
@@ -155,16 +149,32 @@ public abstract class Entity {
 		return mana;
 	}
 
-	public int getDamage() {
-		return damage;
+	public int getAtk() {
+		return atk;
 	}
 
-	public void setDamage(int damage) {
-		this.damage = damage;
+	public void setAtk(int atk) {
+		this.atk = atk;
+	}
+	public int getNormalAtk() {
+		return normalDef;
+	}
+	public void setNormalAtk(int normalAtk){
+		this.normalAtk = normalAtk;
 	}
 
-	public void setDefense(int def) {
+	public int getDef() {
+		return def;
+	}
+	public void setDef(int def) {
 		this.def = def;
+	}
+
+	public int getNormalDef() {
+		return normalDef;
+	}
+	public void setNormalDef(int normalDef){
+		this.normalDef = normalDef;
 	}
 
 	public Entity() {
@@ -172,9 +182,9 @@ public abstract class Entity {
 
 	//	Hàm tính lượng dame nhận
 	public int damageCal(Entity entity) {
-		if (damage - entity.getDef() <= 0)
+		if (atk - entity.getDef() <= 0)
 			return 1;
-		return damage - entity.getDef();
+		return atk - entity.getDef();
 	}
 
 	//	Hàm cập nhật trạng thái tấn công

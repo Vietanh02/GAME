@@ -10,7 +10,9 @@ public class OBJ_Shield_Wood extends Entity {
         value = itemValue;
         type = type_shield;
         name = "Shield Wood";
-        down[0] = setup("/objects/shield_wood", gp.tileSize, gp.tileSize);
+        stay[0] = setup("/objects/shield_wood", gp.tileSize, gp.tileSize);
+        stay[1] = setup("/objects/shield_wood", gp.tileSize, gp.tileSize);
+        stay[2] = setup("/objects/shield_wood", gp.tileSize, gp.tileSize);
         defenseValue = 10;
         description = "[" + name + "]\n" + "Defense value: " + defenseValue;
 

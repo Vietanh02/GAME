@@ -50,8 +50,6 @@ public class Player extends Entity{
 		solidArea.height = 32;
 		solidArea.width = 32;
 
-//		attackArea.width = 36;
-//		attackArea.height = 48;
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
@@ -63,36 +61,27 @@ public class Player extends Entity{
 		worldY = gp.tileSize*40;
 		speed = 4;
 		direction = "up";
+		attackArea.width = 10;
+		attackArea.height = 10;
 		//player status
 		maxLife = 6;
 		life = maxLife;
 		level = 1;
 		nextLevelExp = 5;
-		currentShield = new OBJ_Shield_Wood(gp);
-		currentWeapon = new OBJ_Sword_Normal(gp);
-		attack = getDamage();
-		defense = getDef();
+		atk = getNormalAtk();
+		def = getNormalDef();
 
 	}
 	public void setItems(){
-
-		inventory.add(currentShield);
-		inventory.add(currentWeapon);
-		inventory.add(new OBJ_Key(gp));
-		inventory.add(new OBJ_Key(gp));
-
-
-
-
-
-
 	}
 
 	public int getAttack(){
 		attackArea = currentWeapon.attackArea;
-		return attack = damage + currentWeapon.attackValue;
+		return getNormalAtk()+ currentWeapon.attackValue;
 	}
-	public int getDefense(){ return defense = def + currentShield.defenseValue;}
+	public int getDefense(){
+		return getNormalDef()+currentShield.defenseValue;
+	}
 
 	public void getPlayerImage() {
 			// tải các ảnh vảo mảng
@@ -283,10 +272,10 @@ public class Player extends Entity{
 			nextLevelExp*=2;
 			maxLife+=2;
 			life = maxLife;
-			str++;
-			dex++;
-			atk = getDamage();
-			def = getDef();
+			normalAtk+=10;
+			normalDef+=10;
+			atk = getNormalAtk()+ currentWeapon.attackValue;
+			def = getNormalDef()+currentShield.defenseValue;
 			gp.gameState = gp.dialogueState;
 			gp.ui.currentDialogue = "Level up! You are level "+level+" now!\n You become stronger";
 		}
@@ -301,11 +290,11 @@ public class Player extends Entity{
 			Entity selectedItem = inventory.get(itemIndex);
 			if(selectedItem.type == type_sword || selectedItem.type == type_axe){
 				currentWeapon = selectedItem;
-				attack = getAttack();
+				atk = getAttack();
 			}
 			if (selectedItem.type == type_shield){
 				currentShield = selectedItem;
-				defense = getDefense();
+				def = getDefense();
 			}
 			if (selectedItem.type == type_consumnable){
 					selectedItem.use(this);
