@@ -74,6 +74,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity[] obj = new Entity[10];
 	public Entity[] NPC = new Entity[10];
 	public Entity[] monster = new Entity[20];
+
+	public ArrayList<Entity> projectileList = new ArrayList<>();
 	ArrayList<Entity> entityList = new ArrayList<>();
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
@@ -170,6 +172,12 @@ public class GamePanel extends JPanel implements Runnable{
 					if(!monster[i].alive) monster[i] = null;
 				}
 			}
+			for(int i= 0; i< projectileList.size() ; i++){
+				if(projectileList.get(i) !=null){
+					if(projectileList.get(i).alive) projectileList.get(i).update();
+					if(!projectileList.get(i).alive) projectileList.remove(i);
+				}
+			}
 			tileM.update();
 			if(event < player.hasKey) {
 				//tileM.update("/maps/map01.txt");
@@ -191,19 +199,24 @@ public class GamePanel extends JPanel implements Runnable{
 			//tile
 			tileM.draw(g2);
 			//ADD entities to the List
-			for(int i=0; i< NPC.length; i++){
-				if(NPC[i]!= null){
-					entityList.add(NPC[i]);
+			for (Entity item : NPC) {
+				if (item != null) {
+					entityList.add(item);
 				}
 			}
-			for(int i=0; i<obj.length; i++){
-				if(obj[i]!=null){
-					entityList.add(obj[i]);
+			for (Entity value : obj) {
+				if (value != null) {
+					entityList.add(value);
 				}
 			}
-			for(int i=0; i<monster.length; i++){
-				if(monster[i] != null){
-					entityList.add(monster[i]);
+			for (Entity entity : monster) {
+				if (entity != null) {
+					entityList.add(entity);
+				}
+			}
+			for(int i=0; i<projectileList.size(); i++){
+				if(projectileList.get(i) != null){
+					entityList.add(projectileList.get(i));
 				}
 			}
 			entityList.add(player);
