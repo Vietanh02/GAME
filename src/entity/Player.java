@@ -14,10 +14,10 @@ public class Player extends Entity{
 	private final BufferedImage[] left = new BufferedImage[3];
 	private final BufferedImage[] right = new BufferedImage[3];
 
-	private final BufferedImage[] attackUp = new BufferedImage[3];
-	private final BufferedImage[] attackDown = new BufferedImage[3];
-	private final BufferedImage[] attackLeft = new BufferedImage[3];
-	private final BufferedImage[] attackRight = new BufferedImage[3];
+	private final BufferedImage[] attackUp = new BufferedImage[4];
+	private final BufferedImage[] attackDown = new BufferedImage[4];
+	private final BufferedImage[] attackLeft = new BufferedImage[4];
+	private final BufferedImage[] attackRight = new BufferedImage[4];
 
 	Rectangle attackArea = new Rectangle(0,0,0,0);
 	KeyHandler keyH;
@@ -74,16 +74,18 @@ public class Player extends Entity{
 				right[i] = setup(String.format(imageRight,i+1));
 			}
 	}
+	//Lấy ảnh tấn công
 	public void getPlayerAttackImage(){
-		String imageDown = "/player/boy_down_%d";
-		String imageUp = "/player/boy_up_%d";
-		String imageLeft = "/player/boy_left_%d";
-		String imageRight = "/player/boy_right_%d";
+
+		String atkDown = "/player/attack_down_1";
+		String atkUp = "/player/attack_up_1";
+		String atkLeft = "/player/attack_left_1";
+		String atkRight = "/player/attack_right_1";
 		for(int i=0;i<3;i++) {
-			attackUp[i]   = setup(String.format(imageUp,i+1));
-			attackDown[i] = setup(String.format(imageDown,i+1));
-			attackLeft[i] = setup(String.format(imageLeft,i+1));
-			attackRight[i] = setup(String.format(imageRight,i+1));
+			attackUp[i]   = setup(atkUp);
+			attackDown[i] = setup(atkDown);
+			attackLeft[i] = setup(atkLeft);
+			attackRight[i] = setup(atkRight);
 		}
 	}
 
@@ -169,7 +171,7 @@ public class Player extends Entity{
 			}
 		}
 	}
-
+	//attack
 	private void attacking() {
 		spriteCounter++;
 		if(spriteCounter <= 5){
@@ -255,6 +257,7 @@ public class Player extends Entity{
 	}
 
 	//hàm draw để vẽ hình của nhân vật khi di chuyển hoặc đứng yên
+	//vẽ hình nhận vật tấn công, kích  2x1 ô
 	public void draw(Graphics2D g2) {
 		//g2.setColor(Color.white);
 		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
@@ -305,8 +308,11 @@ public class Player extends Entity{
 		if (bottomOffset > gp.WorldHeight - worldY){
 			y = gp.screenHeight - (gp.WorldHeight -worldY);
 		}
-
-		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
+		//nếu đang tấn công, tỷ lệ ảnh 2 ô 48x48
+		if(attacking){
+			g2.drawImage(image, x, y,gp.tileSize*2,gp.tileSize,null);
+		}
+		else g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
 	}
 
 	public BufferedImage getDownImage(){

@@ -220,6 +220,56 @@ public abstract class Entity {
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 		}
 	}
+	public void draw(Graphics2D g2,int width,int height){
+		//g2.setColor(Color.white);
+		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
+		BufferedImage image = switch (direction) {
+			case "up" -> up[spriteNum - 1];
+			case "down" -> down[spriteNum - 1];
+			case "left" -> left[spriteNum - 1];
+			case "right" -> right[spriteNum - 1];
+			case "stay" -> stay[spriteNum - 1];
+			default -> null;
+		};
+
+		int screenX = worldX - gp.player.worldX + gp.player.screenX;
+		int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+		//
+
+		if (gp.player.screenX > gp.player.worldX){
+			screenX = worldX;
+		}
+		if (gp.player.screenY > gp.player.worldY){
+			screenY = worldY;
+		}
+		int rightOffset = gp.screenWidth -gp.player.screenX;
+		if (rightOffset > gp.WorldWidth - gp.player.worldX){
+			screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+		}
+		int bottomOffset = gp.screenHeight -gp.player.screenY;
+		if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+			screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+		}
+
+		if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
+				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
+				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
+				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
+			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			g2.drawImage(image, screenX, screenY,width,height,null);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
+
+		}
+		else if (gp.player.screenX > gp.player.worldX ||
+				gp.player.screenY > gp.player.worldY ||
+				rightOffset > gp.WorldWidth - gp.player.worldX ||
+				bottomOffset > gp.WorldHeight - gp.player.worldY){
+			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			g2.drawImage(image, screenX, screenY,width,height,null);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
+		}
+	}
 	public void update() {
 		setAction();
 		collision = false;
