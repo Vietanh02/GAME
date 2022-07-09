@@ -279,7 +279,7 @@ public class Player extends Entity{
 			}
 			else{atk = getNormalAtk()+ currentWeapon.attackValue;}
 			if(gp.player.currentShield == null){
-				atk = getNormalDef();
+				def = getNormalDef();
 			}
 			else {def = getNormalDef()+currentShield.defenseValue;}
 			gp.gameState = gp.dialogueState;
