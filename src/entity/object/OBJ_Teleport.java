@@ -11,6 +11,8 @@ public class OBJ_Teleport extends Entity {
         name = "Teleport";
         SpriteSheet sp = new SpriteSheet("objects/SF_Door2.png",48,48);
         stay[0] = sp.spriteArray[4][9].image;
+        stay[1] = stay[0];
+        stay[2] = stay[0];
         collision = false;
     }
 }

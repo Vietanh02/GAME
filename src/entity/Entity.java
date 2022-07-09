@@ -24,6 +24,14 @@ public abstract class Entity {
 	public BufferedImage[] down = new BufferedImage[3];
 	public BufferedImage[] left = new BufferedImage[3];
 	public BufferedImage[] right = new BufferedImage[3];
+	protected boolean invicible = false;
+	protected int invicibleCounter;
+	public boolean alive = true;
+	public boolean dying = false;
+	protected int dyingCounter = 0;
+
+	public boolean hpOn = false;
+	public int hpOnCounter = 0;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
@@ -43,8 +51,10 @@ public abstract class Entity {
 
 	// Now, Time's up, Ure is coming
 	// set again after meeting, all the number is not last one
+	protected int level = 1;
+	protected int nextLevelExp = 2;
 	protected boolean die = false;
-
+	boolean attacking = false;
 	protected int attackSpeed = 1000;
 	protected int attackDelay = 500;
 	protected boolean attackAbility = true;
@@ -63,8 +73,11 @@ public abstract class Entity {
 	public int maxLife;
 	public float life;
 	protected int def = 10;
+	protected int atk = 10;
 	protected int damage = 50;
-
+	protected int str;
+	protected int dex;
+	protected int inte;
 	protected int maxMana = 100;
 	protected int mana = 100;
 
@@ -165,7 +178,8 @@ public abstract class Entity {
 		BufferedImage image = null;
 		try{
 			image = ImageIO.read(getClass().getResourceAsStream(imagePath+".png"));
-			image = uTool.scaleImage(image,gp.tileSize,gp.tileSize);
+			image = uTool.scaleImage(image,image.getWidth()*3,image.getHeight()*3);
+
 		}catch (IOException e){
 			e.printStackTrace();
 		}
@@ -207,15 +221,120 @@ public abstract class Entity {
 				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
 				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
-
-			g2.drawImage(image, screenX, screenY, null);
+			if((type == 2 && hpOn)) {
+				double oneScale = (double)gp.tileSize/maxLife;
+				g2.setColor(Color.BLACK);
+				g2.fillRect(screenX-1,screenY-16,gp.tileSize+2,7);
+				g2.setColor(Color.red);
+				g2.fillRect(screenX,screenY-15, (int) (oneScale*life),5);
+				hpOnCounter++;
+				if(hpOnCounter > 600) {
+					hpOn = false;
+					hpOnCounter = 0;
+				}
+			}
+			if(invicible) {
+				hpOn = true;
+				hpOnCounter = 0;
+				changeAlpha(g2,0.4f);
+			}
+			if(dying) dyingAnimation(g2);
+			g2.drawImage(image, screenX, screenY,null);
+			changeAlpha(g2,1f);
 
 		}
 		else if (gp.player.screenX > gp.player.worldX ||
 				gp.player.screenY > gp.player.worldY ||
 				rightOffset > gp.WorldWidth - gp.player.worldX ||
 				bottomOffset > gp.WorldHeight - gp.player.worldY){
-			g2.drawImage(image, screenX, screenY,gp.tileSize, gp.tileSize, null);
+			if((type == 2 && hpOn)) {
+				double oneScale = (double)gp.tileSize/maxLife;
+				g2.setColor(Color.BLACK);
+				g2.fillRect(screenX-1,screenY-16,gp.tileSize+2,7);
+				g2.setColor(Color.red);
+				g2.fillRect(screenX,screenY-15, (int) (oneScale*life),5);
+				hpOnCounter++;
+
+				if(hpOnCounter > 600) {
+					hpOn = false;
+					hpOnCounter = 0;
+				}
+			}
+			if(invicible) {
+				hpOn = true;
+				hpOnCounter = 0;
+				changeAlpha(g2,0.4f);
+			}
+			if(dying) dyingAnimation(g2);
+			g2.drawImage(image, screenX, screenY,null);
+			changeAlpha(g2,1f);
+		}
+	}
+
+	private void dyingAnimation(Graphics2D g2) {
+		dyingCounter++;
+		if(dyingCounter <= 5){changeAlpha(g2,0f);
+		} else if(dyingCounter <= 10) {changeAlpha(g2,1f);
+		} else if(dyingCounter <= 15) {changeAlpha(g2,0f);
+		} else if(dyingCounter <= 20) {changeAlpha(g2,1f);
+		} else if(dyingCounter <= 25) {changeAlpha(g2,0f);
+		} else if(dyingCounter <= 30) {changeAlpha(g2,1f);
+		} else if(dyingCounter <= 35) {changeAlpha(g2,0f);
+		} else if(dyingCounter <= 40) {changeAlpha(g2,1f);
+		} else {dying = false;alive = false;}
+	}
+	public void changeAlpha(Graphics2D g2,float alpha){
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha));
+	}
+
+	public void draw(Graphics2D g2,int width,int height){
+		//g2.setColor(Color.white);
+		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
+		BufferedImage image = switch (direction) {
+			case "up" -> up[spriteNum - 1];
+			case "down" -> down[spriteNum - 1];
+			case "left" -> left[spriteNum - 1];
+			case "right" -> right[spriteNum - 1];
+			case "stay" -> stay[spriteNum - 1];
+			default -> null;
+		};
+
+		int screenX = worldX - gp.player.worldX + gp.player.screenX;
+		int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+		//
+
+		if (gp.player.screenX > gp.player.worldX){
+			screenX = worldX;
+		}
+		if (gp.player.screenY > gp.player.worldY){
+			screenY = worldY;
+		}
+		int rightOffset = gp.screenWidth -gp.player.screenX;
+		if (rightOffset > gp.WorldWidth - gp.player.worldX){
+			screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+		}
+		int bottomOffset = gp.screenHeight -gp.player.screenY;
+		if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+			screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+		}
+
+		if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
+				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
+				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
+				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
+			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			g2.drawImage(image, screenX, screenY,width,height,null);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
+
+		}
+		else if (gp.player.screenX > gp.player.worldX ||
+				gp.player.screenY > gp.player.worldY ||
+				rightOffset > gp.WorldWidth - gp.player.worldX ||
+				bottomOffset > gp.WorldHeight - gp.player.worldY){
+			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			g2.drawImage(image, screenX, screenY,width,height,null);
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 		}
 	}
 	public void update() {
@@ -237,7 +356,7 @@ public abstract class Entity {
 		}
 
 		//	IF COLLISION IS FALSE, PLAYER CAN MOVE
-		if (collision = false) {
+		if (collision == false) {
 			switch (direction) {
 				case "up":
 					worldY -= speed;
@@ -267,6 +386,9 @@ public abstract class Entity {
 		}
 	}
 	public void setAction(){
+	}
+	public void damageReaction(){
+
 	}
 	public void speak(){
 		if(dialogues[dialogueIndex] == null) dialogueIndex = 0;

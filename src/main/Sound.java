@@ -9,8 +9,7 @@ public class Sound {
     URL[] soundURL = new URL[30];
     public Sound(){
         soundURL[0] =  getClass().getResource("/sound/themeSound.wav");
-
-
+        //them sound danh nhau
     }
     public void setFile(int i){
         try{

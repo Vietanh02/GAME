@@ -1,11 +1,14 @@
 package main;
 
 //import entity.NPC_LittleRed;
+import entity.NPC_Fairy;
 import entity.NPC_OldMan;
-import entity.monster.MON_GreenSlime;
+import monster.MON_GreenSlime;
 import entity.object.OBJ_Door;
 import entity.object.OBJ_Key;
 import entity.object.OBJ_Teleport;
+import monster.Mob_Pig;
+import monster.Mob_Catgirl;
 
 public class AssetSetter {
     GamePanel gp;
@@ -36,7 +39,9 @@ public class AssetSetter {
         gp.NPC[0].worldX = 5*gp.tileSize;
         gp.NPC[0].worldY = 10*gp.tileSize;
 
-
+        gp.NPC[0] = new NPC_Fairy(gp);
+        gp.NPC[0].worldX = 20*gp.tileSize;
+        gp.NPC[0].worldY = 23*gp.tileSize;
     }
     public void setMonster(){
 
@@ -60,9 +65,15 @@ public class AssetSetter {
         gp.monster[4].worldX = 35*gp.tileSize;
         gp.monster[4].worldY = 27*gp.tileSize;
 
-        gp.monster[5] = new MON_GreenSlime(gp);
-        gp.monster[5].worldX = 70*gp.tileSize;
+        gp.monster[5] = new Mob_Catgirl(gp);
+        gp.monster[5].worldX = 31*gp.tileSize;
         gp.monster[5].worldY = 30*gp.tileSize;
+
+        gp.monster[6] = new Mob_Pig(gp);
+        gp.monster[6].worldX = 10*gp.tileSize;
+        gp.monster[6].worldY = 14*gp.tileSize;
+
+
 
     }
 }
