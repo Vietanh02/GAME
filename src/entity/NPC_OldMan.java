@@ -30,11 +30,11 @@ public class NPC_OldMan extends Entity{
         String imageRight = "/npc/oldman_right_%d";
         String imageStay = "/npc/oldman_down_%d";
         for(int i=0;i<2;i++) {
-            stay[i] = setup(String.format(imageStay,i+1));
-            up[i]   = setup(String.format(imageUp,i+1));
-            down[i] = setup(String.format(imageDown,i+1));
-            left[i] = setup(String.format(imageLeft,i+1));
-            right[i] = setup(String.format(imageRight,i+1));
+            stay[i] = setup(String.format(imageStay,i+1), gp.tileSize, gp.tileSize);
+            up[i]   = setup(String.format(imageUp,i+1), gp.tileSize, gp.tileSize);
+            down[i] = setup(String.format(imageDown,i+1), gp.tileSize, gp.tileSize);
+            left[i] = setup(String.format(imageLeft,i+1), gp.tileSize, gp.tileSize);
+            right[i] = setup(String.format(imageRight,i+1), gp.tileSize, gp.tileSize);
         }
     }
     public void setAction() {

@@ -4,7 +4,6 @@ import main.GamePanel;
 import main.UtilityTool;
 
 import javax.imageio.ImageIO;
-import javax.swing.text.Utilities;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -51,8 +50,8 @@ public abstract class Entity {
 
 	// Now, Time's up, Ure is coming
 	// set again after meeting, all the number is not last one
-	protected int level = 1;
-	protected int nextLevelExp = 2;
+	public int level = 1;
+	public int nextLevelExp = 2;
 	protected boolean die = false;
 	boolean attacking = false;
 	protected int attackSpeed = 1000;
@@ -72,6 +71,16 @@ public abstract class Entity {
 	protected int health = 100;
 	public int maxLife;
 	public float life;
+	public int strength;
+	public int dexterity;
+	public int attack;
+	public int defense;
+	public Entity currentWeapon;
+	public Entity currentShield;
+
+	// item attributes
+	public int attackValue;
+	public int defenseValue;
 	protected int def = 10;
 	protected int atk = 10;
 	protected int damage = 50;
@@ -112,6 +121,7 @@ public abstract class Entity {
 	public int getEXP() {
 		return EXP;
 	}
+	public int getCoin() {return coin;}
 
 	public void setEXP(int EXP) {
 		this.EXP = EXP;
@@ -173,7 +183,7 @@ public abstract class Entity {
 		return false;
 	}
 	//GET IMAGE ENTITY (GỌI ẢNH THỰC THỂ)
-	public BufferedImage setup(String imagePath){
+	public BufferedImage setup(String imagePath, int tileSize, int size){
 		UtilityTool uTool = new UtilityTool();
 		BufferedImage image = null;
 		try{
