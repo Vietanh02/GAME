@@ -95,7 +95,7 @@ public class Player extends Entity{
 			gp.cChecker.checkEntity(this, gp.monster);
 			//	CHECK MONSTER COLLISION
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
-
+			contactMonster(monsterIndex);
 			//IF COLLISION IS FALSE PLAYER CAN MOVE
 			if(!collisionOn && !keyH.enterPressed) {
 				if(keyH.upPressed && keyH.leftPressed){
@@ -144,7 +144,17 @@ public class Player extends Entity{
 
 			}
 		}
+
+		//	This needs to be outside of the key if statement
+		if(invincible == true){
+			invincibleCounter ++;
+			if(invincibleCounter > 60){
+				invincible = false;
+				invincibleCounter = 0;
+			}
+		}
 	}
+
 
 	public void pickUpObject(int i){
 		if(i!=999){
@@ -179,6 +189,16 @@ public class Player extends Entity{
 		}
 	}
 
+	public void contactMonster(int i){
+
+		if(i!= 999){
+			if(invincible == false){
+				life -= 1;
+				invincible = true;
+			}
+		}
+	}
+
 	//hàm draw để vẽ hình của nhân vật khi di chuyển hoặc đứng yên
 	public void draw(Graphics2D g2) {
 		//g2.setColor(Color.white);
@@ -210,7 +230,16 @@ public class Player extends Entity{
 			y = gp.screenHeight - (gp.WorldHeight -worldY);
 		}
 
+		if(invincible == true){
+			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
+		}
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
+
+		// reset alpha
+		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
+//		g2.setFont(new Font("Arial", Font.PLAIN, 26));
+//		g2.setColor(Color.white);
+//		g2.drawString("Invicible: "+ invincibleCounter,10,400);
 	}
 
 	public BufferedImage getDownImage(){

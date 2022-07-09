@@ -29,6 +29,9 @@ public abstract class Entity {
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public boolean collisionOn = false;
 	public int actionLockCounter = 0;
+	public boolean invincible = false;
+	public int invincibleCounter = 0;
+	public int type; //	0 = player, 1 = NPC, 2 = monster
 	String dialogues[] = new String[20];
 	int dialogueIndex = 0;
 
@@ -222,7 +225,16 @@ public abstract class Entity {
 		gp.cChecker.checkObject(this, false);
 		gp.cChecker.checkEntity(this, gp.monster);
 		gp.cChecker.checkEntity(this, gp.NPC);
-		gp.cChecker.checkPlayer(this);
+		boolean contactPlayer = gp.cChecker.checkPlayer(this);
+
+		if(this.type == 2 && contactPlayer == true){
+			if(gp.player.invincible == false){
+				//	player can give damage
+
+				gp.player.life -=1;
+				gp.player.invincible = true;
+			}
+		}
 
 		//	IF COLLISION IS FALSE, PLAYER CAN MOVE
 		if (collision = false) {
