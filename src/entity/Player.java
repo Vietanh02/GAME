@@ -1,6 +1,7 @@
 package entity;
 
 
+import entity.object.OBJ_Key;
 import entity.object.OBJ_Shield_Wood;
 import entity.object.OBJ_Sword_Normal;
 import main.GamePanel;
@@ -9,6 +10,7 @@ import main.KeyHandler;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.rmi.UnexpectedException;
+import java.util.ArrayList;
 
 public class Player extends Entity{
 	public BufferedImage[] stay = new BufferedImage[3];
@@ -28,6 +30,10 @@ public class Player extends Entity{
 	public int hasKey = 0;
 	public final int screenX;
 	public final int screenY;
+	public ArrayList<Entity> inventory = new ArrayList<>();
+	public final int maxinventorySize = 48;
+
+
 
 	public Player(GamePanel gp, KeyHandler keyH) {
 		super(gp);
@@ -49,6 +55,7 @@ public class Player extends Entity{
 		setDefaultValues();
 		getPlayerImage();
 		getPlayerAttackImage();
+		setItems();
 	}
 
 	public void setDefaultValues() {
@@ -65,6 +72,19 @@ public class Player extends Entity{
 		currentWeapon = new OBJ_Sword_Normal(gp);
 		attack = getAttack();
 		defense = getDefense();
+
+	}
+	public void setItems(){
+
+		inventory.add(currentShield);
+		inventory.add(currentWeapon);
+		inventory.add(new OBJ_Key(gp));
+		inventory.add(new OBJ_Key(gp));
+
+
+
+
+
 
 	}
 

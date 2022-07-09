@@ -78,9 +78,6 @@ public abstract class Entity {
 	public Entity currentWeapon;
 	public Entity currentShield;
 
-	// item attributes
-	public int attackValue;
-	public int defenseValue;
 	protected int def = 10;
 	protected int atk = 10;
 	protected int damage = 50;
@@ -95,6 +92,11 @@ public abstract class Entity {
 
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
+
+	// item attributes
+	public int attackValue;
+	public int defenseValue;
+	public String description = "";
 	// chưa viết được hàm skill
 
 	// get,set

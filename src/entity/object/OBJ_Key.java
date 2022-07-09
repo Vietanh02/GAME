@@ -11,5 +11,6 @@ public class OBJ_Key extends Entity {
         stay[1] = setup("/objects/Key0", gp.tileSize, gp.tileSize);
         stay[2] = setup("/objects/Key0", gp.tileSize, gp.tileSize);
         collision = true;
+        description = "[" + name + "]\n" + "It uses to open the door !";
     }
 }

@@ -8,12 +8,13 @@ public class Sound {
     Clip clip;
     URL[] soundURL = new URL[30];
     public Sound(){
-        soundURL[0] =  getClass().getResource("/sound/themeSound.wav");
+        soundURL[0] = getClass().getResource("/sound/themeSound.wav");
+        soundURL[1] = getClass().getResource("/sound/cursor.wav");
         //them sound danh nhau
     }
     public void setFile(int i){
         try{
-            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[0]);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(soundURL[i]);
             clip = AudioSystem.getClip();
             clip.open(ais);
         } catch (Exception e) {
