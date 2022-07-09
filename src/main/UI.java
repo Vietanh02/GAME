@@ -141,7 +141,10 @@ public class UI {
             //options State
             if (gp.gameState == gp.optionsState){
                 drawOptionsScreen();
-
+            }
+            //game over State
+            if (gp.gameState == gp.gameOverState){
+                drawGameOverScreen();
             }
 
         }
@@ -464,6 +467,43 @@ public class UI {
                 g2.drawString(line, textX, textY);
                 textY += 32;
             }
+        }
+
+    }
+    public void drawGameOverScreen(){
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        int x;
+        int y;
+        String text;
+        g2.setFont(g2.getFont().deriveFont(Font.BOLD, 110f));
+
+        //shadow
+        text = "Game Over";
+        g2.setColor(Color.BLACK);
+        x = gp.tileSize + getXforCenteredText(text);
+        y = 4 * gp.tileSize;
+        g2.drawString(text, x, y);
+        //main
+        g2.setColor(Color.white);
+        g2.drawString(text, x-5, y-5);
+        //retry
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "Retry";
+        x = gp.tileSize + getXforCenteredText(text);
+        y += 7 * gp.tileSize;
+        if(commandNum == 0) {
+            g2.drawString(">", x - 40, y);
+        }
+
+        g2.drawString(text, x, y);
+        // Quit
+        text = "Quit";
+        y += gp.tileSize + 15;
+        g2.drawString(text, x, y);
+        if(commandNum == 1) {
+            g2.drawString(">", x - 40, y);
         }
 
     }

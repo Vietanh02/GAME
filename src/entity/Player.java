@@ -194,6 +194,10 @@ public class Player extends Entity{
 				spriteCounter = 0;
 
 			}
+			if (life <=0) {
+				gp.gameState = gp.gameOverState;
+				gp.gameState = gp.gameOverState;
+			}
 		}
 
 		//	This needs to be outside of the key if statement
