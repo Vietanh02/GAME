@@ -58,8 +58,8 @@ public class AssetSetter {
         gp.NPC[0].worldY = 10*gp.tileSize;
 
         gp.NPC[0] = new NPC_Fairy(gp);
-        gp.NPC[0].worldX = 20*gp.tileSize;
-        gp.NPC[0].worldY = 23*gp.tileSize;
+        gp.NPC[0].worldX = 31*gp.tileSize;
+        gp.NPC[0].worldY = 20*gp.tileSize;
     }
     public void setMonster(){
 

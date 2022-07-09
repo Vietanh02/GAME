@@ -1,9 +1,7 @@
 package main;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -23,10 +21,17 @@ public class GamePanel extends JPanel implements Runnable{
 	final int originalTileSize = 16; //16x16 pixel
 	final int scale = 3;
 	public final int tileSize = originalTileSize*scale;//48x48 title
-	public final int maxScreenCol = 20;
-	public final int maxScreenRow = 12;
-	public final int screenWidth = tileSize*maxScreenCol; //768 pixel
+	public final int maxScreenCol = 24;
+	public final int maxScreenRow = 14;
+	public final int screenWidth = tileSize*maxScreenCol; // 960 pixel
 	public final int screenHeight =  tileSize*maxScreenRow; // 576 // pixel
+
+	// FOR FULL SCREEN
+	int screenWidth2 = screenWidth;
+	int screenHeight2 = screenHeight;
+	BufferedImage tempScreen;
+	Graphics2D g2;
+
 
 	//WORLD SETTING 
 	public final int maxWorldCol = 200;
@@ -84,6 +89,22 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setObject();
 		aSetter.setMonster();
 		playMusic(0);
+
+		//ADD FULL SCREEN IN SET UP
+		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
+		g2 = (Graphics2D)tempScreen.getGraphics();
+		setFullScreen();
+	}
+	public void setFullScreen(){
+
+		//GET LOCAL SCREEN DEVICE
+		GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+		GraphicsDevice gd = ge.getDefaultScreenDevice();
+		gd.setFullScreenWindow(Main.window);
+
+		//GET FULLSCREEN HEIGHT AND WIDTH
+		screenWidth2 = Main.window.getWidth();
+		screenHeight2 = Main.window.getHeight();
 	}
 	public void startGameThread() {
 		gameThread = new Thread(this);
@@ -110,7 +131,9 @@ public class GamePanel extends JPanel implements Runnable{
 				//1 UPDATE: update information
 				update();
 				//2 DRAW: draw the screen
-				repaint();
+//			repaint();
+				drawToTempScreen();	// draw everything to the buf image
+				drawToScreen();	//	draw buf image to the screen
 				delta--;
 				drawCount++;
 			}
@@ -158,9 +181,9 @@ public class GamePanel extends JPanel implements Runnable{
 
 		}
 	}
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2 = (Graphics2D)g;
+
+	public void drawToTempScreen(){
+
 		//title screen
 		if(gameState == titleState){
 			ui.draw(g2);
@@ -205,7 +228,63 @@ public class GamePanel extends JPanel implements Runnable{
 			//UI
 			ui.draw(g2);
 		}
-		g2.dispose();
+	}
+//	public void paintComponent(Graphics g) {
+//		super.paintComponent(g);
+//		Graphics2D g2 = (Graphics2D)g;
+//		//title screen
+//		if(gameState == titleState){
+//			ui.draw(g2);
+//		}else{
+//			//tile
+//			tileM.draw(g2);
+//			//ADD entities to the List
+//			for(int i=0; i< NPC.length; i++){
+//				if(NPC[i]!= null){
+//					entityList.add(NPC[i]);
+//				}
+//			}
+//			for(int i=0; i<obj.length; i++){
+//				if(obj[i]!=null){
+//					entityList.add(obj[i]);
+//				}
+//			}
+//			for(int i=0; i<monster.length; i++){
+//				if(monster[i] != null){
+//					entityList.add(monster[i]);
+//				}
+//			}
+//			entityList.add(player);
+//
+//			//Sort
+//			Collections.sort(entityList, new Comparator<Entity>() {
+//				@Override
+//				public int compare(Entity e1, Entity e2) {
+//					int result = Integer.compare(e1.worldY,e2.worldY);
+//					return result;
+//				}
+//			});
+//			//Draw Entities
+//			for(int i = 0; i <entityList.size(); i++){
+//				entityList.get(i).draw(g2);
+//			}
+//			tileM.draw2(g2);
+//			// Empty Entity List
+//			entityList.clear();
+//			//layer2
+//
+//			//UI
+//			ui.draw(g2);
+//		}
+//		g2.dispose();
+//	}
+
+
+	// vẽ Màn hình mới
+	public void drawToScreen(){
+		Graphics g = getGraphics();
+		g.drawImage(tempScreen, 0, 0, screenWidth2, screenHeight2, null);
+		g.dispose();
 	}
 
 	public void playMusic(int i){

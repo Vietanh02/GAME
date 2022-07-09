@@ -392,9 +392,9 @@ public class UI {
 
     public void drawInventory(){
         int frameWidth = gp.tileSize * 9;
-        int frameHeight = gp.tileSize * 7;
+        int frameHeight = gp.tileSize *7 ;
         int frameX = gp.screenWidth - frameWidth - gp.tileSize;
-        int frameY = gp.tileSize;
+        int frameY =gp.tileSize;
 
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
