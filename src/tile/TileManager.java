@@ -53,6 +53,8 @@ public class TileManager {
 		setupTilesC("tiles/Outside_C.png");
 		setupTileA4("tiles/Outside_A4.png");
 		setupTileA5("tiles/Outside_A5.png");
+		setupTileWA1("tiles/World_A1.png");
+		setupTileWA2("tiles/World_A2.png");
 		mapType = "Outside";
 	}
 
@@ -118,7 +120,7 @@ public class TileManager {
 					worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 					worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
 				//vẽ nền
-				g2.drawImage(tile[layer0Num].image, screenX, screenY, gp.tileSize,gp.tileSize, null);
+				g2.drawImage(tile[layer0Num].image, screenX, screenY, 48,48, null);
 				//vẽ lớp thứ 2
 				//	g2.drawImage(tile[layer1Num].image, screenX, screenY,  gp.tileSize,gp.tileSize, null);
 
@@ -128,7 +130,7 @@ public class TileManager {
 					rightOffset > gp.WorldWidth - gp.player.worldX ||
 					bottomOffset > gp.WorldHeight - gp.player.worldY) {
 				//vẽ nền
-				g2.drawImage(tile[layer0Num].image, screenX, screenY, gp.tileSize,gp.tileSize, null);
+				g2.drawImage(tile[layer0Num].image, screenX, screenY, 48,48, null);
 
 				//vẽ lớp thứ 2
 				//	g2.drawImage(tile[layer1Num].image, screenX, screenY,  gp.tileSize,gp.tileSize, null);
@@ -178,7 +180,7 @@ public class TileManager {
 					worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 					worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
 				//vẽ nền
-				g2.drawImage(tile[layer2Num].image, screenX, screenY, gp.tileSize,gp.tileSize, null);
+				g2.drawImage(tile[layer2Num].image, screenX, screenY, 48,48, null);
 
 //				g2.drawImage(tile[layer3Num].image, screenX, screenY, gp.tileSize,gp.tileSize, null);
 			}
@@ -187,7 +189,7 @@ public class TileManager {
 					rightOffset > gp.WorldWidth - gp.player.worldX ||
 					bottomOffset > gp.WorldHeight - gp.player.worldY){
 				//vẽ nền
-				g2.drawImage(tile[layer2Num].image, screenX, screenY, gp.tileSize,gp.tileSize, null);
+				g2.drawImage(tile[layer2Num].image, screenX, screenY, 48,48, null);
 
 
 //				g2.drawImage(tile[layer3Num].image, screenX, screenY, gp.tileSize,gp.tileSize, null);
@@ -310,47 +312,73 @@ public class TileManager {
 			for(int j = 0; j < 32; j++){
 				tile[index] = new Tile();
 				tile[index].image = ss.spriteArray[i][j].image;
+
 				index++;
 			}
 		}
 	}
-
+	public void setupTileWA1(String file){
+		SpriteSheet ss = new SpriteSheet(file);
+		int index = 1537;
+		for(int i = 0; i < 24; i++){
+			for(int j = 0; j < 32; j++){
+				tile[index] = new Tile();
+				tile[index].image = ss.spriteArray[i][j].image;
+				tile[index].collision = true;
+				index++;
+			}
+		}
+	}
+	public void setupTileWA2(String file){
+		SpriteSheet ss = new SpriteSheet(file);
+		int index = 2305;
+		for(int i = 0; i < 24; i++){
+			for(int j = 0; j < 32; j++){
+				tile[index] = new Tile();
+				tile[index].image = ss.spriteArray[i][j].image;
+				index++;
+			}
+		}
+	}
 	public void setupTilesA3(String file){
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 2561;
+		int index = 6593;
 		for(int i = 0; i < 16; i++){
 			for(int j = 0; j < 32; j++){
 				tile[index] = new Tile();
 				tile[index].image = ss.spriteArray[i][j].image;
+				tile[index].collision = true;
 				index++;
 			}
 		}
 	}
 	public void setupTileA4(String file){
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 4097;
+		int index = 4609;
 		for(int i = 0; i < 30; i++){
 			for(int j = 0; j < 32; j++){
 				tile[index] = new Tile();
 				tile[index].image = ss.spriteArray[i][j].image;
+				tile[index].collision = true;
 				index++;
 			}
 		}
 	}
 	public void setupTileA5(String file){
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 5057;
+		int index = 3073;
 		for(int i = 0; i < 32; i++){
 			for(int j = 0; j < 16; j++){
 				tile[index] = new Tile();
 				tile[index].image = ss.spriteArray[i][j].image;
+				tile[index].collision = true;
 				index++;
 			}
 		}
 	}
 	public void setupTilesB(String file) {
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 1537;
+		int index = 3585;
 		for(int i = 0; i < 32; i++){
 			for(int j = 0; j < 32; j++){
 				tile[index] = new Tile();
@@ -361,7 +389,7 @@ public class TileManager {
 	}
 	public void setupTilesC(String file){
 		SpriteSheet ss = new SpriteSheet(file);
-		int index = 3073;
+		int index = 5569;
 		for(int i = 0; i < 32; i++){
 			for(int j = 0; j < 32; j++){
 				tile[index] = new Tile();
