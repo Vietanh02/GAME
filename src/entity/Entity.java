@@ -48,6 +48,8 @@ public abstract class Entity {
 
 	// Now, Time's up, Ure is coming
 	// set again after meeting, all the number is not last one
+	protected int level = 1;
+	protected int nextLevelExp = 2;
 	protected boolean die = false;
 	boolean attacking = false;
 	protected int attackSpeed = 1000;
@@ -68,8 +70,11 @@ public abstract class Entity {
 	public int maxLife;
 	public float life;
 	protected int def = 10;
+	protected int atk = 10;
 	protected int damage = 50;
-
+	protected int str;
+	protected int dex;
+	protected int inte;
 	protected int maxMana = 100;
 	protected int mana = 100;
 

@@ -6,6 +6,7 @@ import main.KeyHandler;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.rmi.UnexpectedException;
 
 public class Player extends Entity{
 	public BufferedImage[] stay = new BufferedImage[3];
@@ -213,15 +214,37 @@ public class Player extends Entity{
 		if(i!= 999){
 			if(!gp.monster[i].invicible) {
 				//gp.playSE(index);
-				gp.monster[i].life -= 1;
+
+				damage = atk - gp.monster[i].def;
+				if(damage <= 0) damage = 0;
+				gp.monster[i].life -= damage;
+				gp.ui.addMessage(damage+" damage!");
 				gp.monster[i].invicible = true;
 				gp.monster[i].damageReaction();
+
 				if(gp.monster[i].life == 0){
 					gp.monster[i].dying = true;
+					gp.ui.addMessage("Killed the "+gp.monster[i].name+"!");
+					gp.ui.addMessage("Gained "+gp.monster[i].EXP+" exp!");
+					EXP += gp.monster[i].EXP;
+					checkLevelUp(EXP);
 				}
 			}
-		} else {
-			System.out.println("Miss!");
+		}
+	}
+
+	private void checkLevelUp(int exp) {
+		if(exp >= nextLevelExp){
+			level++;
+			nextLevelExp*=2;
+			maxLife+=2;
+			life = maxLife;
+			str++;
+			dex++;
+//			atk = getatk();
+//			def = getdef();
+			gp.gameState = gp.dialogueState;
+			gp.ui.currentDialogue = "Level up! You are level "+level+" now!\n You become stronger";
 		}
 	}
 
@@ -232,21 +255,21 @@ public class Player extends Entity{
 				case "Key":
 					hasKey++;
 					gp.obj[i] = null;
-					gp.ui.showMessage("You got a key");
+//					gp.ui.showMessage("You got a key");
 					break;
 				case "Door":
 					if(hasKey>0){
 						gp.obj[i] = null;
 						hasKey--;
-						gp.ui.showMessage("You opened the door !");
+//						gp.ui.showMessage("You opened the door !");
 					}else{
-						gp.ui.showMessage("You needed a key!");
+//						gp.ui.showMessage("You needed a key!");
 					}
 					break;
 				case "Boots":
 					gp.obj[i] = null;
 					speed+=1;
-					gp.ui.showMessage("Speed up");
+//					gp.ui.showMessage("Speed up");
 					break;
 				case "Chest":
 					gp.ui.gameFinished = true;
