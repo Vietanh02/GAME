@@ -31,6 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
 	int screenHeight2 = screenHeight;
 	BufferedImage tempScreen;
 	Graphics2D g2;
+	public boolean fullScreen = false;
 
 
 	//WORLD SETTING 
@@ -45,12 +46,15 @@ public class GamePanel extends JPanel implements Runnable{
 	int FPS = 60;
 	long  timer = 0;
 	//SYSTEM
+
+	//Sound
+	public Sound music = new Sound();
+	public Sound se = new Sound();
 	// bản đồ và cỏ, tường nước ( tile
 	TileManager tileM = new TileManager(this);
 
 	// keyHandle -- các nút điều khiển
 	public KeyHandler keyH = new KeyHandler(this);
-	Sound sound = new Sound();
 	//UI
 	public UI ui = new UI(this);
 
@@ -93,7 +97,7 @@ public class GamePanel extends JPanel implements Runnable{
 		//ADD FULL SCREEN IN SET UP
 		tempScreen = new BufferedImage(screenWidth, screenHeight, BufferedImage.TYPE_INT_ARGB);
 		g2 = (Graphics2D)tempScreen.getGraphics();
-		setFullScreen();
+		//setFullScreen();
 	}
 	public void setFullScreen(){
 
@@ -175,9 +179,6 @@ public class GamePanel extends JPanel implements Runnable{
 				//tileM.update("/maps/map01.txt");
 				event = player.hasKey;
 			}
-
-		}
-		if(gameState == pauseState) {
 
 		}
 	}
@@ -288,16 +289,16 @@ public class GamePanel extends JPanel implements Runnable{
 	}
 
 	public void playMusic(int i){
-		sound.setFile(i);
-		sound.play();
-		sound.loop();
+		music.setFile(i);
+		music.play();
+		music.loop();
 	}
 
 	public void stopMusic(){
-		sound.stop();
+		music.stop();
 	}
 	public void playSE(int i){
-		sound.setFile(i);
-		sound.play();
+		se.setFile(i);
+		se.play();
 	}
 }

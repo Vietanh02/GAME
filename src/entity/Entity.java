@@ -52,8 +52,8 @@ public abstract class Entity {
 	// set again after meeting, all the number is not last one
 
 
-	protected int level = 1;
-	public int nextLevelExp = 2;
+	protected int level;
+	protected int nextLevelExp;
 	protected boolean die = false;
 	boolean attacking = false;
 	protected int attackSpeed = 1000;
@@ -175,6 +175,10 @@ public abstract class Entity {
 	}
 	public void setNormalDef(int normalDef){
 		this.normalDef = normalDef;
+	}
+
+	public int getNextLevelExp(){
+		return nextLevelExp;
 	}
 
 	public Entity() {

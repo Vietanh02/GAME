@@ -9,7 +9,7 @@ public class EventHandler {
     int previousEventX, previousEventY;
     boolean canTouchEvent = true;
 //
- 
+
     public EventHandler(GamePanel gp) {
         this.gp = gp;
 
@@ -19,10 +19,10 @@ public class EventHandler {
         int row = 0;
         while (col < gp.maxWorldCol && row < gp.maxWorldRow) {
             eventRect[col][row] = new EventRect();
-            eventRect[col][row].x = 23;
-            eventRect[col][row].y = 23;
-            eventRect[col][row].width = 2;
-            eventRect[col][row].height = 2;
+            eventRect[col][row].x = 25;
+            eventRect[col][row].y = 25;
+            eventRect[col][row].width = gp.tileSize/2;
+            eventRect[col][row].height = gp.tileSize/2;
             eventRect[col][row].eventRectDefaultX = eventRect[col][row].x;
             eventRect[col][row].eventRectDefaultY = eventRect[col][row].y;
 
