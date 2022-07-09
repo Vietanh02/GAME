@@ -3,12 +3,12 @@ package main;
 //import entity.NPC_LittleRed;
 import entity.NPC_Fairy;
 import entity.NPC_OldMan;
-import monster.MON_GreenSlime;
+import entity.monster.MON_GreenSlime;
 import entity.object.OBJ_Door;
 import entity.object.OBJ_Key;
 import entity.object.OBJ_Teleport;
-import monster.Mob_Pig;
-import monster.Mob_Catgirl;
+import entity.monster.Mob_Pig;
+import entity.monster.Mob_Catgirl;
 
 public class AssetSetter {
     GamePanel gp;

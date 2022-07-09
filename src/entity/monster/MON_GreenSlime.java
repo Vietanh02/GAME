@@ -1,4 +1,4 @@
-package monster;
+package entity.monster;
 
 import entity.Entity;
 import main.GamePanel;
@@ -62,7 +62,16 @@ public class MON_GreenSlime extends Entity {
         collisionOn = false;
         gp.cChecker.checkTile(this);
         gp.cChecker.checkObject(this, false);
-        gp.cChecker.checkPlayer(this);
+        boolean contactPlayer = gp.cChecker.checkPlayer(this);
+
+        if(this.type == 2 && contactPlayer == true){
+            if(gp.player.invincible == false){
+                //	player can give damage
+
+                gp.player.life -=1;
+                gp.player.invincible = true;
+            }
+        }
         if (!collisionOn) {
             switch (direction) {
                 case "up" -> worldY -= speed;
