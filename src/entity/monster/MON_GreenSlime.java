@@ -34,10 +34,10 @@ public class MON_GreenSlime extends Entity {
         String imageRight1 = "/monster/greenslime_down_%d";
 
         for(int i=0;i<2;i++) {
-            up[i]   = setup(String.format(imageUp1,i+1));
-            down[i] = setup(String.format(imageDown1,i+1));
-            left[i] = setup(String.format(imageLeft1,i+1));
-            right[i] = setup(String.format(imageRight1,i+1));
+            up[i]   = setup(String.format(imageUp1,i+1),gp.tileSize, gp.tileSize);
+            down[i] = setup(String.format(imageDown1,i+1), gp.tileSize, gp.tileSize );
+            left[i] = setup(String.format(imageLeft1,i+1),gp.tileSize, gp.tileSize);
+            right[i] = setup(String.format(imageRight1,i+1),gp.tileSize, gp.tileSize);
         }
     }
     public void setAction(){

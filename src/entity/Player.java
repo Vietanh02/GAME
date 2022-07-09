@@ -1,6 +1,8 @@
 package entity;
 
 
+import entity.object.OBJ_Shield_Wood;
+import entity.object.OBJ_Sword_Normal;
 import main.GamePanel;
 import main.KeyHandler;
 
@@ -57,7 +59,17 @@ public class Player extends Entity{
 		//player status
 		maxLife = 6;
 		life = maxLife;
+		level = 1;
+		nextLevelExp = 5;
+		currentShield = new OBJ_Shield_Wood(gp);
+		currentWeapon = new OBJ_Sword_Normal(gp);
+		attack = getAttack();
+		defense = getDefense();
+
 	}
+
+	public int getAttack(){ return attack = damage + currentWeapon.attackValue;}
+	public int getDefense(){ return defense = def + currentShield.defenseValue;}
 
 	public void getPlayerImage() {
 			// tải các ảnh vảo mảng
@@ -68,11 +80,11 @@ public class Player extends Entity{
 			String imageRight = "/player/boy_right_%d";
 			String imageStay = "/player/boy_down_%d";
 			for(int i=0;i<3;i++) {
-				stay[i] = setup(String.format(imageStay,i+1));
-				up[i]   = setup(String.format(imageUp,i+1));
-				down[i] = setup(String.format(imageDown,i+1));
-				left[i] = setup(String.format(imageLeft,i+1));
-				right[i] = setup(String.format(imageRight,i+1));
+				stay[i] = setup(String.format(imageStay,i+1), gp.tileSize, gp.tileSize);
+				up[i]   = setup(String.format(imageUp,i+1), gp.tileSize, gp.tileSize);
+				down[i] = setup(String.format(imageDown,i+1), gp.tileSize, gp.tileSize);
+				left[i] = setup(String.format(imageLeft,i+1), gp.tileSize, gp.tileSize);
+				right[i] = setup(String.format(imageRight,i+1), gp.tileSize, gp.tileSize);
 			}
 	}
 	//Lấy ảnh tấn công
@@ -83,10 +95,10 @@ public class Player extends Entity{
 		String atkLeft = "/player/attack_left_1";
 		String atkRight = "/player/attack_right_1";
 		for(int i=0;i<3;i++) {
-			attackUp[i]   = setup(atkUp);
-			attackDown[i] = setup(atkDown);
-			attackLeft[i] = setup(atkLeft);
-			attackRight[i] = setup(atkRight);
+			attackUp[i]   = setup(atkUp, gp.tileSize, gp.tileSize);
+			attackDown[i] = setup(atkDown, gp.tileSize, gp.tileSize);
+			attackLeft[i] = setup(atkLeft, gp.tileSize, gp.tileSize);
+			attackRight[i] = setup(atkRight, gp.tileSize, gp.tileSize);
 		}
 	}
 
