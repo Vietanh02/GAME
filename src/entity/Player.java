@@ -226,12 +226,6 @@ public class Player extends Entity{
 		if(shotCounter < 50){
 			shotCounter++;
 		}
-
-		if(	life > maxLife) life = maxLife;
-		if(life < 0) life = 0;
-		if( mana > maxMana) mana = maxMana;
-		if(mana < 0) mana = 0;
-
 	}
 	//attack
 	private void attacking() {
@@ -283,7 +277,7 @@ public class Player extends Entity{
 				gp.monster[i].invicible = true;
 				gp.monster[i].damageReaction();
 
-				if(gp.monster[i].life <= 0){
+				if(gp.monster[i].life == 0){
 					gp.monster[i].dying = true;
 					gp.ui.addMessage("Killed the "+gp.monster[i].name+"!");
 					gp.ui.addMessage("Gained "+gp.monster[i].EXP+" exp!");
@@ -340,26 +334,21 @@ public class Player extends Entity{
 
 	public void pickUpObject(int i){
 		if(i!=999) {
-			if(gp.obj[i].type == type_pickupOnly){
-				gp.obj[i].use(this);
-				gp.obj[i] = null;
-			}
-			else {
-				String text = "";
 
-				if (inventory.size() != maxinventorySize) {
-					if (gp.obj[i].value == 1) {
-						inventory.add(gp.obj[i]);
-						gp.playSE(2);
-						text = "Got a " + gp.obj[i].name + "!";
-					}
-				} else {
-					text = "Inventory is full" + "\n" + "You can't carry any more!!!";
+			String text = "";
+			if (inventory.size() != maxinventorySize ){
+				if(gp.obj[i].value == 1) {
+					inventory.add(gp.obj[i]);
+					gp.playSE(2);
+					text = "Got a " + gp.obj[i].name + "!";
 				}
-
-				gp.ui.addMessage(text);
-				gp.obj[i] = null;
 			}
+		 	else {
+			text = "Inventory is full"+"\n"+"You can't carry any more!!!";
+			}
+
+			gp.ui.addMessage(text);
+			gp.obj[i] = null;
 		}
 	}
 
