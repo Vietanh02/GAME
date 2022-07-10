@@ -8,6 +8,7 @@ import java.util.Comparator;
 
 import javax.swing.JPanel;
 
+import Ai.PathFinder;
 import entity.Entity;
 import entity.InteractiveTile.InteractiveTile;
 import entity.Player;
@@ -52,13 +53,14 @@ public class GamePanel extends JPanel implements Runnable{
 	public Sound music = new Sound();
 	public Sound se = new Sound();
 	// bản đồ và cỏ, tường nước ( tile
-	TileManager tileM = new TileManager(this);
+	public TileManager tileM = new TileManager(this);
 
 	// keyHandle -- các nút điều khiển
 	public KeyHandler keyH = new KeyHandler(this);
 	//UI
 	public UI ui = new UI(this);
 
+	public PathFinder pathFinder = new PathFinder(this);
 
 	Thread gameThread;
 

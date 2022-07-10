@@ -38,20 +38,27 @@ public class NPC_OldMan extends Entity{
         }
     }
     public void setAction() {
-        actionLockCounter++;
-        if (actionLockCounter == 200) {
-            Random random = new Random();
-            int i = random.nextInt(100) + 1;//ngau nhien tu 1 toi 100
-            if (i <= 25) {
-                direction = "up";
-            } else if (i <= 50) {
-                direction = "down";
-            } else if (i <= 75) {
-                direction = "left";
-            } else {
-                direction = "right";
+        if(onPath){
+            int goalCol = 29;
+            int goalRow = 50;
+            searchPath(goalCol,goalRow);
+        } else {
+            actionLockCounter++;
+            if (actionLockCounter == 200) {
+                Random random = new Random();
+                int i = random.nextInt(100) + 1;//ngau nhien tu 1 toi 100
+                if (i <= 25) {
+                    direction = "up";
+                } else if (i <= 50) {
+                    direction = "down";
+                } else if (i <= 75) {
+                    direction = "left";
+                } else {
+                    direction = "right";
+                }
             }
         }
+
     }
     public void update() {
         setAction();
@@ -76,5 +83,6 @@ public class NPC_OldMan extends Entity{
     }
     public void speak(){
         super.speak();
+        onPath = true;
     }
 }

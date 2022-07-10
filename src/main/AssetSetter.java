@@ -18,8 +18,8 @@ public class AssetSetter {
 
     public void setObject(){
         gp.obj[0] = new OBJ_Key(gp);
-        gp.obj[0].worldX = 38*gp.tileSize;
-        gp.obj[0].worldY = 52*gp.tileSize;
+        gp.obj[0].worldX = 29*gp.tileSize;
+        gp.obj[0].worldY = 50*gp.tileSize;
 
         gp.obj[2] = new OBJ_Key(gp);
         gp.obj[2].worldX = 42*gp.tileSize;
@@ -72,8 +72,8 @@ public class AssetSetter {
     }
     public void setNPC(){
         gp.NPC[0] = new NPC_OldMan(gp);
-        gp.NPC[0].worldX = 5*gp.tileSize;
-        gp.NPC[0].worldY = 10*gp.tileSize;
+        gp.NPC[0].worldX = 30*gp.tileSize;
+        gp.NPC[0].worldY = 42*gp.tileSize;
 
         gp.NPC[1] = new NPC_Fairy(gp);
         gp.NPC[1].worldX = 31*gp.tileSize;
