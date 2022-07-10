@@ -159,7 +159,7 @@ public class AssetSetter {
 
         gp.monster[12] = new Boss_DarkLord(gp);
         gp.monster[12].worldX = 120*gp.tileSize;
-        gp.monster[12].worldY = 100*gp.tileSize;
+        gp.monster[12].worldY = 110*gp.tileSize;
 
     }
     public void setInteractiveTile(){
