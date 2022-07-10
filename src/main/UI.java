@@ -551,14 +551,11 @@ public class UI {
         int frameY = 2 * gp.tileSize;
         drawSubWindow(frameX, frameY, frameWidth, frameHeight);
 
-        switch (subState){
-            case 0: option_top(frameX, frameY); break;
-
-            case 1: options_fullScreenNotification(frameX, frameY); break;
-
-            case 2: options_control(frameX, frameY); break;
-
-            case 3: options_endGameConfirmation(frameX,frameY); break;
+        switch (subState) {
+            case 0 -> option_top(frameX, frameY);
+            case 1 -> options_fullScreenNotification(frameX, frameY);
+            case 2 -> options_control(frameX, frameY);
+            case 3 -> options_endGameConfirmation(frameX, frameY);
         }
         gp.keyH.enterPressed = false;
 
@@ -581,8 +578,8 @@ public class UI {
         g2.drawString("Full Screen", textX, textY);
         if (commandNum == 0) {
             g2.drawString(">", textX - 25,textY);
-            if(gp.keyH.enterPressed == true){
-                if(gp.fullScreen == false){gp.fullScreen =true;}
+            if(gp.keyH.enterPressed){
+                if(!gp.fullScreen){gp.fullScreen =true;}
                 else {gp.fullScreen = false;}
                 subState = 1;
             }
@@ -618,7 +615,7 @@ public class UI {
         g2.drawString("End Game", textX, textY);
         if (commandNum == 4) {
             g2.drawString(">", textX - 25,textY);
-            if(gp.keyH.enterPressed == true) {
+            if(gp.keyH.enterPressed) {
                 subState = 3;
                 commandNum = 0;
             }

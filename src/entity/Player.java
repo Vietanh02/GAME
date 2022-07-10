@@ -2,6 +2,7 @@ package entity;
 
 
 import entity.Projectile.Ptile_Fireball;
+import entity.object.OBJ_AXE;
 import entity.object.OBJ_Key;
 import entity.object.OBJ_Shield_Wood;
 import entity.object.OBJ_Sword_Normal;
@@ -72,6 +73,8 @@ public class Player extends Entity{
 		mana = maxMana;
 		level = 1;
 		nextLevelExp = 5;
+		skillShot = new Ptile_Fireball(gp);
+		currentWeapon = new OBJ_AXE(gp);
 		atk = getNormalAtk();
 		def = getNormalDef();
 	}
