@@ -1,7 +1,6 @@
 package entity;
 
 import entity.Projectile.Projectile;
-
 import entity.object.OBJ_Coin;
 import entity.object.OBJ_Heart;
 import entity.object.OBJ_ManaCrystal;
@@ -109,8 +108,8 @@ public abstract class Entity {
 
 	protected int coin = 0;
 
-	//public int coin = 0;
 
+	//public int coin = 0;
 
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;

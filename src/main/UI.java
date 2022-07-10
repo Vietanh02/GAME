@@ -59,12 +59,14 @@ public class UI {
         crystal_half = crystal.stay[1];
         crystal_blank = crystal.stay[2];
 
+
        // heart_half = heart.setup("/objects/heart_half", gp.tileSize, gp.tileSize);
        // heart_blank = heart.setup("/objects/heart_blank", gp.tileSize, gp.tileSize);
 
        // Entity crystal = new OBJ_ManaCrystal(gp);
        // crystal_full = crystal.stay[0];
        // crystal_blank = crystal.setup("/objects/crystal_blank", gp.tileSize, gp.tileSize);
+
 
     }
     public void addMessage(String text){
@@ -235,18 +237,14 @@ public class UI {
         y = gp.tileSize*2;
         i = 0;
         //draw current life
-
-
         while(i < gp.player.maxMana/2){
             g2.drawImage(crystal_blank,x,y,null);
             i++;
             x += gp.tileSize;
-
         // while(i < gp.player.maxMana){
         //    g2.drawImage(crystal_blank,x,y,null);
         //    i++;
         //   x += 35;
-
         }
         //reset
         x = gp.tileSize/2;
@@ -261,10 +259,10 @@ public class UI {
             }
             i++;
             x+= gp.tileSize;
-
            // g2.drawImage(crystal_full,x,y,null);
            // i++;
            // x+= 35;
+
         }
     }
     public void drawTitleScreen(){
