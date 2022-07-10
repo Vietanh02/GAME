@@ -49,13 +49,12 @@ public class UI {
         //CREATE HUB OBJ
         Entity heart = new OBJ_Heart(gp);
         heart_full = heart.stay[0];
-        heart_half = heart.stay[1];
-        heart_blank = heart.stay[2];
+        heart_half = heart.setup("/objects/heart_half", gp.tileSize, gp.tileSize);
+        heart_blank = heart.setup("/objects/heart_blank", gp.tileSize, gp.tileSize);
 
         Entity crystal = new OBJ_ManaCrystal(gp);
         crystal_full = crystal.stay[0];
-        crystal_half = crystal.stay[1];
-        crystal_blank = crystal.stay[2];
+        crystal_blank = crystal.setup("/objects/crystal_blank", gp.tileSize, gp.tileSize);
     }
     public void addMessage(String text){
 //        message = text;
@@ -226,10 +225,10 @@ public class UI {
         i = 0;
         //draw current life
 
-        while(i < gp.player.maxMana/2){
+        while(i < gp.player.maxMana){
             g2.drawImage(crystal_blank,x,y,null);
             i++;
-            x += gp.tileSize;
+            x += 35;
         }
         //reset
         x = gp.tileSize/2;
@@ -237,13 +236,9 @@ public class UI {
         i = 0;
         //draw current life
         while(i< gp.player.mana){
-            g2.drawImage(crystal_half,x,y,null);
+            g2.drawImage(crystal_full,x,y,null);
             i++;
-            if(i<gp.player.mana){
-                g2.drawImage(crystal_full,x,y,null);
-            }
-            i++;
-            x+= gp.tileSize;
+            x+= 35;
         }
     }
     public void drawTitleScreen(){
