@@ -49,12 +49,23 @@ public class UI {
         //CREATE HUB OBJ
         Entity heart = new OBJ_Heart(gp);
         heart_full = heart.stay[0];
-        heart_half = heart.setup("/objects/heart_half", gp.tileSize, gp.tileSize);
-        heart_blank = heart.setup("/objects/heart_blank", gp.tileSize, gp.tileSize);
+
+
+        heart_half = heart.stay[1];
+        heart_blank = heart.stay[2];
 
         Entity crystal = new OBJ_ManaCrystal(gp);
         crystal_full = crystal.stay[0];
-        crystal_blank = crystal.setup("/objects/crystal_blank", gp.tileSize, gp.tileSize);
+        crystal_half = crystal.stay[1];
+        crystal_blank = crystal.stay[2];
+
+       // heart_half = heart.setup("/objects/heart_half", gp.tileSize, gp.tileSize);
+       // heart_blank = heart.setup("/objects/heart_blank", gp.tileSize, gp.tileSize);
+
+       // Entity crystal = new OBJ_ManaCrystal(gp);
+       // crystal_full = crystal.stay[0];
+       // crystal_blank = crystal.setup("/objects/crystal_blank", gp.tileSize, gp.tileSize);
+
     }
     public void addMessage(String text){
 //        message = text;
@@ -225,10 +236,17 @@ public class UI {
         i = 0;
         //draw current life
 
-        while(i < gp.player.maxMana){
+
+        while(i < gp.player.maxMana/2){
             g2.drawImage(crystal_blank,x,y,null);
             i++;
-            x += 35;
+            x += gp.tileSize;
+
+        // while(i < gp.player.maxMana){
+        //    g2.drawImage(crystal_blank,x,y,null);
+        //    i++;
+        //   x += 35;
+
         }
         //reset
         x = gp.tileSize/2;
@@ -236,9 +254,17 @@ public class UI {
         i = 0;
         //draw current life
         while(i< gp.player.mana){
-            g2.drawImage(crystal_full,x,y,null);
+            g2.drawImage(crystal_half,x,y,null);
             i++;
-            x+= 35;
+            if(i<gp.player.mana){
+                g2.drawImage(crystal_full,x,y,null);
+            }
+            i++;
+            x+= gp.tileSize;
+
+           // g2.drawImage(crystal_full,x,y,null);
+           // i++;
+           // x+= 35;
         }
     }
     public void drawTitleScreen(){
@@ -736,7 +762,6 @@ public class UI {
             textY += 40;
             textX += 3 * gp.tileSize;
         }
-
         //Yes
         String text = "Yes";
         textX = getXforCenteredText(text);

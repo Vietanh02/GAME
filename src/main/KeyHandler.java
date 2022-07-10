@@ -101,6 +101,9 @@ public class KeyHandler implements KeyListener {
 		}
 		if (code == KeyEvent.VK_ESCAPE){
 			gp.gameState = gp.optionsState;
+  }
+		if(code == KeyEvent.VK_J){
+			shotKeyPressed = true;
 		}
 	}
 	// Cancel state
