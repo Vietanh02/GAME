@@ -63,7 +63,6 @@ public class KeyHandler implements KeyListener {
 			if (code == KeyEvent.VK_ENTER) {
 				if (gp.ui.commandNum == 0) {
 					gp.gameState = gp.playState;
-					//gp.playMusic(0);
 				}
 				if (gp.ui.commandNum == 1) {
 
@@ -95,9 +94,6 @@ public class KeyHandler implements KeyListener {
 		}
 		if (code == KeyEvent.VK_C){
 			gp.gameState = gp.charaterState;
-		}
-		if(code == KeyEvent.VK_J){
-			shotKeyPressed = true;
 		}
 		if (code == KeyEvent.VK_ESCAPE){
 			gp.gameState = gp.optionsState;
