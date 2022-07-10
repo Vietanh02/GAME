@@ -1,6 +1,9 @@
 package entity;
 
 import entity.Projectile.Projectile;
+import entity.object.OBJ_Coin;
+import entity.object.OBJ_Heart;
+import entity.object.OBJ_ManaCrystal;
 import main.GamePanel;
 import main.UtilityTool;
 
@@ -8,6 +11,7 @@ import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Random;
 
 public abstract class Entity {
 	protected GamePanel gp;
@@ -101,7 +105,11 @@ public abstract class Entity {
 
 
 	protected int EXP;
+
 	protected int coin = 0;
+
+
+	//public int coin = 0;
 
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
@@ -118,6 +126,8 @@ public abstract class Entity {
 	public final int type_axe = 4;
 	public final int type_shield = 5;
 	public final int type_consumnable = 6;
+
+	public final int type_pickupOnly = 7;
 
 	public int value = 0;
 	public int itemValue = 1;
@@ -461,5 +471,29 @@ public abstract class Entity {
 	}
 
 	protected void use(Entity entity) {
+	}
+
+	public void dropItem(Entity droppedItem){
+		for(int i = 0; i < gp.obj.length; i++){
+			if(gp.obj[i] == null){
+				gp.obj[i] = droppedItem;
+				gp.obj[i].worldX = worldX;
+				gp.obj[i].worldY = worldY;
+				break;
+			}
+		}
+	}
+
+	public void checkDrop() {
+		int i = new Random().nextInt(100)+1;
+		if(i < 25){
+			dropItem(new OBJ_Heart(gp));
+		}
+		if(i < 50) {
+			dropItem(new OBJ_ManaCrystal(gp));
+		}
+		if(i < 75){
+			dropItem(new OBJ_Coin(gp));
+		}
 	}
 }
