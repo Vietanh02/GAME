@@ -5,7 +5,7 @@ import entity.InteractiveTile.IT_Tree;
 import entity.NPC_Fairy;
 import entity.NPC_OldMan;
 import entity.monster.Boss_DarkLord;
-import tiles.monster.Destroy_Boss;
+//import tiles.monster.Destroy_Boss;
 import tiles.monster.MON_GreenSlime;
 import entity.object.*;
 import tiles.monster.Mob_Pig;
@@ -174,7 +174,7 @@ public class AssetSetter {
         gp.monster[12].worldY = 44*gp.tileSize;
 
         gp.monster[13] = new Boss_DarkLord(gp);
-        gp.monster[13].worldX = 120*gp.tileSize;
+        gp.monster[13].worldX = 115*gp.tileSize;
         gp.monster[13].worldY = 110*gp.tileSize;
 
         gp.monster[14] = new MON_GreenSlime(gp);

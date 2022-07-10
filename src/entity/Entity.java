@@ -247,7 +247,7 @@ public abstract class Entity {
 		}
 	}
 
-	private void dyingAnimation(Graphics2D g2) {
+	protected void dyingAnimation(Graphics2D g2) {
 		dyingCounter++;
 		if(dyingCounter <= 5){changeAlpha(g2,0f);
 		} else if(dyingCounter <= 10) {changeAlpha(g2,1f);

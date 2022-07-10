@@ -6,6 +6,8 @@ import entity.Projectile.Ptile_DarkEnergy;
 import entity.Projectile.Ptile_rock;
 import main.GamePanel;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Random;
 
 public class Boss_DarkLord extends Entity {
@@ -21,10 +23,10 @@ public class Boss_DarkLord extends Entity {
         skillShot = new Ptile_DarkEnergy(gp);
         direction = "down";
         type = type_monster;
-        solidArea.x = 3;
-        solidArea.y = 9;
-        solidArea.width = 42;
-        solidArea.height = 30;
+        solidArea.x = 5;
+        solidArea.y = 5;
+        solidArea.width = 110;
+        solidArea.height = 110;
         solidAreaDefaultX = solidArea.x;
         solidAreaDefaultY = solidArea.y;
         isBoss = true;
@@ -32,13 +34,13 @@ public class Boss_DarkLord extends Entity {
 }
     public void getImage(){
 
-        SpriteSheet ss = new SpriteSheet("monster/Boss.png",48,48);
+        SpriteSheet ss = new SpriteSheet("monster/Lord.png",120,120);
 
         for(int i=0;i<2;i++) {
-            up[i]   = ss.spriteArray[3][9+i].image;
-            down[i] =  ss.spriteArray[0][9+i].image;
-            left[i] =  ss.spriteArray[1][9+i].image;
-            right[i] =  ss.spriteArray[2][9+i].image;
+            up[i]   = ss.spriteArray[2][i].image;
+            down[i] =  ss.spriteArray[2][i+1].image;
+            left[i] =  ss.spriteArray[2][i].image;
+            right[i] =  ss.spriteArray[2][i+1].image;
         }
     }
 
@@ -117,6 +119,93 @@ public class Boss_DarkLord extends Entity {
         };
         skillShot.set(worldX,worldY,direction,true,this);
         gp.projectileList.add(skillShot);
+//        skillShot.set(worldX+50,worldY+50,direction,true,this);
+//        gp.projectileList.add(skillShot);
         shotCounter = 0;
+    }
+    public void draw(Graphics2D g2){
+        //g2.setColor(Color.white);
+        //g2.fillRect(x, y, gp.titleSize, gp.titleSize);
+        BufferedImage image = switch (direction) {
+            case "up" -> up[spriteNum - 1];
+            case "down" -> down[spriteNum - 1];
+            case "left" -> left[spriteNum - 1];
+            case "right" -> right[spriteNum - 1];
+            case "stay" -> stay[spriteNum - 1];
+            default -> null;
+        };
+
+        int screenX = worldX - gp.player.worldX + gp.player.screenX;
+        int screenY = worldY - gp.player.worldY + gp.player.screenY;
+
+        //
+
+        if (gp.player.screenX > gp.player.worldX){
+            screenX = worldX;
+        }
+        if (gp.player.screenY > gp.player.worldY){
+            screenY = worldY;
+        }
+        int rightOffset = gp.screenWidth -gp.player.screenX;
+        if (rightOffset > gp.WorldWidth - gp.player.worldX){
+            screenX = gp.screenWidth - (gp.WorldWidth -worldX);
+        }
+        int bottomOffset = gp.screenHeight -gp.player.screenY;
+        if (bottomOffset > gp.WorldHeight - gp.player.worldY){
+            screenY = gp.screenHeight - (gp.WorldHeight -worldY);
+        }
+
+        if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
+                worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
+                worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
+                worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
+            if((type == 2 && hpOn)) {
+                double oneScale = (double)2*gp.tileSize/maxLife;
+                g2.setColor(Color.BLACK);
+                g2.fillRect(screenX+10,screenY-16,(int) (oneScale*maxLife)+2,7);
+                g2.setColor(Color.red);
+                g2.fillRect(screenX+11,screenY-15, (int) (oneScale*life),5);
+                hpOnCounter++;
+                if(hpOnCounter > 600) {
+                    hpOn = false;
+                    hpOnCounter = 0;
+                }
+            }
+            if(invincible) {
+                hpOn = true;
+                hpOnCounter = 0;
+                changeAlpha(g2,0.4f);
+            }
+            if(dying) dyingAnimation(g2);
+            g2.drawImage(image, screenX, screenY,null);
+            changeAlpha(g2,1f);
+
+        }
+        else if (gp.player.screenX > gp.player.worldX ||
+                gp.player.screenY > gp.player.worldY ||
+                rightOffset > gp.WorldWidth - gp.player.worldX ||
+                bottomOffset > gp.WorldHeight - gp.player.worldY){
+            if((type == 2 && hpOn)) {
+                double oneScale = (double)2*gp.tileSize/maxLife;
+                g2.setColor(Color.BLACK);
+                g2.fillRect(screenX+10,screenY-16,(int) (oneScale*maxLife)+2,7);
+                g2.setColor(Color.red);
+                g2.fillRect(screenX+11,screenY-15, (int) (oneScale*life),5);
+                hpOnCounter++;
+
+                if(hpOnCounter > 600) {
+                    hpOn = false;
+                    hpOnCounter = 0;
+                }
+            }
+            if(invincible) {
+                hpOn = true;
+                hpOnCounter = 0;
+                changeAlpha(g2,0.4f);
+            }
+            if(dying) dyingAnimation(g2);
+            g2.drawImage(image, screenX, screenY,null);
+            changeAlpha(g2,1f);
+        }
     }
 }
