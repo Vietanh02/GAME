@@ -3,6 +3,8 @@ package entity.Projectile;
 import entity.Entity;
 import main.GamePanel;
 
+import java.awt.*;
+
 public class Ptile_Fireball extends Projectile{
 
     GamePanel gp;
@@ -41,5 +43,17 @@ public class Ptile_Fireball extends Projectile{
     }
     public void subtractResource(Entity user){
         user.mana -= skillManaCost;
+    }
+    public Color getParticleColor(){
+        return new Color(240,50,0);
+    }
+    public int getParticleSize(){
+        return 10;
+    }
+    public int getParticleSpeed(){
+        return 2;
+    }
+    public int getParticleMaxLife(){
+        return 20;
     }
 }

@@ -21,12 +21,14 @@ public class Projectile extends Entity {
             int monIndex = gp.cChecker.checkEntity(this, gp.monster);
             if(monIndex != 999){
                 gp.player.damageMonster(monIndex, atk);
+                genarateParticle(user.skillShot,gp.monster[monIndex]);
                 alive = false;
             }
         }else if(user.type == 2){
             boolean contactPlayer = gp.cChecker.checkPlayer(this);
             if(!gp.player.invincible&&contactPlayer){
                 damagePlayer(atk);
+                genarateParticle(user.skillShot,gp.player);
                 alive = false;
             }
         }

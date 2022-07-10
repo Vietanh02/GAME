@@ -1,5 +1,6 @@
 package entity;
 
+import entity.Particle.Particle;
 import entity.Projectile.Projectile;
 import entity.object.OBJ_Coin;
 import entity.object.OBJ_Heart;
@@ -494,5 +495,36 @@ public abstract class Entity {
 		if(i < 75){
 			dropItem(new OBJ_Coin(gp));
 		}
+	}
+
+	public Color getParticleColor(){
+		return null;
+	}
+	public int getParticleSize(){
+		return 0;
+	}
+	public int getParticleSpeed(){
+		return 0;
+	}
+	public int getParticleMaxLife(){
+		return 0;
+	}
+	public void genarateParticle(Entity generator, Entity target){
+		Color color = generator.getParticleColor();
+		int size = generator.getParticleSize();
+		int speed = generator.getParticleSpeed();
+		int maxLife = generator.getParticleMaxLife();
+//		Color color = target.getParticleColor();
+//		int size = target.getParticleSize();
+//		int speed = target.getParticleSpeed();
+//		int maxLife = target.getParticleMaxLife();
+		Particle p1 = new Particle(gp, generator,color,size,speed,maxLife,-1,-1);
+		Particle p2 = new Particle(gp, generator,color,size,speed,maxLife,1,-1);
+		Particle p3 = new Particle(gp, generator,color,size,speed,maxLife,-1,1);
+		Particle p4 = new Particle(gp, generator,color,size,speed,maxLife,1,1);
+		gp.particleList.add(p1);
+		gp.particleList.add(p2);
+		gp.particleList.add(p3);
+		gp.particleList.add(p4);
 	}
 }
