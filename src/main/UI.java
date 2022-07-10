@@ -68,9 +68,6 @@ public class UI {
         return x;
     }
     public void draw(Graphics2D g2){
-        if(gameFinished){
-            drawFinishedScreen();
-        }else{
             this.g2 = g2;
             g2.setFont(arial_40);
             g2.setColor(Color.white);
@@ -124,8 +121,9 @@ public class UI {
             if (gp.gameState == gp.gameOverState){
                 drawGameOverScreen();
             }
-
-        }
+            if(gp.gameState == gp.gameFinishedState){
+                drawFinishedScreen();
+            }
     }
 
     private void drawMessage() {

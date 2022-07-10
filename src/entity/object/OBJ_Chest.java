@@ -8,6 +8,7 @@ public class OBJ_Chest extends Entity {
     public OBJ_Chest(GamePanel gp){
         super(gp);
         isTreasure = true;
+        value = 1;
         name = "Chest";
             for (int i = 0; i < 3; i++) {
                 stay[i] = setup(String.format(resImage, i + 1), gp.tileSize, gp.tileSize);

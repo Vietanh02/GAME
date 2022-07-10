@@ -79,6 +79,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 
+	public final int gameFinishedState = 7;
+
 	public Entity[] obj = new Entity[20];
 	public Entity[] NPC = new Entity[10];
 	public Entity[] monster = new Entity[20];

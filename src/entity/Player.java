@@ -356,9 +356,16 @@ public class Player extends Entity{
 
 					if (inventory.size() != maxinventorySize) {
 						if (gp.obj[i].value == 1) {
-							inventory.add(gp.obj[i]);
-							gp.playSE(2);
-							text = "Got a " + gp.obj[i].name + "!";
+							if(gp.obj[i].name == "Chest"){
+									gp.ui.gameFinished = true;
+									gp.gameState = gp.gameFinishedState;
+									gp.stopMusic();
+							}
+							else {
+								inventory.add(gp.obj[i]);
+								gp.playSE(2);
+								text = "Got a " + gp.obj[i].name + "!";
+							}
 						}
 					} else {
 						text = "Inventory is full" + "\n" + "You can't carry any more!!!";
