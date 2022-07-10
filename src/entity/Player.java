@@ -203,6 +203,10 @@ public class Player extends Entity{
 				spriteCounter = 0;
 
 			}
+			if (life <=0) {
+				gp.gameState = gp.gameOverState;
+				gp.gameState = gp.gameOverState;
+			}
 		}
 
 		if(gp.keyH.shotKeyPressed && !skillShot.alive && shotCounter == 50 && skillShot.haveResource(this)){

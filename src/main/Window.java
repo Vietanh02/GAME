@@ -11,7 +11,7 @@ public class Window {
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.setResizable(false);
         window.setTitle("2D advanture");
-        window.setUndecorated(true);
+//        window.setUndecorated(true);
 
         // đưa vào các hình ảnh của game
         GamePanel gamePanel = new GamePanel();
