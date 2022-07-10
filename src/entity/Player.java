@@ -72,14 +72,8 @@ public class Player extends Entity{
 		mana = maxMana;
 		level = 1;
 		nextLevelExp = 5;
-		currentShield = new OBJ_Shield_Wood(gp);
-		currentWeapon = new OBJ_Sword_Normal(gp);
-		skillShot = new Ptile_Fireball(gp);
-		attack = getAttack();
-		defense = getDefense();
 		atk = getNormalAtk();
 		def = getNormalDef();
-
 	}
 	public void setItems(){
 	}
@@ -302,6 +296,8 @@ public class Player extends Entity{
 			nextLevelExp*=2;
 			maxLife+=2;
 			life = maxLife;
+			maxMana+=2;
+			mana = maxMana;
 			normalAtk+=10;
 			normalDef+=10;
 			if(gp.player.currentWeapon == null){

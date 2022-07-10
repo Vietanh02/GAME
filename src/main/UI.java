@@ -225,7 +225,7 @@ public class UI {
         i = 0;
         //draw current life
 
-        while(i < gp.player.maxMana){
+        while(i < gp.player.getMaxMana()){
             g2.drawImage(crystal_blank,x,y,null);
             i++;
             x += 35;
@@ -364,10 +364,6 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Mana", textX, textY);
         textY += lineHeight;
-        g2.drawString("Strength", textX, textY);
-        textY += lineHeight;
-        g2.drawString("Dexterity", textX, textY);
-        textY += lineHeight;
         g2.drawString("ATK", textX, textY);
         textY += lineHeight;
         g2.drawString("DEF", textX, textY);
@@ -394,12 +390,12 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = gp.player.life + "/" + gp.player.maxLife;
+        value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = gp.player.mana + "/" + gp.player.maxMana;
+        value = String.valueOf(gp.player.mana + "/" + gp.player.getMaxMana());
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
@@ -430,11 +426,11 @@ public class UI {
         textY += lineHeight;
 
         if(gp.player.currentWeapon != null){
-            g2.drawImage(gp.player.currentWeapon.stay[0], tailX - gp.tileSize, textY - 25, null);
+            g2.drawImage(gp.player.currentWeapon.stay[0], tailX - gp.tileSize, textY - 15, null);
         }
-            textY += lineHeight + 20;
+        textY += lineHeight + 20;
         if(gp.player.currentShield != null){
-            g2.drawImage(gp.player.currentShield.stay[0], tailX - gp.tileSize, textY - 25, null);
+            g2.drawImage(gp.player.currentShield.stay[0], tailX - gp.tileSize, textY - 15, null);
         }
 }
 

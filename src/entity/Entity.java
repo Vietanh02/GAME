@@ -80,23 +80,16 @@ public abstract class Entity {
 	protected int health = 100;
 	public int maxLife;
 	public int life;
-	public int strength;
-	public int dexterity;
-	public int attack;
-	public int defense;
 	public Entity currentWeapon;
 	public Entity currentShield;
 
 	public Projectile skillShot;
 
-	protected int def = 10;
-	protected int atk = 5;
+	protected int def;
+	protected int atk;
 	protected int damage = 50;
-	protected int str;
-	protected int dex;
-	protected int inte;
-	public int maxMana = 100;
-	public int mana = 100;
+	protected int maxMana ;
+	public int mana ;
 
 
 	protected int normalDef = 10;
@@ -107,9 +100,6 @@ public abstract class Entity {
 	protected int EXP;
 
 	public int coin = 0;
-
-
-	//public int coin = 0;
 
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
@@ -187,7 +177,7 @@ public abstract class Entity {
 		this.atk = atk;
 	}
 	public int getNormalAtk() {
-		return normalDef;
+		return normalAtk;
 	}
 	public void setNormalAtk(int normalAtk){
 		this.normalAtk = normalAtk;
