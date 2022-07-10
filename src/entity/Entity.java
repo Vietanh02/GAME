@@ -105,7 +105,11 @@ public abstract class Entity {
 
 
 	protected int EXP;
-	public int coin = 0;
+
+	protected int coin = 0;
+
+
+	//public int coin = 0;
 
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
