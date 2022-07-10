@@ -196,18 +196,6 @@ public class GamePanel extends JPanel implements Runnable{
 					if(!projectileList.get(i).alive) projectileList.remove(i);
 				}
 			}
-			for(int i= 0; i< projectileList.size() ; i++){
-				if(projectileList.get(i) !=null){
-					if(projectileList.get(i).alive) projectileList.get(i).update();
-					if(!projectileList.get(i).alive) projectileList.remove(i);
-				}
-			}
-			for(int i= 0; i< projectileList.size() ; i++){
-				if(projectileList.get(i) !=null){
-					if(projectileList.get(i).alive) projectileList.get(i).update();
-					if(!projectileList.get(i).alive) projectileList.remove(i);
-				}
-			}
 			tileM.update();
 			if(event < player.hasKey) {
 				//tileM.update("/maps/map01.txt");

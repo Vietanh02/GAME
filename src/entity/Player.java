@@ -68,7 +68,7 @@ public class Player extends Entity{
 		//player status
 		maxLife = 6;
 		life = maxLife;
-		maxMana = 4;
+		maxMana = 5;
 		mana = maxMana;
 		level = 1;
 		nextLevelExp = 5;
@@ -157,6 +157,8 @@ public class Player extends Entity{
 			contactMonster(monsterIndex);
 			int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
 			damageInteractiveTile(iTileIndex);
+			//	CHECK BULLET COLLISION
+//			int bulletIndex = gp.cChecker.checkEntity(this,gp.projectileList.toArray(new Entity[0]));
 			//IF COLLISION IS FALSE PLAYER CAN MOVE
 			if(!collisionOn && !keyH.enterPressed) {
 				if(keyH.upPressed && keyH.leftPressed){

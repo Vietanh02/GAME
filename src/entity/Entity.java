@@ -89,7 +89,7 @@ public abstract class Entity {
 	public Projectile skillShot;
 
 	protected int def = 10;
-	protected int atk = 10;
+	protected int atk = 5;
 	protected int damage = 50;
 	protected int str;
 	protected int dex;

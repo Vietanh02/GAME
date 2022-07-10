@@ -2,7 +2,8 @@ package entity.monster;
 
 import Graphics.SpriteSheet;
 import entity.Entity;
-import entity.Projectile.Ptile_Fireball;
+import entity.Projectile.Projectile;
+import entity.Projectile.Ptile_rock;
 import main.GamePanel;
 
 import java.util.Random;
@@ -18,7 +19,7 @@ public class MON_GreenSlime extends Entity {
         atk = 5;
         def = 0;
         EXP = 2;
-        skillShot = new Ptile_Fireball(gp);
+        skillShot = new Ptile_rock(gp);
         direction = "down";
         type = type_monster;
         solidArea.x = 3;

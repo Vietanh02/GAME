@@ -10,7 +10,7 @@ public class Ptile_Fireball extends Projectile{
         super(gp);
         this.gp = gp;
         name = "Fireball";
-        speed = 5;
+        speed = 10;
         maxLife = 80;
         life = maxLife;
         atk = 2;
@@ -20,10 +20,10 @@ public class Ptile_Fireball extends Projectile{
     }
 
     private void getImage() {
-        String imageDown1 = "/monster/greenslime_down_%d";
-        String imageUp1 = "/monster/greenslime_down_%d";
-        String imageLeft1 = "/monster/greenslime_down_%d";
-        String imageRight1 = "/monster/greenslime_down_%d";
+        String imageDown1 = "/bullet/fireball_down_%d";
+        String imageUp1 = "/bullet/fireball_up_%d";
+        String imageLeft1 = "/bullet/fireball_left_%d";
+        String imageRight1 = "/bullet/fireball_right_%d";
 
         for(int i=0;i<2;i++) {
             up[i]   = setup(String.format(imageUp1,i+1),gp.tileSize, gp.tileSize);
