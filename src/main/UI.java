@@ -741,7 +741,6 @@ public class UI {
             textY += 40;
             textX += 3 * gp.tileSize;
         }
-
         //Yes
         String text = "Yes";
         textX = getXforCenteredText(text);
