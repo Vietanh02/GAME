@@ -60,7 +60,9 @@ public class Player extends Entity{
 	}
 
 	public void setDefaultValues() {
-		worldX = gp.tileSize*30;
+//		worldX = gp.tileSize*30;
+//		worldY = gp.tileSize*40;
+		worldX = gp.tileSize*63;
 		worldY = gp.tileSize*40;
 		speed = 4;
 		direction = "up";
@@ -341,25 +343,30 @@ public class Player extends Entity{
 
 	public void pickUpObject(int i){
 		if(i!=999) {
-			if(gp.obj[i].type == type_pickupOnly){
-				gp.obj[i].use(this);
-				gp.obj[i] = null;
+			if(isTreasure){
+				gp.ui.gameFinished = true;
 			}
 			else {
-				String text = "";
-
-				if (inventory.size() != maxinventorySize) {
-					if (gp.obj[i].value == 1) {
-						inventory.add(gp.obj[i]);
-						gp.playSE(2);
-						text = "Got a " + gp.obj[i].name + "!";
-					}
-				} else {
-					text = "Inventory is full" + "\n" + "You can't carry any more!!!";
+				if(gp.obj[i].type == type_pickupOnly){
+					gp.obj[i].use(this);
+					gp.obj[i] = null;
 				}
+				else if(gp.obj[i].type != type_Port) {
+					String text = "";
 
-				gp.ui.addMessage(text);
-				gp.obj[i] = null;
+					if (inventory.size() != maxinventorySize) {
+						if (gp.obj[i].value == 1) {
+							inventory.add(gp.obj[i]);
+							gp.playSE(2);
+							text = "Got a " + gp.obj[i].name + "!";
+						}
+					} else {
+						text = "Inventory is full" + "\n" + "You can't carry any more!!!";
+					}
+
+					gp.ui.addMessage(text);
+					gp.obj[i] = null;
+				}
 			}
 		}
 	}

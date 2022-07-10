@@ -2,6 +2,7 @@ package entity;
 
 import entity.Particle.Particle;
 import entity.Projectile.Projectile;
+import entity.object.OBJ_Chest;
 import entity.object.OBJ_Coin;
 import entity.object.OBJ_Heart;
 import entity.object.OBJ_ManaCrystal;
@@ -48,7 +49,8 @@ public abstract class Entity {
 	public int type; //	0 = player, 1 = NPC, 2 = monster
 	String[] dialogues = new String[20];
 	int dialogueIndex = 0;
-
+	public boolean isBoss = false;
+	public boolean isTreasure = false;
 	public boolean onPath = false;
 	//CHARATER STATUS
 
@@ -126,6 +128,8 @@ public abstract class Entity {
 	public final int type_consumnable = 6;
 
 	public final int type_pickupOnly = 7;
+
+	public final int type_Port = 8;
 
 	public int value = 0;
 	public int itemValue = 1;
@@ -490,6 +494,9 @@ public abstract class Entity {
 		if(i < 75){
 			dropItem(new OBJ_Coin(gp));
 		}
+		if(isBoss){
+			dropItem(new OBJ_Chest(gp));
+		}
 	}
 
 	public Color getParticleColor(){
@@ -530,7 +537,7 @@ public abstract class Entity {
 		gp.cChecker.checkEntity(this, gp.NPC);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-		if(this.type == 2 && contactPlayer){
+		if(this.type == 2  && contactPlayer){
 			damagePlayer(atk);
 		}
 	}

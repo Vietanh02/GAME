@@ -44,7 +44,8 @@ public class EventHandler {
         }
         if(canTouchEvent){
 //            if (hit(3, 3, "any")) {damagePit(3,3,gp.dialogueState);}
-            if (hit(40, 36,1,1, "any")) {telemap(70,50,gp.dialogueState);}
+            if (hit(50, 50,1,1, "any")) {telemap(120,120,gp.dialogueState);}
+            if (hit(110, 110,1,1, "any")) {telemap(45,60,gp.dialogueState);}
 //            if(hit(10,10,"up") == true){healingPool(gp.dialogueState);}
         }
     }
@@ -106,8 +107,8 @@ public class EventHandler {
     public void telemap (int col, int row, int gameState){
         gp.gameState = gameState ;
         gp.ui.currentDialogue = "Teleport";
-        gp.player.worldX = gp.tileSize * 70;
-        gp.player.worldY = gp.tileSize * 30;
+        gp.player.worldX = gp.tileSize * col;
+        gp.player.worldY = gp.tileSize * row;
     }
     public void healingPool(int gameState){
         if(gp.keyH.enterPressed){

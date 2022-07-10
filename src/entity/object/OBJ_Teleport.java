@@ -10,6 +10,7 @@ public class OBJ_Teleport extends Entity {
         super(gp);
 
         name = "Teleport";
+        type = type_Port;
         SpriteSheet sp = new SpriteSheet("objects/SF_Door2.png",48,48);
         stay[0] = sp.spriteArray[4][9].image;
         stay[1] = stay[0];

@@ -69,35 +69,7 @@ public class UI {
     }
     public void draw(Graphics2D g2){
         if(gameFinished){
-            g2.setFont(arial_40);
-            g2.setColor(Color.white);
-
-            String text;
-            int textLength;
-            int x;
-            int y;
-
-            text = "You found the treasure!!";
-            textLength = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
-            x = gp.screenWidth/2 - textLength/2;
-            y = gp.screenHeight/2 -(gp.tileSize)*3;
-             g2.drawString(text,x,y);
-
-            text = "You time is: "+ dFormat.format(playTime);
-            textLength = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
-            x = gp.screenWidth/2 - textLength/2;
-            y = gp.screenHeight/2 + (gp.tileSize)*4;
-            g2.drawString(text,x,y);
-
-            g2.setFont(arial_80B);
-            g2.setColor(Color.yellow);
-            text = "Congratulation !!";
-            textLength = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
-            x = gp.screenWidth/2 - textLength/2;
-            y = gp.screenHeight/2 + (gp.tileSize)*2;
-            g2.drawString(text,x,y);
-
-            gp.gameThread =null;
+            drawFinishedScreen();
         }else{
             this.g2 = g2;
             g2.setFont(arial_40);
@@ -759,6 +731,59 @@ public class UI {
     public int getItemIndexOnSlot(){
         int itemIndex = slotCol + (slotRow*5);
         return itemIndex;
+    }
+    public void drawFinishedScreen(){
+        g2.setColor(new Color(0,0,0,150));
+        g2.fillRect(0,0,gp.screenWidth,gp.screenHeight);
+
+        g2.setFont(arial_40);
+        g2.setColor(Color.white);
+
+        String text;
+        int textLength;
+        int x;
+        int y;
+
+        text = "You found the treasure!!";
+        textLength = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
+        x = gp.screenWidth/2 - textLength/2;
+        y = gp.screenHeight/2 -(gp.tileSize)*3;
+        g2.drawString(text,x,y);
+
+        text = "You time is: "+ dFormat.format(playTime);
+        textLength = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
+        x = gp.screenWidth/2 - textLength/2;
+        y = gp.screenHeight/2 + (gp.tileSize)*4;
+        g2.drawString(text,x,y);
+
+        g2.setFont(arial_80B);
+        g2.setColor(Color.yellow);
+        text = "Congratulation !!";
+        textLength = (int)g2.getFontMetrics().getStringBounds(text,g2).getWidth();
+        x = gp.screenWidth/2 - textLength/2;
+        y = gp.screenHeight/2 + (gp.tileSize)*2;
+        g2.drawString(text,x,y);
+        //main
+        g2.setColor(Color.white);
+        g2.drawString(text, x-5, y-5);
+        //retry
+        g2.setFont(g2.getFont().deriveFont(50f));
+        text = "Retry";
+        x = gp.tileSize + getXforCenteredText(text);
+        y += 7 * gp.tileSize;
+        if(commandNum == 0) {
+            g2.drawString(">", x - 40, y);
+        }
+
+        g2.drawString(text, x, y);
+        // Quit
+        text = "Quit";
+        y += gp.tileSize + 15;
+        g2.drawString(text, x, y);
+        if(commandNum == 1) {
+            g2.drawString(">", x - 40, y);
+        }
+
     }
 
 

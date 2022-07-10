@@ -5,6 +5,7 @@ import entity.InteractiveTile.IT_Tree;
 import entity.InteractiveTile.InteractiveTile;
 import entity.NPC_Fairy;
 import entity.NPC_OldMan;
+import entity.monster.Boss_DarkLord;
 import entity.monster.MON_GreenSlime;
 import entity.object.*;
 import entity.monster.Mob_Pig;
@@ -30,8 +31,8 @@ public class AssetSetter {
         gp.obj[1].worldY = 40*gp.tileSize;
 
         gp.obj[3] = new OBJ_Teleport(gp);
-        gp.obj[3].worldX = 42*gp.tileSize;
-        gp.obj[3].worldY = 36*gp.tileSize;
+        gp.obj[3].worldX = 50*gp.tileSize;
+        gp.obj[3].worldY = 50*gp.tileSize;
 
         gp.obj[4] = new OBJ_AXE(gp);
         gp.obj[4].worldX = 56*gp.tileSize;
@@ -69,6 +70,9 @@ public class AssetSetter {
         gp.obj[12].worldX = 48*gp.tileSize;
         gp.obj[12].worldY = 49*gp.tileSize;
 
+        gp.obj[13] = new OBJ_Teleport(gp);
+        gp.obj[13].worldX = 110*gp.tileSize;
+        gp.obj[13].worldY = 110*gp.tileSize;
     }
     public void setNPC(){
         gp.NPC[0] = new NPC_OldMan(gp);
@@ -152,6 +156,10 @@ public class AssetSetter {
         gp.monster[12] = new Mob_Catgirl(gp);
         gp.monster[12].worldX = 63*gp.tileSize;
         gp.monster[12].worldY = 44*gp.tileSize;
+
+        gp.monster[12] = new Boss_DarkLord(gp);
+        gp.monster[12].worldX = 120*gp.tileSize;
+        gp.monster[12].worldY = 100*gp.tileSize;
 
     }
     public void setInteractiveTile(){
