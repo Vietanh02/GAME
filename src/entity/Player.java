@@ -1,6 +1,7 @@
 package entity;
 
 
+import entity.Projectile.Ptile_Fireball;
 import entity.object.OBJ_Key;
 import entity.object.OBJ_Shield_Wood;
 import entity.object.OBJ_Sword_Normal;
@@ -24,6 +25,7 @@ public class Player extends Entity{
 	private final BufferedImage[] attackLeft = new BufferedImage[4];
 	private final BufferedImage[] attackRight = new BufferedImage[4];
 
+	Rectangle attackArea = new Rectangle(0,0,0,0);
 	KeyHandler keyH;
 
 	public int hasKey = 0;
@@ -66,8 +68,15 @@ public class Player extends Entity{
 		//player status
 		maxLife = 6;
 		life = maxLife;
+		maxMana = 6;
+		mana = maxMana;
 		level = 1;
 		nextLevelExp = 5;
+		currentShield = new OBJ_Shield_Wood(gp);
+		currentWeapon = new OBJ_Sword_Normal(gp);
+		skillShot = new Ptile_Fireball(gp);
+		attack = getAttack();
+		defense = getDefense();
 		atk = getNormalAtk();
 		def = getNormalDef();
 
@@ -200,13 +209,22 @@ public class Player extends Entity{
 			}
 		}
 
+		if(gp.keyH.shotKeyPressed && !skillShot.alive && shotCounter == 50 && skillShot.haveResource(this)){
+			skillShot.set(worldX,worldY,direction,true,this);
+			gp.projectileList.add(skillShot);
+			skillShot.subtractResource(this);
+			shotCounter = 0;
+		}
 		//	This needs to be outside of the key if statement
-		if(invincible == true){
+		if(invincible){
 			invincibleCounter ++;
 			if(invincibleCounter > 60){
 				invincible = false;
 				invincibleCounter = 0;
 			}
+		}
+		if(shotCounter < 50){
+			shotCounter++;
 		}
 	}
 	//attack
@@ -234,7 +252,7 @@ public class Player extends Entity{
 			solidArea.height = attackArea.height;
 
 			int monIndex = gp.cChecker.checkEntity(this, gp.monster);
-			damageMonster(monIndex);
+			damageMonster(monIndex, atk);
 			worldX = currentWorldX;
 			worldY = currentWorldY;
 			solidArea.width = solidAreaWidth;
@@ -247,7 +265,7 @@ public class Player extends Entity{
 		}
 	}
 
-	public void damageMonster(int i){
+	public void damageMonster(int i, int atk){
 		if(i!= 999){
 			if(!gp.monster[i].invicible) {
 				//gp.playSE(index);
@@ -337,7 +355,7 @@ public class Player extends Entity{
 	public void contactMonster(int i){
 
 		if(i!= 999){
-			if(invincible == false){
+			if(!invincible && !gp.monster[i].dying){
 				life -= 1;
 				invincible = true;
 			}
