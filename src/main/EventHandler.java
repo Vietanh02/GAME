@@ -96,7 +96,7 @@ public class EventHandler {
 
     public void damagePit(int col, int row, int gameState){
         gp.gameState = gameState;
-        gp.ui.currentDialogue = "Vap co va nga";
+        gp.ui.currentDialogue = "tripping grass and fall";
         gp.player.life -= 1;
 //        eventRect[col][row].eventDone = true;
         canTouchEvent = false;
@@ -105,14 +105,14 @@ public class EventHandler {
 
     public void telemap (int col, int row, int gameState){
         gp.gameState = gameState ;
-        gp.ui.currentDialogue = "Dich chuyen";
+        gp.ui.currentDialogue = "Teleport";
         gp.player.worldX = gp.tileSize * 70;
         gp.player.worldY = gp.tileSize * 30;
     }
     public void healingPool(int gameState){
         if(gp.keyH.enterPressed){
             gp.gameState = gameState;
-            gp.ui.currentDialogue = "Ban choi da va hoi mau";
+            gp.ui.currentDialogue = "Let's play and gain heart";
             gp.player.life += 1;
         }
     }

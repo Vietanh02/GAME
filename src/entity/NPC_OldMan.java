@@ -13,12 +13,12 @@ public class NPC_OldMan extends Entity{
         setDialogue();
     }
     public void setDialogue(){
-        dialogues[0] = "Hello,Kiwi.";
-        dialogues[1] = "Kiwi oi! Kiwi di dau day?";
-        dialogues[2] = "Toi la Ure";
-        dialogues[3] = "Co 1 cai ruong o gan day";
-        dialogues[4] = "Toi dang ban, hay de luc khac noi chuyen";
-        dialogues[5] = "Nay chang trai tre a, cau co biet ve nguoi anh \nhung Ba Binh, nguoi ma da danh bai quai vat \nSima de giai cuu the gioi khong?";
+        dialogues[0] = "Welcome to summoner's rift captain Kiwi!!";
+        dialogues[1] = "The monster is destroying my village,\n we need captain Kiwi to save our lives";
+        dialogues[2] = "Fistly, let's kill small monsters,\n collect items to upgrade your power";
+        dialogues[3] = "Then, find a gate where you can teleport ";
+        dialogues[4] = "You will see the manor of the DesTroyBoss!";
+        dialogues[5] = "Finally, Let's kill this boss and receive your treasure!!!";
 
     }
     public void getImage(){

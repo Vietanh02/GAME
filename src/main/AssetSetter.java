@@ -30,7 +30,7 @@ public class AssetSetter {
         gp.obj[1].worldY = 40*gp.tileSize;
 
         gp.obj[3] = new OBJ_Teleport(gp);
-        gp.obj[3].worldX = 40*gp.tileSize;
+        gp.obj[3].worldX = 42*gp.tileSize;
         gp.obj[3].worldY = 36*gp.tileSize;
 
         gp.obj[4] = new OBJ_AXE(gp);
@@ -50,7 +50,7 @@ public class AssetSetter {
         gp.obj[7].worldY = 54*gp.tileSize;
 
         gp.obj[8] = new OBJ_Sword_Normal(gp);
-        gp.obj[8].worldX = 52*gp.tileSize;
+        gp.obj[8].worldX = 62*gp.tileSize;
         gp.obj[8].worldY = 48*gp.tileSize;
 
         gp.obj[10] = new OBJ_Coin(gp);
@@ -75,39 +75,83 @@ public class AssetSetter {
         gp.NPC[0].worldX = 5*gp.tileSize;
         gp.NPC[0].worldY = 10*gp.tileSize;
 
-        gp.NPC[0] = new NPC_Fairy(gp);
-        gp.NPC[0].worldX = 31*gp.tileSize;
-        gp.NPC[0].worldY = 20*gp.tileSize;
+        gp.NPC[1] = new NPC_Fairy(gp);
+        gp.NPC[1].worldX = 31*gp.tileSize;
+        gp.NPC[1].worldY = 20*gp.tileSize;
+
+        gp.NPC[2] = new NPC_OldMan(gp);
+        gp.NPC[2].worldX = 44*gp.tileSize;
+        gp.NPC[2].worldY = 57*gp.tileSize;
+
+        gp.NPC[3] = new NPC_OldMan(gp);
+        gp.NPC[3].worldX = 78*gp.tileSize;
+        gp.NPC[3].worldY = 55*gp.tileSize;
+
+        gp.NPC[4] = new NPC_OldMan(gp);
+        gp.NPC[4].worldX = 99*gp.tileSize;
+        gp.NPC[4].worldY = 59*gp.tileSize;
+
+        gp.NPC[5] = new NPC_OldMan(gp);
+        gp.NPC[5].worldX = 55*gp.tileSize;
+        gp.NPC[5].worldY = 89*gp.tileSize;
+
+        gp.NPC[6] = new NPC_OldMan(gp);
+        gp.NPC[6].worldX = 50*gp.tileSize;
+        gp.NPC[6].worldY = 37*gp.tileSize;
     }
     public void setMonster(){
 
         gp.monster[0] = new MON_GreenSlime(gp);
-        gp.monster[0].worldX = 48*gp.tileSize;
-        gp.monster[0].worldY = 40*gp.tileSize;
+        gp.monster[0].worldX = 14*gp.tileSize;
+        gp.monster[0].worldY = 33*gp.tileSize;
 
         gp.monster[1] = new MON_GreenSlime(gp);
-        gp.monster[1].worldX = 46*gp.tileSize;
-        gp.monster[1].worldY = 42*gp.tileSize;
+        gp.monster[1].worldX = 56*gp.tileSize;
+        gp.monster[1].worldY = 15*gp.tileSize;
 
         gp.monster[2] = new MON_GreenSlime(gp);
-        gp.monster[2].worldX = 50*gp.tileSize;
+        gp.monster[2].worldX = 45*gp.tileSize;
         gp.monster[2].worldY = 42*gp.tileSize;
 
         gp.monster[3] = new MON_GreenSlime(gp);
-        gp.monster[3].worldX = 46*gp.tileSize;
+        gp.monster[3].worldX = 24*gp.tileSize;
         gp.monster[3].worldY = 50*gp.tileSize;
 
         gp.monster[4] = new MON_GreenSlime(gp);
         gp.monster[4].worldX = 48*gp.tileSize;
-        gp.monster[4].worldY = 56*gp.tileSize;
+        gp.monster[4].worldY = 67*gp.tileSize;
 
         gp.monster[5] = new Mob_Catgirl(gp);
         gp.monster[5].worldX = 46*gp.tileSize;
-        gp.monster[5].worldY = 52*gp.tileSize;
+        gp.monster[5].worldY = 89*gp.tileSize;
 
         gp.monster[6] = new Mob_Pig(gp);
-        gp.monster[6].worldX = 10*gp.tileSize;
-        gp.monster[6].worldY = 14*gp.tileSize;
+        gp.monster[6].worldX = 23*gp.tileSize;
+        gp.monster[6].worldY = 55*gp.tileSize;
+
+        gp.monster[7] = new Mob_Pig(gp);
+        gp.monster[7].worldX = 66*gp.tileSize;
+        gp.monster[7].worldY = 36*gp.tileSize;
+
+        gp.monster[8] = new MON_GreenSlime(gp);
+        gp.monster[8].worldX = 78*gp.tileSize;
+        gp.monster[8].worldY = 54*gp.tileSize;
+
+        gp.monster[9] = new MON_GreenSlime(gp);
+        gp.monster[9].worldX = 67*gp.tileSize;
+        gp.monster[9].worldY = 48*gp.tileSize;
+
+        gp.monster[10] = new MON_GreenSlime(gp);
+        gp.monster[10].worldX = 99*gp.tileSize;
+        gp.monster[10].worldY = 59*gp.tileSize;
+
+        gp.monster[11] = new Mob_Pig(gp);
+        gp.monster[11].worldX = 89*gp.tileSize;
+        gp.monster[11].worldY = 102*gp.tileSize;
+
+        gp.monster[12] = new Mob_Catgirl(gp);
+        gp.monster[12].worldX = 63*gp.tileSize;
+        gp.monster[12].worldY = 44*gp.tileSize;
 
     }
     public void setInteractiveTile(){
@@ -118,5 +162,24 @@ public class AssetSetter {
         gp.iTile[i++] = new IT_Tree(gp,53,47);
         gp.iTile[i++] = new IT_Tree(gp,54,47);
         gp.iTile[i++] = new IT_Tree(gp,55,47);
+        gp.iTile[i++] = new IT_Tree(gp,56,47);
+        gp.iTile[i++] = new IT_Tree(gp,57,47);
+        gp.iTile[i++] = new IT_Tree(gp,50,48);
+        gp.iTile[i++] = new IT_Tree(gp,51,48);
+        gp.iTile[i++] = new IT_Tree(gp,52,48);
+        gp.iTile[i++] = new IT_Tree(gp,53,48);
+        gp.iTile[i++] = new IT_Tree(gp,54,48);
+        gp.iTile[i++] = new IT_Tree(gp,55,48);
+        gp.iTile[i++] = new IT_Tree(gp,56,48);
+        gp.iTile[i++] = new IT_Tree(gp,57,48);
+        gp.iTile[i++] = new IT_Tree(gp,50,49);
+        gp.iTile[i++] = new IT_Tree(gp,51,49);
+        gp.iTile[i++] = new IT_Tree(gp,52,49);
+        gp.iTile[i++] = new IT_Tree(gp,53,49);
+        gp.iTile[i++] = new IT_Tree(gp,54,49);
+        gp.iTile[i++] = new IT_Tree(gp,55,49);
+        gp.iTile[i++] = new IT_Tree(gp,56,49);
+        gp.iTile[i++] = new IT_Tree(gp,57,49);
+
     }
 }
