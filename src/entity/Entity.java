@@ -64,29 +64,9 @@ public abstract class Entity {
 
 	protected int level;
 	protected int nextLevelExp;
-	protected boolean die = false;
 	boolean attacking = false;
-	protected int attackSpeed = 1000;
-	protected int attackDelay = 500;
-	protected boolean attackAbility = true;
-	protected boolean isAttacking = false;
-	protected double attacktime;
-
-	protected int skillSpeed = 1000;
-	protected int skillDelay = 500;
-	protected long skillStartTime;
-	protected double skillTime;
-	protected boolean skillAbility = true;
-	protected boolean isSkilling = false;
-
-	protected int maxHealth = 100;
-	protected int health = 100;
 	public int maxLife;
 	public int life;
-	public int strength;
-	public int dexterity;
-	public int attack;
-	public int defense;
 	public Entity currentWeapon;
 	public Entity currentShield;
 
@@ -110,8 +90,6 @@ public abstract class Entity {
 
 
 	//public int coin = 0;
-
-	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
 
 	// item attributes
@@ -136,113 +114,40 @@ public abstract class Entity {
 
 	public Rectangle attackArea = new Rectangle();
 	public String description = "";
-	// chưa viết được hàm skill
 
 	// get,set
-	public boolean getDeath() {
-		return die;
-	}
-
-	public void setDeath(boolean death) {
-		this.die = death;
-	}
-
 	public int getLevel() {
 		return level;
 	}
-
-	public int getHealth() {
-		return health;
-	}
-
-	public void setHealth(int health) {
-		this.health = health;
-	}
-
-
 	public int getEXP() {
 		return EXP;
 	}
 	public int getCoin() {return coin;}
 
-	public void setEXP(int EXP) {
-		this.EXP = EXP;
-	}
-
 	public int getMaxMana() {
 		return maxMana;
-	}
-
-	public void setMaxMana(int maxMana) {
-		this.maxMana = maxMana;
-	}
-
-	public int getMana() {
-		return mana;
 	}
 
 	public int getAtk() {
 		return atk;
 	}
 
-	public void setAtk(int atk) {
-		this.atk = atk;
-	}
 	public int getNormalAtk() {
 		return normalAtk;
-	}
-	public void setNormalAtk(int normalAtk){
-		this.normalAtk = normalAtk;
 	}
 
 	public int getDef() {
 		return def;
 	}
-	public void setDef(int def) {
-		this.def = def;
-	}
 
 	public int getNormalDef() {
 		return normalDef;
-	}
-	public void setNormalDef(int normalDef){
-		this.normalDef = normalDef;
 	}
 
 	public int getNextLevelExp(){
 		return nextLevelExp;
 	}
 
-	public Entity() {
-	}
-
-	//	Hàm tính lượng dame nhận
-	public int damageCal(Entity entity) {
-		if (atk - entity.getDef() <= 0)
-			return 1;
-		return atk - entity.getDef();
-	}
-
-	//	Hàm cập nhật trạng thái tấn công
-	protected boolean isAttacking(double time) {
-		if ((attackDelay / 1000000) > ((time / 1000000) - attackSpeed) || (this.mana - attackManaCost) <= 0) {
-			attackAbility = false;
-		} else attackAbility = true;
-		if ((attacktime / 1000000) + attackDelay > (time / 1000000) && (this.mana - attackManaCost) >= 0) {
-			return true;
-		}
-		return false;
-	}
-
-	protected boolean isSkilling(double time) {
-		if ((skillTime / 1000000) > ((time / 1000000) - skillSpeed) || (this.mana - skillManaCost) <= 0) {
-			skillAbility = false;
-		} else skillAbility = true;
-		if ((skillTime / 1000000) + skillDelay > (time / 1000000) && (this.mana - skillManaCost) >= 0) {
-			return true;
-		}
-		return false;
-	}
 	//GET IMAGE ENTITY (GỌI ẢNH THỰC THỂ)
 	public BufferedImage setup(String imagePath, int tileSize, int size){
 		UtilityTool uTool = new UtilityTool();
@@ -356,57 +261,6 @@ public abstract class Entity {
 	}
 	public void changeAlpha(Graphics2D g2,float alpha){
 		g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,alpha));
-	}
-
-	public void draw(Graphics2D g2,int width,int height){
-		//g2.setColor(Color.white);
-		//g2.fillRect(x, y, gp.titleSize, gp.titleSize);
-		BufferedImage image = switch (direction) {
-			case "up" -> up[spriteNum - 1];
-			case "down" -> down[spriteNum - 1];
-			case "left" -> left[spriteNum - 1];
-			case "right" -> right[spriteNum - 1];
-			case "stay" -> stay[spriteNum - 1];
-			default -> null;
-		};
-
-		int screenX = worldX - gp.player.worldX + gp.player.screenX;
-		int screenY = worldY - gp.player.worldY + gp.player.screenY;
-
-		//
-
-		if (gp.player.screenX > gp.player.worldX){
-			screenX = worldX;
-		}
-		if (gp.player.screenY > gp.player.worldY){
-			screenY = worldY;
-		}
-		int rightOffset = gp.screenWidth -gp.player.screenX;
-		if (rightOffset > gp.WorldWidth - gp.player.worldX){
-			screenX = gp.screenWidth - (gp.WorldWidth -worldX);
-		}
-		int bottomOffset = gp.screenHeight -gp.player.screenY;
-		if (bottomOffset > gp.WorldHeight - gp.player.worldY){
-			screenY = gp.screenHeight - (gp.WorldHeight -worldY);
-		}
-
-		if(worldX + gp.tileSize  > gp.player.worldX - gp.player.screenX &&
-				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
-				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
-				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
-			if(invincible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
-			g2.drawImage(image, screenX, screenY,width,height,null);
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
-
-		}
-		else if (gp.player.screenX > gp.player.worldX ||
-				gp.player.screenY > gp.player.worldY ||
-				rightOffset > gp.WorldWidth - gp.player.worldX ||
-				bottomOffset > gp.WorldHeight - gp.player.worldY){
-			if(invincible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
-			g2.drawImage(image, screenX, screenY,width,height,null);
-			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
-		}
 	}
 	public void update() {
 		setAction();

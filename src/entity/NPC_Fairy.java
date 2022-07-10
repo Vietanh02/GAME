@@ -14,12 +14,12 @@ public class NPC_Fairy extends Entity{
         setDialogue();
     }
     public void setDialogue(){
-        dialogues[0] = "Hello,Kiwi.";
+        dialogues[0] = "Hello Kiwiiii!";
         dialogues[1] = "Kiwi oi! Kiwi di dau day?";
-        dialogues[2] = "Toi la Ure";
-        dialogues[3] = "Co 1 cai ruong o gan day";
-        dialogues[4] = "Toi dang ban, hay de luc khac noi chuyen";
-        dialogues[5] = "Nay chang trai tre a, cau co biet ve nguoi anh \nhung Ba Binh, nguoi ma da danh bai quai vat \nSima de giai cuu the gioi khong?";
+        dialogues[2] = "Toi la Ure!";
+        dialogues[3] = "Co 1 cai ruong o gan day!";
+        dialogues[4] = "No se roi ra neu ban giet chet con quai vat va cuu dan lang!!";
+        dialogues[5] = "Hay tim no va nhan phan thuong!!!";
 
     }
     public void getImage(){

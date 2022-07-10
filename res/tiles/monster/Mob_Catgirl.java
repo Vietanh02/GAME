@@ -1,25 +1,18 @@
-package entity.monster;
+package tiles.monster;
 
 import Graphics.SpriteSheet;
 import entity.Entity;
-import entity.Projectile.Projectile;
-import entity.Projectile.Ptile_rock;
 import main.GamePanel;
 
 import java.util.Random;
 
-public class MON_GreenSlime extends Entity {
-    public MON_GreenSlime(GamePanel gp){
+public class Mob_Catgirl extends Entity {
+    public Mob_Catgirl(GamePanel gp){
         super(gp);
-        type =2;
-        name = "Green Slime";
+        name = "Catgirl";
         speed = 1;
-        maxLife = 10;
+        maxLife = 20;
         life = maxLife;
-        atk = 5;
-        def = 0;
-        EXP = 2;
-        skillShot = new Ptile_rock(gp);
         direction = "down";
         type = type_monster;
         solidArea.x = 3;
@@ -32,20 +25,19 @@ public class MON_GreenSlime extends Entity {
     }
     public void getImage(){
 
-        SpriteSheet ss = new SpriteSheet("monster/monsters.png",48,48);
+        SpriteSheet ss = new SpriteSheet("monster/Mob.png",48,48);
 
         for(int i=0;i<2;i++) {
-            up[i]   = ss.spriteArray[3][9+i].image;
-            down[i] =  ss.spriteArray[0][9+i].image;
-            left[i] =  ss.spriteArray[1][9+i].image;
-            right[i] =  ss.spriteArray[2][9+i].image;
+            up[i]   = ss.spriteArray[7][i].image;
+            down[i] =  ss.spriteArray[4][i].image;
+            left[i] =  ss.spriteArray[5][i].image;
+            right[i] =  ss.spriteArray[6][i].image;
         }
     }
     public void setAction(){
 
         actionLockCounter++;
         if (actionLockCounter == 120) {
-            speed = 1;
             Random random = new Random();
             int i = random.nextInt(100) + 1;//ngau nhien tu 1 toi 100
             if (i <= 25) {
@@ -57,12 +49,6 @@ public class MON_GreenSlime extends Entity {
             } else direction = "right";
             actionLockCounter = 0;
         }
-        int i = new Random().nextInt(100)+1;
-        if(i > 99 && !skillShot.alive && shotCounter == 50){
-            skillShot.set(worldX,worldY,direction,true,this);
-            gp.projectileList.add(skillShot);
-            shotCounter = 0;
-        }
     }
     public void update() {
         setAction();
@@ -71,8 +57,8 @@ public class MON_GreenSlime extends Entity {
         gp.cChecker.checkObject(this, false);
         boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-        if(this.type == 2 && contactPlayer){
-            if(!gp.player.invincible){
+        if(this.type == 2 && contactPlayer == true){
+            if(gp.player.invincible == false){
                 //	player can give damage
 
                 gp.player.life -=1;
@@ -101,13 +87,9 @@ public class MON_GreenSlime extends Entity {
                 invincibleCounter = 0;
             }
         }
-        if(shotCounter < 50){
-            shotCounter++;
-        }
     }
     public void damageReaction(){
-        speed = 4;
-        actionLockCounter = 80;
+        actionLockCounter = 0;
         switch (gp.player.direction){
             case "up" -> direction =  "down";
             case "down" -> direction =  "up";

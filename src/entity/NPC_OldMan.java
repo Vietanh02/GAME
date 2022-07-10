@@ -8,15 +8,16 @@ public class NPC_OldMan extends Entity{
     public NPC_OldMan(GamePanel gp){
         super(gp);
         direction = "down";
-        speed = 1;
+        speed = 0;
         getImage();
         setDialogue();
     }
     public void setDialogue(){
         dialogues[0] = "Welcome to summoner's rift captain Kiwi!!";
-        dialogues[1] = "The monster is destroying my village,\n we need captain Kiwi to save our lives";
-        dialogues[2] = "Fistly, let's kill small monsters,\n collect items to upgrade your power";
-        dialogues[3] = "Then, find a gate where you can teleport ";
+        dialogues[1] = "The monster is destroying my village,\n we need captain Kiwi to save our lives!" +
+                "";
+        dialogues[2] = "Fistly, let's kill small monsters,\n collect items to upgrade your power!";
+        dialogues[3] = "Then, find a gate where you can teleport!! ";
         dialogues[4] = "You will see the manor of the DesTroyBoss!";
         dialogues[5] = "Finally, Let's kill this boss and receive your treasure!!!";
 
@@ -25,9 +26,9 @@ public class NPC_OldMan extends Entity{
         // tải các ảnh vảo mảng
 
         String imageDown = "/npc/oldman_down_%d";
-        String imageUp = "/npc/oldman_up_%d";
-        String imageLeft = "/npc/oldman_left_%d";
-        String imageRight = "/npc/oldman_right_%d";
+        String imageUp = "/npc/oldman_down_%d";
+        String imageLeft = "/npc/oldman_down_%d";
+        String imageRight = "/npc/oldman_down_%d";
         String imageStay = "/npc/oldman_down_%d";
         for(int i=0;i<2;i++) {
             stay[i] = setup(String.format(imageStay,i+1), gp.tileSize, gp.tileSize);

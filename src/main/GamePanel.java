@@ -25,8 +25,8 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int tileSize = originalTileSize*scale;//48x48 title
 	public final int maxScreenCol = 24;
 	public final int maxScreenRow = 14;
-	public final int screenWidth = tileSize*maxScreenCol; // 960 pixel
-	public final int screenHeight =  tileSize*maxScreenRow; // 576 // pixel
+	public final int screenWidth = tileSize*maxScreenCol; // 16*24 pixel
+	public final int screenHeight =  tileSize*maxScreenRow; // 16*14 // pixel
 
 	// FOR FULL SCREEN
 	int screenWidth2 = screenWidth;
@@ -81,9 +81,9 @@ public class GamePanel extends JPanel implements Runnable{
 
 	public final int gameFinishedState = 7;
 
-	public Entity[] obj = new Entity[20];
-	public Entity[] NPC = new Entity[10];
-	public Entity[] monster = new Entity[20];
+	public Entity[] obj = new Entity[30];
+	public Entity[] NPC = new Entity[30];
+	public Entity[] monster = new Entity[30];
 
 	public ArrayList<Entity> projectileList = new ArrayList<>();
 	public ArrayList<Entity> particleList = new ArrayList<>();

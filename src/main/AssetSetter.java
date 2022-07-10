@@ -2,14 +2,14 @@ package main;
 
 //import entity.NPC_LittleRed;
 import entity.InteractiveTile.IT_Tree;
-import entity.InteractiveTile.InteractiveTile;
 import entity.NPC_Fairy;
 import entity.NPC_OldMan;
 import entity.monster.Boss_DarkLord;
-import entity.monster.MON_GreenSlime;
+import tiles.monster.Destroy_Boss;
+import tiles.monster.MON_GreenSlime;
 import entity.object.*;
-import entity.monster.Mob_Pig;
-import entity.monster.Mob_Catgirl;
+import tiles.monster.Mob_Pig;
+import tiles.monster.Mob_Catgirl;
 
 public class AssetSetter {
     GamePanel gp;
@@ -75,7 +75,7 @@ public class AssetSetter {
         gp.obj[13].worldY = 110*gp.tileSize;
     }
     public void setNPC(){
-        gp.NPC[0] = new NPC_OldMan(gp);
+        gp.NPC[0] = new NPC_Fairy(gp);
         gp.NPC[0].worldX = 30*gp.tileSize;
         gp.NPC[0].worldY = 42*gp.tileSize;
 
@@ -100,8 +100,24 @@ public class AssetSetter {
         gp.NPC[5].worldY = 89*gp.tileSize;
 
         gp.NPC[6] = new NPC_OldMan(gp);
-        gp.NPC[6].worldX = 50*gp.tileSize;
-        gp.NPC[6].worldY = 37*gp.tileSize;
+        gp.NPC[6].worldX = 63*gp.tileSize;
+        gp.NPC[6].worldY = 38*gp.tileSize;
+
+        gp.NPC[7] = new NPC_Fairy(gp);
+        gp.NPC[7].worldX = 180*gp.tileSize;
+        gp.NPC[7].worldY = 150*gp.tileSize;
+
+        gp.NPC[8] = new NPC_Fairy(gp);
+        gp.NPC[8].worldX = 33*gp.tileSize;
+        gp.NPC[8].worldY = 120*gp.tileSize;
+
+        gp.NPC[9] = new NPC_Fairy(gp);
+        gp.NPC[9].worldX = 174*gp.tileSize;
+        gp.NPC[9].worldY = 69*gp.tileSize;
+
+        gp.NPC[10] = new NPC_Fairy(gp);
+        gp.NPC[10].worldX = 96*gp.tileSize;
+        gp.NPC[10].worldY = 155*gp.tileSize;
     }
     public void setMonster(){
 
@@ -157,10 +173,21 @@ public class AssetSetter {
         gp.monster[12].worldX = 63*gp.tileSize;
         gp.monster[12].worldY = 44*gp.tileSize;
 
-        gp.monster[12] = new Boss_DarkLord(gp);
-        gp.monster[12].worldX = 120*gp.tileSize;
-        gp.monster[12].worldY = 110*gp.tileSize;
+        gp.monster[13] = new Boss_DarkLord(gp);
+        gp.monster[13].worldX = 120*gp.tileSize;
+        gp.monster[13].worldY = 110*gp.tileSize;
 
+        gp.monster[14] = new MON_GreenSlime(gp);
+        gp.monster[14].worldX = 160*gp.tileSize;
+        gp.monster[14].worldY = 54*gp.tileSize;
+
+        gp.monster[15] = new MON_GreenSlime(gp);
+        gp.monster[15].worldX = 67*gp.tileSize;
+        gp.monster[15].worldY = 155*gp.tileSize;
+
+        gp.monster[16] = new MON_GreenSlime(gp);
+        gp.monster[16].worldX = 140*gp.tileSize;
+        gp.monster[16].worldY = 77*gp.tileSize;
     }
     public void setInteractiveTile(){
         int i = 0;

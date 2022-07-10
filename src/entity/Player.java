@@ -64,7 +64,7 @@ public class Player extends Entity{
 //		worldY = gp.tileSize*40;
 		worldX = gp.tileSize*63;
 		worldY = gp.tileSize*40;
-		speed = 4;
+		speed = 6;
 		direction = "up";
 		attackArea.width = 20;
 		attackArea.height = 20;

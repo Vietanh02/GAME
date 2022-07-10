@@ -12,7 +12,7 @@ public class Boss_DarkLord extends Entity {
     public Boss_DarkLord(GamePanel gp){
         super(gp);
         name = "Dark_Lord";
-        speed = 3;
+        speed = 4;
         maxLife = 5;
         life = maxLife;
         atk = 10;
