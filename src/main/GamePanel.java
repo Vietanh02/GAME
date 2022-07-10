@@ -9,6 +9,7 @@ import java.util.Comparator;
 import javax.swing.JPanel;
 
 import entity.Entity;
+import entity.InteractiveTile.InteractiveTile;
 import entity.Player;
 import tile.TileManager;
 
@@ -81,7 +82,9 @@ public class GamePanel extends JPanel implements Runnable{
 	public Entity[] monster = new Entity[20];
 
 	public ArrayList<Entity> projectileList = new ArrayList<>();
-	ArrayList<Entity> entityList = new ArrayList<>();
+	public ArrayList<Entity> entityList = new ArrayList<>();
+	public InteractiveTile[] iTile = new InteractiveTile[30];
+
 	public GamePanel() {
 		this.setPreferredSize(new Dimension(screenWidth,screenHeight));
 		this.setBackground(Color.black);
@@ -95,6 +98,7 @@ public class GamePanel extends JPanel implements Runnable{
 		aSetter.setNPC();
 		aSetter.setObject();
 		aSetter.setMonster();
+		aSetter.setInteractiveTile();
 		playMusic(0);
 
 		//ADD FULL SCREEN IN SET UP
@@ -159,15 +163,15 @@ public class GamePanel extends JPanel implements Runnable{
 			// update player
 			player.update();
 			// update obj
-			for(int i= 0; i< obj.length ; i++){
-				if(obj[i]!=null){
-					obj[i].update();
+			for (Entity value : obj) {
+				if (value != null) {
+					value.update();
 				}
 			}
 			// update NPC
-			for(int i= 0; i< NPC.length ; i++){
-				if(NPC[i]!=null){
-					NPC[i].update();
+			for (Entity entity : NPC) {
+				if (entity != null) {
+					entity.update();
 				}
 			}
 			// update Monster
@@ -180,6 +184,12 @@ public class GamePanel extends JPanel implements Runnable{
 					}
 				}
 			}
+			for(int i = 0; i < iTile.length; i++){
+				if(iTile[i] != null){
+					iTile[i].update();
+				}
+			}
+
 			for(int i= 0; i< projectileList.size() ; i++){
 				if(projectileList.get(i) !=null){
 					if(projectileList.get(i).alive) projectileList.get(i).update();
@@ -215,6 +225,12 @@ public class GamePanel extends JPanel implements Runnable{
 		}else{
 			//tile
 			tileM.draw(g2);
+
+			for(int i = 0; i < iTile.length; i++){
+				if(iTile[i] != null){
+					iTile[i].draw(g2);
+				}
+			}
 			//ADD entities to the List
 			for (Entity item : NPC) {
 				if (item != null) {

@@ -1,6 +1,8 @@
 package main;
 
 //import entity.NPC_LittleRed;
+import entity.InteractiveTile.IT_Tree;
+import entity.InteractiveTile.InteractiveTile;
 import entity.NPC_Fairy;
 import entity.NPC_OldMan;
 import entity.monster.MON_GreenSlime;
@@ -107,5 +109,14 @@ public class AssetSetter {
         gp.monster[6].worldX = 10*gp.tileSize;
         gp.monster[6].worldY = 14*gp.tileSize;
 
+    }
+    public void setInteractiveTile(){
+        int i = 0;
+        gp.iTile[i++] = new IT_Tree(gp,50,47);
+        gp.iTile[i++] = new IT_Tree(gp,51,47);
+        gp.iTile[i++] = new IT_Tree(gp,52,47);
+        gp.iTile[i++] = new IT_Tree(gp,53,47);
+        gp.iTile[i++] = new IT_Tree(gp,54,47);
+        gp.iTile[i++] = new IT_Tree(gp,55,47);
     }
 }

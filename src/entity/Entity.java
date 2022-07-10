@@ -28,8 +28,7 @@ public abstract class Entity {
 	public BufferedImage[] down = new BufferedImage[3];
 	public BufferedImage[] left = new BufferedImage[3];
 	public BufferedImage[] right = new BufferedImage[3];
-	protected boolean invicible = false;
-	protected int invicibleCounter;
+
 	public boolean alive = true;
 	public boolean dying = false;
 	protected int dyingCounter = 0;
@@ -106,7 +105,7 @@ public abstract class Entity {
 
 	protected int EXP;
 
-	protected int coin = 0;
+	public int coin = 0;
 
 
 	//public int coin = 0;
@@ -302,7 +301,7 @@ public abstract class Entity {
 					hpOnCounter = 0;
 				}
 			}
-			if(invicible) {
+			if(invincible) {
 				hpOn = true;
 				hpOnCounter = 0;
 				changeAlpha(g2,0.4f);
@@ -329,7 +328,7 @@ public abstract class Entity {
 					hpOnCounter = 0;
 				}
 			}
-			if(invicible) {
+			if(invincible) {
 				hpOn = true;
 				hpOnCounter = 0;
 				changeAlpha(g2,0.4f);
@@ -392,7 +391,7 @@ public abstract class Entity {
 				worldX - gp.tileSize  < gp.player.worldX + gp.player.screenX &&
 				worldY + gp.tileSize  > gp.player.worldY - gp.player.screenY &&
 				worldY - gp.tileSize  < gp.player.worldY + gp.player.screenY) {
-			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			if(invincible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
 			g2.drawImage(image, screenX, screenY,width,height,null);
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 
@@ -401,7 +400,7 @@ public abstract class Entity {
 				gp.player.screenY > gp.player.worldY ||
 				rightOffset > gp.WorldWidth - gp.player.worldX ||
 				bottomOffset > gp.WorldHeight - gp.player.worldY){
-			if(invicible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
+			if(invincible) g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.4f));
 			g2.drawImage(image, screenX, screenY,width,height,null);
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,1f));
 		}

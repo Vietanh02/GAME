@@ -152,10 +152,11 @@ public class Player extends Entity{
 			int npcIndex = gp.cChecker.checkEntity(this, gp.NPC);
 			interactNPC(npcIndex);
 			gp.eHandler.checkEvent();
-			gp.cChecker.checkEntity(this, gp.monster);
 			//	CHECK MONSTER COLLISION
 			int monsterIndex = gp.cChecker.checkEntity(this, gp.monster);
 			contactMonster(monsterIndex);
+			int iTileIndex = gp.cChecker.checkEntity(this,gp.iTile);
+			damageInteractiveTile(iTileIndex);
 			//IF COLLISION IS FALSE PLAYER CAN MOVE
 			if(!collisionOn && !keyH.enterPressed) {
 				if(keyH.upPressed && keyH.leftPressed){
@@ -204,7 +205,6 @@ public class Player extends Entity{
 
 			}
 			if (life <=0) {
-				gp.gameState = gp.gameOverState;
 				gp.gameState = gp.gameOverState;
 			}
 		}
@@ -273,14 +273,14 @@ public class Player extends Entity{
 
 	public void damageMonster(int i, int atk){
 		if(i!= 999){
-			if(!gp.monster[i].invicible) {
+			if(!gp.monster[i].invincible) {
 				//gp.playSE(index);
 
 				damage = atk - gp.monster[i].def;
 				if(damage <= 0) damage = 0;
 				gp.monster[i].life -= damage;
 				gp.ui.addMessage(damage+" damage!");
-				gp.monster[i].invicible = true;
+				gp.monster[i].invincible = true;
 				gp.monster[i].damageReaction();
 
 				if(gp.monster[i].life <= 0){
@@ -426,7 +426,7 @@ public class Player extends Entity{
 			y = gp.screenHeight - (gp.WorldHeight -worldY);
 		}
 
-		if(invincible == true){
+		if(invincible){
 			g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.4f));
 		}
 		g2.drawImage(image, x, y, gp.tileSize, gp.tileSize,null);
@@ -451,6 +451,14 @@ public class Player extends Entity{
 				//gp.playSE(index);
 				attacking = true;
 			}
+		}
+	}
+	public void damageInteractiveTile(int i){
+
+		if(i!= 999 && gp.iTile[i].destructible && gp.iTile[i].isCorrectItem(this)&&!gp.iTile[i].invincible){
+			gp.iTile[i].life--;
+			gp.iTile[i].invincible = true;
+			if(gp.iTile[i].life <= 0) gp.iTile[i] = gp.iTile[i].getDestroyedForm();
 		}
 	}
 }

@@ -80,11 +80,11 @@ public class Mob_Catgirl extends Entity {
             spriteCounter = 0;
         }
         //neu quai bi danh, bat tu 1 thoi gian
-        if(invicible){
-            invicibleCounter++;
-            if(invicibleCounter > 60){
-                invicible = false;
-                invicibleCounter = 0;
+        if(invincible){
+            invincibleCounter++;
+            if(invincibleCounter > 60){
+                invincible = false;
+                invincibleCounter = 0;
             }
         }
     }
