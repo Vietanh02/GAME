@@ -2,6 +2,7 @@ package main;
 
 import entity.Entity;
 import entity.object.OBJ_Heart;
+import entity.object.OBJ_ManaCrystal;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -31,6 +32,7 @@ public class UI {
     DecimalFormat dFormat = new DecimalFormat("#0.00");
 
     BufferedImage heart_full, heart_half, heart_blank;
+    BufferedImage crystal_full, crystal_half, crystal_blank;
     public int commandNum = 0;
     public int titleScreenState = 0;
     public int slotCol = 0;
@@ -49,6 +51,11 @@ public class UI {
         heart_full = heart.stay[0];
         heart_half = heart.stay[1];
         heart_blank = heart.stay[2];
+
+        Entity crystal = new OBJ_ManaCrystal(gp);
+        crystal_full = crystal.stay[0];
+        crystal_half = crystal.stay[1];
+        crystal_blank = crystal.stay[2];
     }
     public void addMessage(String text){
 //        message = text;
@@ -214,6 +221,30 @@ public class UI {
             i++;
             x+= gp.tileSize;
         }
+        x = gp.tileSize/2;
+        y = gp.tileSize*2;
+        i = 0;
+        //draw current life
+
+        while(i < gp.player.maxMana/2){
+            g2.drawImage(crystal_blank,x,y,null);
+            i++;
+            x += gp.tileSize;
+        }
+        //reset
+        x = gp.tileSize/2;
+        y = gp.tileSize*2;
+        i = 0;
+        //draw current life
+        while(i< gp.player.mana){
+            g2.drawImage(crystal_half,x,y,null);
+            i++;
+            if(i<gp.player.mana){
+                g2.drawImage(crystal_full,x,y,null);
+            }
+            i++;
+            x+= gp.tileSize;
+        }
     }
     public void drawTitleScreen(){
         //titlename
@@ -336,6 +367,12 @@ public class UI {
         textY += lineHeight;
         g2.drawString("Life", textX, textY);
         textY += lineHeight;
+        g2.drawString("Mana", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Strength", textX, textY);
+        textY += lineHeight;
+        g2.drawString("Dexterity", textX, textY);
+        textY += lineHeight;
         g2.drawString("ATK", textX, textY);
         textY += lineHeight;
         g2.drawString("DEF", textX, textY);
@@ -362,7 +399,12 @@ public class UI {
         g2.drawString(value, textX, textY);
         textY += lineHeight;
 
-        value = String.valueOf(gp.player.life + "/" + gp.player.maxLife);
+        value = gp.player.life + "/" + gp.player.maxLife;
+        textX = getXforAlignToRightText(value, tailX);
+        g2.drawString(value, textX, textY);
+        textY += lineHeight;
+
+        value = gp.player.mana + "/" + gp.player.maxMana;
         textX = getXforAlignToRightText(value, tailX);
         g2.drawString(value, textX, textY);
         textY += lineHeight;
@@ -393,11 +435,11 @@ public class UI {
         textY += lineHeight;
 
         if(gp.player.currentWeapon != null){
-            g2.drawImage(gp.player.currentWeapon.stay[0], tailX - gp.tileSize, textY - 15, null);
+            g2.drawImage(gp.player.currentWeapon.stay[0], tailX - gp.tileSize, textY - 25, null);
         }
             textY += lineHeight + 20;
         if(gp.player.currentShield != null){
-            g2.drawImage(gp.player.currentShield.stay[0], tailX - gp.tileSize, textY - 15, null);
+            g2.drawImage(gp.player.currentShield.stay[0], tailX - gp.tileSize, textY - 25, null);
         }
 }
 
@@ -453,7 +495,7 @@ public class UI {
         int dFrameWidth = frameWidth;
         int dFrameHeigth = gp.tileSize * 3;
 
-        //draw discription text
+        //draw discription
 
         int textX = dFrameX + 20;
         int textY = dFrameY + gp.tileSize;
@@ -699,7 +741,6 @@ public class UI {
             textY += 40;
             textX += 3 * gp.tileSize;
         }
-
         //Yes
         String text = "Yes";
         textX = getXforCenteredText(text);

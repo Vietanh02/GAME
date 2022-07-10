@@ -1,5 +1,6 @@
 package entity;
 
+import entity.Projectile.Projectile;
 import main.GamePanel;
 import main.UtilityTool;
 
@@ -33,13 +34,15 @@ public abstract class Entity {
 	public int hpOnCounter = 0;
 	public int spriteCounter = 0;
 	public int spriteNum = 1;
+
+	public int shotCounter = 0;
 	public Rectangle solidArea = new Rectangle(0,0,48,48);
 	public boolean collisionOn = false;
 	public int actionLockCounter = 0;
 	public boolean invincible = false;
 	public int invincibleCounter = 0;
-
-	String dialogues[] = new String[20];
+	public int type; //	0 = player, 1 = NPC, 2 = monster
+	String[] dialogues = new String[20];
 	int dialogueIndex = 0;
 
 	//CHARATER STATUS
@@ -72,25 +75,42 @@ public abstract class Entity {
 	protected int maxHealth = 100;
 	protected int health = 100;
 	public int maxLife;
-	public float life;
+	public int life;
+	public int strength;
+	public int dexterity;
+	public int attack;
+	public int defense;
 	public Entity currentWeapon;
 	public Entity currentShield;
-	public int damage;
+
+	public Projectile skillShot;
+
+	protected int def = 10;
+	protected int atk = 10;
+	protected int damage = 50;
+	protected int str;
+	protected int dex;
+	protected int inte;
+	public int maxMana = 100;
+	public int mana = 100;
+
+
 	protected int normalDef = 10;
 	protected int normalAtk = 10;
-	protected int def;
-	protected int atk;
-	protected int maxMana = 100;
-	protected int mana = 100;
+
+
+
 	protected int EXP;
 	protected int coin = 0;
+
 	protected int attackManaCost = 4;
 	protected int skillManaCost = 10;
+
 	// item attributes
 	public int attackValue;
 	public int defenseValue;
 	//type
-	public int type; //	0 = player, 1 = NPC, 2 = monster
+	//0 = player, 1 = NPC, 2 = monster
 	public final int type_player = 0;
 	public final int type_NPC = 1;
 	public final int type_monster = 2;
@@ -385,30 +405,17 @@ public abstract class Entity {
 		gp.cChecker.checkEntity(this, gp.NPC);
 		boolean contactPlayer = gp.cChecker.checkPlayer(this);
 
-		if(this.type == type_monster && contactPlayer == true){
-			if(gp.player.invincible == false){
-				//	player can give damage
-
-				gp.player.life -=1;
-				gp.player.invincible = true;
-			}
+		if(this.type == 2 && contactPlayer){
+			damagePlayer(atk);
 		}
 
 		//	IF COLLISION IS FALSE, PLAYER CAN MOVE
-		if (collision == false) {
+		if (!collision) {
 			switch (direction) {
-				case "up":
-					worldY -= speed;
-					break;
-				case "down":
-					worldY += speed;
-					break;
-				case "left":
-					worldX -= speed;
-					break;
-				case "right":
-					worldX += speed;
-					break;
+				case "up" -> worldY -= speed;
+				case "down" -> worldY += speed;
+				case "left" -> worldX -= speed;
+				case "right" -> worldX += speed;
 			}
 		}
 		spriteCounter++;
@@ -421,7 +428,18 @@ public abstract class Entity {
 				spriteNum = 1;
 			}
 			spriteCounter = 0;
-
+		}
+		if(shotCounter < 50){
+			shotCounter++;
+		}
+	}
+	public void damagePlayer(int atk){
+		if(!gp.player.invincible){
+			//	player can give damage
+			int damage = atk - gp.player.def;
+			if(damage < 0) damage = 0;
+			gp.player.life -= damage;
+			gp.player.invincible = true;
 		}
 	}
 	public void setAction(){
@@ -441,7 +459,7 @@ public abstract class Entity {
 			case "stay" -> direction = "stay";
 		}
 	}
-	public void use(Entity entity){
 
+	protected void use(Entity entity) {
 	}
 }
