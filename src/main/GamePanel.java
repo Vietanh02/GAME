@@ -76,7 +76,7 @@ public class GamePanel extends JPanel implements Runnable{
 	public final int optionsState = 5;
 	public final int gameOverState = 6;
 
-	public Entity[] obj = new Entity[10];
+	public Entity[] obj = new Entity[20];
 	public Entity[] NPC = new Entity[10];
 	public Entity[] monster = new Entity[20];
 
@@ -174,7 +174,22 @@ public class GamePanel extends JPanel implements Runnable{
 			for(int i= 0; i< monster.length ; i++){
 				if(monster[i]!=null){
 					if(monster[i].alive&&!monster[i].dying) monster[i].update();
-					if(!monster[i].alive) monster[i] = null;
+					if(!monster[i].alive) {
+						monster[i].checkDrop();
+						monster[i] = null;
+					}
+				}
+			}
+			for(int i= 0; i< projectileList.size() ; i++){
+				if(projectileList.get(i) !=null){
+					if(projectileList.get(i).alive) projectileList.get(i).update();
+					if(!projectileList.get(i).alive) projectileList.remove(i);
+				}
+			}
+			for(int i= 0; i< projectileList.size() ; i++){
+				if(projectileList.get(i) !=null){
+					if(projectileList.get(i).alive) projectileList.get(i).update();
+					if(!projectileList.get(i).alive) projectileList.remove(i);
 				}
 			}
 			for(int i= 0; i< projectileList.size() ; i++){

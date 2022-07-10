@@ -51,6 +51,22 @@ public class AssetSetter {
         gp.obj[8].worldX = 52*gp.tileSize;
         gp.obj[8].worldY = 48*gp.tileSize;
 
+        gp.obj[10] = new OBJ_Coin(gp);
+        gp.obj[10].worldX = 48*gp.tileSize;
+        gp.obj[10].worldY = 46*gp.tileSize;
+
+        gp.obj[9] = new OBJ_Coin(gp);
+        gp.obj[9].worldX = 48*gp.tileSize;
+        gp.obj[9].worldY = 47*gp.tileSize;
+
+        gp.obj[11] = new OBJ_Heart(gp);
+        gp.obj[11].worldX = 48*gp.tileSize;
+        gp.obj[11].worldY = 51*gp.tileSize;
+
+        gp.obj[12] = new OBJ_ManaCrystal(gp);
+        gp.obj[12].worldX = 48*gp.tileSize;
+        gp.obj[12].worldY = 49*gp.tileSize;
+
     }
     public void setNPC(){
         gp.NPC[0] = new NPC_OldMan(gp);
